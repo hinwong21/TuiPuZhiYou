@@ -85,7 +85,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("exchange_point").notNullable();
       table.integer("participant").notNullable();
       table.string("project_id").references("projects.project_id");
-      table.date("dateAdd").notNullable();
+      table.date("date_add").notNullable();
     });
   }
 
