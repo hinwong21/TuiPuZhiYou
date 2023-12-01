@@ -1,0 +1,45 @@
+.dropDownContainer {
+  width: 60vw;
+  margin-bottom: 30px;
+}
+
+.dropDown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropDownTitle {
+  width: 50px;
+}
+.dropDownHeader {
+  width: calc(60vw - 50px);
+  height: 30px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+}
+.dropDownList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: calc(60vw - 49px);
+  margin-left: 49px;
+}
+
+.dropDownListOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid black;
+  width: calc(60vw - 49px);
+  padding: 5px 0;
+  cursor: pointer;
+}
