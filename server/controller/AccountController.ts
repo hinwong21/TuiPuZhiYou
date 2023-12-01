@@ -40,4 +40,20 @@ export class AccountController {
       errorHandler(err, req, res);
     }
   };
+
+  login = async (req: Request) => {
+    try {
+      const emailOrPhoneNum = req.body.emailOrPhoneNum;
+      const password = req.body.password;
+
+      const result = await this.accountService.login(emailOrPhoneNum, password);
+      // req.session.userId = userId;
+      // req.session.username = username;
+      // req.session.isLogin = true;
+
+      // console.log(req.session.username);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
