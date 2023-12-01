@@ -6,6 +6,8 @@ export class AccountController {
   constructor(private accountService: AccountService) {}
 
   registerNewAccount = async (req: Request, res: Response) => {
+    console.log(123);
+
     const today = new Date();
     try {
       const userId = 123456;
