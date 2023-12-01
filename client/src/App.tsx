@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { TopBar } from "../src/Component/TopBar/TopBar";
 import { Login } from "./Page/Login";
-import { Register } from "./Page/Register";
+import { Register } from "./Page/Register/Register";
 
 function App() {
   const [status, setStatus] = useState("login");
