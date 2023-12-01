@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { TopBar } from "../src/Component/TopBar/TopBar";
-import { Input } from "./Component/Input/Input";
+import { Login } from "./Page/Login";
+import { Register } from "./Page/Register";
 
 function App() {
+  const [status, setStatus] = useState("login");
+
+  const handleRegisterClick = () => {
+    setStatus("register");
+  };
   return (
     <div className="wrapper">
       <TopBar />
-      <Input title="用戶名稱" />
+
+      {status === "login" && (
+        <Login onStatusChange={handleRegisterClick} />
+      )}
+      {status === "register" && <Register />}
     </div>
   );
 }
