@@ -1,0 +1,44 @@
+.topBarContainer {
+  background-color: white;
+  height: 100px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.topBarLogoContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.topBarLogo {
+  margin-right: 10px;
+}
+
+.topBarLogoTitle {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.topBarLogoImage {
+  height: 50px;
+}
+
+.topBarLoginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #32a02b;
+  color: white;
+}
+
+.topBarLoginButton {
+  font-weight: bold;
+}
