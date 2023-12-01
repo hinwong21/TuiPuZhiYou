@@ -8,6 +8,19 @@ interface LoginProps {
 }
 
 export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
+  const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handlePhoneNumOrEmailChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPhoneNumOrEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
   const handleStatus = (newStatus: string) => {
     onStatusChange(newStatus);
   };
@@ -20,8 +33,19 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       {/* Login form */}
       <form>
         {/* Input fields for username and password */}
-        <Input title="電話號碼或電郵" type="text" />
-        <Input title="密碼" type="text" />
+        <Input
+          title="電話號碼或電郵"
+          type="text"
+          value={phoneNumOrEmail}
+          onChange={handlePhoneNumOrEmailChange}
+        />
+        <Input
+          title="密碼"
+          type="text"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+
         {/* Button to submit the login form */}
         <div className="container-confirmButton">
           <ConfirmButton type="submit" btnName="登入" />

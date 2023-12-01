@@ -1,47 +1,38 @@
-import React, { useState } from "react";
+import React, { ChangeEvent } from "react";
 import "./Dropdown.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-interface DropdownProps {
+type DropdownProps = {
   title: string;
-  component?: React.ReactNode;
-}
+  options: string[];
+  selectedOption: string;
+  onSelectOption: (selectedOption: string) => void;
+};
 
-export const Dropdown = ({ title, component }: DropdownProps) => {
-  const [show, setShow] = useState(false);
-  const [result, setResult] = useState("請選擇");
-  const handleShow = () => {
-    setShow(!show);
-  };
-
-  const handleSelectResult = () => {
-    setResult("123");
-    setShow(!show);
+export const Dropdown: React.FC<DropdownProps> = ({
+  title,
+  options,
+  selectedOption,
+  onSelectOption,
+}) => {
+  const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = event.target.value;
+    onSelectOption(selectedOption);
   };
 
   return (
-    <>
-      <div className="dropDownContainer">
-        <div className="dropDown">
-          <div className="dropDownTitle">{title}:</div>
-          <div className="dropDownHeader" onClick={handleShow}>
-            <FontAwesomeIcon icon={faChevronDown} color="white" />
-            <span>{result}</span>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-        </div>
-        {show && (
-          <div className="dropDownList">
-            <div onClick={handleSelectResult} className="dropDownListOption">
-              123
-            </div>
-            <div onClick={handleSelectResult} className="dropDownListOption">
-              324
-            </div>
-          </div>
-        )}
-      </div>
-    </>
+    <div className="dropDownContainer">
+      <label className="dropDownTitle">{title}</label>
+      <select
+        value={selectedOption}
+        onChange={handleOptionChange}
+        className="dropDownHeader"
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
