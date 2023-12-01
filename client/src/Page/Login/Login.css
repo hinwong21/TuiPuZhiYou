@@ -1,0 +1,12 @@
+.container-confirmButton {
+  display: flex;
+  justify-content: center;
+}
+
+.register-link {
+  margin-top: 2%;
+}
+
+.rememberMe {
+  margin-top: 2%;
+}

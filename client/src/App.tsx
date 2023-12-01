@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { TopBar } from "../src/Component/TopBar/TopBar";
-import { Login } from "./Page/Login";
+import { Login } from "./Page/Login/Login";
 import { Register } from "./Page/Register/Register";
 
 function App() {
@@ -14,9 +14,7 @@ function App() {
     <div className="wrapper">
       <TopBar />
 
-      {status === "login" && (
-        <Login onStatusChange={handleRegisterClick} />
-      )}
+      {status === "login" && <Login onStatusChange={handleRegisterClick} />}
       {status === "register" && <Register />}
     </div>
   );

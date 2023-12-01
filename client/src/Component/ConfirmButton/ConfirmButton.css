@@ -1,0 +1,14 @@
+.ConButton {
+  background-color: #32a02b;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px 20px 5px 20px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ConButton:active {
+  background-color: #267921;
+}
