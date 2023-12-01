@@ -76,12 +76,8 @@ export const Register = () => {
     setUnit(event.target.value);
   };
 
-  const setConfirmPhoneNumOrEmailEqualToPassword = () => {
-    setPassword(confirmPhoneNumOrEmail);
-  };
-
   useEffect(() => {
-    setConfirmPhoneNumOrEmailEqualToPassword();
+    setPassword(confirmPhoneNumOrEmail);
   }, [confirmPhoneNumOrEmail]);
 
   return (
