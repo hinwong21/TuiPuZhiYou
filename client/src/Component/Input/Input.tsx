@@ -3,15 +3,16 @@ import "./Input.css";
 
 interface InputProps {
   title: string;
+  type: string;
 }
 
 export const Input = (props: InputProps) => {
-  const { title } = props;
+  const { title, type } = props;
 
   return (
-    <div className="inputContainer">
-      <div>{title}</div>
-      <input></input>
+    <div className="inputCompoContainer">
+      <div className="inputCompoTitle">{title}</div>
+      <input type={type} className="inputCompo" placeholder={title}></input>
     </div>
   );
 };

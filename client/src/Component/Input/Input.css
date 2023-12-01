@@ -1,0 +1,17 @@
+.inputCompoContainer {
+  width: 60vw;
+  margin: 30px;
+}
+
+.inputCompoTitle {
+  margin-bottom: 10px;
+}
+
+.inputCompo {
+  font-size: 16px;
+  height: 30px;
+  width: 60vw;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}

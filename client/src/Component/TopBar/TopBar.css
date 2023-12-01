@@ -6,13 +6,12 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
 }
 
 .topBarLogoContainer {
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  padding: 5px;
 }
 
 .topBarLogo {
@@ -37,6 +36,7 @@
   border-radius: 20px;
   background-color: #32a02b;
   color: white;
+  margin: 10px;
 }
 
 .topBarLoginButton {
