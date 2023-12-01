@@ -1,8 +1,8 @@
 import React from "react";
 import { Input } from "../../Component/Input/Input";
-// import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import "./Register.css";
 import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
+import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 
 export const Register = () => {
   return (
@@ -21,6 +21,10 @@ export const Register = () => {
       <Dropdown title="號" />
       <Dropdown title="樓層" />
       <Input title="單位" type="text" />
+
+      <ConfirmButton btnName="確認" />
+
+      <div className="registerGap"></div>
     </>
   );
 };

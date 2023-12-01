@@ -5,7 +5,7 @@ import logo from "../../uploads/logo.png";
 
 export const TopBar = () => {
   return (
-    <header className="topBarContainer">
+    <div className="topBarContainer">
       <section className="topBarLogoContainer">
         <div className="topBarLogo">
           <div className="topBarLogoTitle">資助</div>
@@ -21,6 +21,6 @@ export const TopBar = () => {
       <section className="topBarLoginContainer">
         <div className="topBarLoginButton">登入｜注册</div>
       </section>
-    </header>
+    </div>
   );
 };

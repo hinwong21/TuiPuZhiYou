@@ -1,4 +1,9 @@
 .registerAddressTitle {
   font-size: 16px;
   font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.registerGap {
+  height: 10vh;
 }
