@@ -1,3 +1,4 @@
+import { log } from "console";
 import { Knex } from "knex";
 
 export class AccountService {
@@ -16,7 +17,7 @@ export class AccountService {
     dateAdd: Date
   ) => {
     try {
-      const account = await this.knex("users").insert({
+      await this.knex("users").insert({
         user_id: userId,
         username: username,
         emailOrPhoneNum: emailOrPhoneNum,
@@ -28,6 +29,7 @@ export class AccountService {
         project_id: projectId,
         date_add: dateAdd,
       });
+      return true;
     } catch (err) {
       throw new Error((err as Error).message);
     }
@@ -39,11 +41,28 @@ export class AccountService {
     rememberMe?: boolean
   ) => {
     try {
-      const [result] = await this.knex("admins")
-        .select("usersname", "password")
-        .where("username", emailOrPhoneNum);
+      const [adminResult] = await this.knex("admins")
+        .select("admin_id", "username")
+        .where("username", emailOrPhoneNum)
+        .andWhere("password", password);
 
-      console.log(result);
+      if (adminResult == undefined) {
+        const [userResult] = await this.knex("users")
+          .select("user_id", "username")
+          .where("emailOrPhoneNum", emailOrPhoneNum)
+          .andWhere("password", password);
+
+        if (userResult === undefined) {
+          return { success: false };
+        } else {
+          console.log("user login");
+          return { success: true, result: userResult };
+        }
+      } else {
+        console.log("admin login");
+
+        return { success: true, result: adminResult };
+      }
     } catch (err) {
       throw new Error((err as Error).message);
     }

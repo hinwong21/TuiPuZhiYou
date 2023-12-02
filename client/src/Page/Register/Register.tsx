@@ -3,7 +3,7 @@ import { Input } from "../../Component/Input/Input";
 import "./Register.css";
 import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
-import {api_origin} from "../../service/api"
+import { api_origin } from "../../service/api";
 
 export const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -143,7 +143,14 @@ export const Register = () => {
         project_id: projectId,
       }),
     });
-    const json = await res.json;
+
+    // if success, json = {success:true}
+    const json = await res.json();
+    if (json.success === true) {
+      alert("成功注册");
+    } else{
+      alert("未能注册成功");
+    }
   };
 
   useEffect(() => {

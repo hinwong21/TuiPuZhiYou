@@ -9,4 +9,4 @@ export let accountService = new AccountService(knex);
 let accountController = new AccountController(accountService);
 
 accountRoutes.post("/register", accountController.registerNewAccount);
-accountRoutes.get("/login", accountController.login);
+accountRoutes.post("/login", accountController.login);

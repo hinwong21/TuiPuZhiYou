@@ -13,7 +13,7 @@ function getRandomSixDigitNumber() {
 export class AccountController {
   constructor(private accountService: AccountService) {}
 
-  registerNewAccount = async (req: express.Request, res: express.Response,) => {
+  registerNewAccount = async (req: express.Request, res: express.Response) => {
     const today = new Date();
     try {
       const userId = getRandomSixDigitNumber();
@@ -39,13 +39,16 @@ export class AccountController {
         projectId,
         dateAdd
       );
-      req.session.userId = userId;
-      req.session.username = username;
-      req.session.isLogin = true;
 
-      console.log(req.session.userId);
+      if (result) {
+        // req.session.userId = userId;
+        // req.session.username = username;
+        // req.session.isLogin = true;
 
-      res.redirect("/");
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
     } catch (err) {
       errorHandler(err, req, res);
     }
@@ -53,13 +56,14 @@ export class AccountController {
 
   login = async (req: express.Request, res: express.Response) => {
     try {
-      const emailOrPhoneNum = req.body.emailOrPhoneNum;
+      const phoneNumOrEmail = req.body.phoneNumOrEmail;
       const password = req.body.password;
 
-      const result = await this.accountService.login(emailOrPhoneNum, password);
-      // req.session.userId = userId;
-      // req.session.username = username;
-      // req.session.isLogin = true;
+      const result = await this.accountService.login(phoneNumOrEmail, password);
+
+      console.log(result);
+
+      return res.json({ result: result });
 
       // console.log(req.session.username);
     } catch (err) {
