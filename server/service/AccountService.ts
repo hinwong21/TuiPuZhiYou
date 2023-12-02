@@ -4,10 +4,10 @@ export class AccountService {
   constructor(private knex: Knex) {}
 
   registerNewAccount = async (
-    userId: number,
+    userId: string,
     username: string,
-    password: string,
     emailOrPhoneNum: string,
+    password: string,
     street: string,
     number: string,
     floor: string,
@@ -15,12 +15,15 @@ export class AccountService {
     projectId: string,
     dateAdd: Date
   ) => {
+    console.log(emailOrPhoneNum, 1);
+    console.log(password, 2);
+
     try {
       const account = await this.knex("users").insert({
         user_id: userId,
         username: username,
-        password: password,
         emailOrPhoneNum: emailOrPhoneNum,
+        password: password,
         street: street,
         number: number,
         floor: floor,

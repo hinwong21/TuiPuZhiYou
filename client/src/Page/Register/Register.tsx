@@ -3,9 +3,9 @@ import { Input } from "../../Component/Input/Input";
 import "./Register.css";
 import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
+import {api_origin} from "../../service/api"
 
 export const Register = () => {
-
   const [username, setUsername] = useState<string>("");
   const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
   const [confirmPhoneNumOrEmail, setConfirmPhoneNumOrEmail] =
@@ -23,6 +23,7 @@ export const Register = () => {
     "同秀坊",
     "同茂坊",
   ];
+
   const numberOptions: string[] = [
     "---請選擇---",
     "1-3",
@@ -89,8 +90,60 @@ export const Register = () => {
     setUnit(event.target.value);
   };
 
-  const handleBackButtonClick = () => {
+  const handleBackBtnClick = () => {
     window.location.reload();
+  };
+
+  const handleRegisterBtnClick = async () => {
+    if (username === "") {
+      alert("請填寫用戶名稱！");
+      return;
+    }
+
+    if (phoneNumOrEmail !== confirmPhoneNumOrEmail) {
+      alert("確認電話號碼或電郵地址不相符");
+      setConfirmPhoneNumOrEmail("");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("確認密碼不相符");
+      setConfirmPassword("");
+      return;
+    }
+
+    if (
+      street === "---請選擇---" ||
+      number === "---請選擇---" ||
+      floor === "---請選擇---" ||
+      unit === ""
+    ) {
+      alert("請填寫完整地址");
+      return;
+    }
+
+    // const projectId = window.location.hostname;
+
+    // not deploy yet, hard code first
+    const projectId = "P001";
+
+    const res = await fetch(`${api_origin}/account/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        emailOrPhoneNum: confirmPhoneNumOrEmail,
+        password: confirmPassword,
+        street: street,
+        number: number,
+        floor: floor,
+        unit: unit,
+        project_id: projectId,
+      }),
+    });
+    const json = await res.json;
   };
 
   useEffect(() => {
@@ -166,10 +219,12 @@ export const Register = () => {
       />
 
       <div className="registerBtnContainer">
-        <div onClick={handleBackButtonClick}>
+        <div onClick={handleBackBtnClick}>
           <ConfirmButton btnName="返回" />
         </div>
-        <ConfirmButton btnName="注册" />
+        <div onClick={handleRegisterBtnClick}>
+          <ConfirmButton btnName="注册" />
+        </div>
       </div>
 
       <div className="registerGap"></div>
