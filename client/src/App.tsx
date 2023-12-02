@@ -10,12 +10,15 @@ function App() {
   const handleRegisterClick = () => {
     setStatus("register");
   };
+
   return (
     <div className="wrapper">
       <TopBar />
 
       {status === "login" && <Login onStatusChange={handleRegisterClick} />}
-      {status === "register" && <Register />}
+      {status === "register" && (
+        <Register />
+      )}
     </div>
   );
 }

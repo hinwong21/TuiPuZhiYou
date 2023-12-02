@@ -46,20 +46,20 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
           onChange={handlePasswordChange}
         />
 
+        <div className="rememberMe">
+          <input
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <label>記住帳號密碼</label>
+        </div>
+
         {/* Button to submit the login form */}
         <div className="container-confirmButton">
           <ConfirmButton type="submit" btnName="登入" />
         </div>
       </form>
-
-      <div className="rememberMe">
-        <input
-          type="checkbox"
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
-        />
-        <label>記住帳號密碼</label>
-      </div>
 
       {/* Register button */}
       <div className="register-link">

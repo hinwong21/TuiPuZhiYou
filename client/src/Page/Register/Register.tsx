@@ -5,6 +5,7 @@ import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 
 export const Register = () => {
+
   const [username, setUsername] = useState<string>("");
   const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
   const [confirmPhoneNumOrEmail, setConfirmPhoneNumOrEmail] =
@@ -32,6 +33,18 @@ export const Register = () => {
     "10-12",
     "13-15",
     "14-16",
+  ];
+
+  const floorOptions: string[] = [
+    "---請選擇---",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "閣樓",
+    "天台",
   ];
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,12 +81,16 @@ export const Register = () => {
     setNumber(selectedOption);
   };
 
-  const handleFloorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFloor(event.target.value);
+  const handleFloorChange = (selectedOption: string) => {
+    setFloor(selectedOption);
   };
 
   const handleUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUnit(event.target.value);
+  };
+
+  const handleBackButtonClick = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -96,7 +113,7 @@ export const Register = () => {
         onChange={handlePhoneNumOrEmailChange}
       />
       <Input
-        title="確認電話號碼或電郵地址"
+        title="確認您的電話號碼或電郵地址"
         type="text"
         value={confirmPhoneNumOrEmail}
         onChange={handleConfirmPhoneNumOrEmailChange}
@@ -115,7 +132,7 @@ export const Register = () => {
       />
 
       <Input
-        title="確認密碼"
+        title="確認您的密碼"
         type="text"
         value={confirmPassword}
         onChange={handleConfirmPasswordChange}
@@ -135,11 +152,11 @@ export const Register = () => {
         selectedOption={number}
         onSelectOption={handleNumberChange}
       />
-      <Input
+      <Dropdown
         title="樓層"
-        type="text"
-        value={floor}
-        onChange={handleFloorChange}
+        options={floorOptions}
+        selectedOption={floor}
+        onSelectOption={handleFloorChange}
       />
       <Input
         title="單位"
@@ -148,7 +165,12 @@ export const Register = () => {
         onChange={handleUnitChange}
       />
 
-      <ConfirmButton btnName="確認" />
+      <div className="registerBtnContainer">
+        <div onClick={handleBackButtonClick}>
+          <ConfirmButton btnName="返回" />
+        </div>
+        <ConfirmButton btnName="注册" />
+      </div>
 
       <div className="registerGap"></div>
     </>
