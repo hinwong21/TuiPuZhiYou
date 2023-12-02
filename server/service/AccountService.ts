@@ -15,9 +15,6 @@ export class AccountService {
     projectId: string,
     dateAdd: Date
   ) => {
-    console.log(emailOrPhoneNum, 1);
-    console.log(password, 2);
-
     try {
       const account = await this.knex("users").insert({
         user_id: userId,

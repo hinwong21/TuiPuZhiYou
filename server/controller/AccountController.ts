@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
+import express from "express";
 import { errorHandler } from "../error";
 import { AccountService } from "../service/AccountService";
+import session from "express-session";
 
 function getRandomSixDigitNumber() {
   const dateNow = new Date();
@@ -12,7 +13,7 @@ function getRandomSixDigitNumber() {
 export class AccountController {
   constructor(private accountService: AccountService) {}
 
-  registerNewAccount = async (req: Request, res: Response) => {
+  registerNewAccount = async (req: express.Request, res: express.Response,) => {
     const today = new Date();
     try {
       const userId = getRandomSixDigitNumber();
@@ -26,8 +27,6 @@ export class AccountController {
       const projectId = "P001";
       const dateAdd = today;
 
-      console.log(req.body, 555);
-
       const result = await this.accountService.registerNewAccount(
         userId,
         username,
@@ -40,17 +39,19 @@ export class AccountController {
         projectId,
         dateAdd
       );
-      // req.session.userId = userId;
-      // req.session.username = username;
-      // req.session.isLogin = true;
+      req.session.userId = userId;
+      req.session.username = username;
+      req.session.isLogin = true;
 
-      // console.log(req.session.username);
+      console.log(req.session.userId);
+
+      res.redirect("/");
     } catch (err) {
       errorHandler(err, req, res);
     }
   };
 
-  login = async (req: Request) => {
+  login = async (req: express.Request, res: express.Response) => {
     try {
       const emailOrPhoneNum = req.body.emailOrPhoneNum;
       const password = req.body.password;
