@@ -1,7 +1,6 @@
 import express from "express";
 import { errorHandler } from "../error";
 import { AccountService } from "../service/AccountService";
-import session from "express-session";
 
 function getRandomSixDigitNumber() {
   const dateNow = new Date();
@@ -40,15 +39,16 @@ export class AccountController {
         dateAdd
       );
 
-      if (result) {
-        // req.session.userId = userId;
-        // req.session.username = username;
-        // req.session.isLogin = true;
-
-        return res.json({ success: true });
-      } else {
-        return res.json({ success: false });
-      }
+      // if (result) {
+      //   req.session.userId = userId;
+      //   req.session.username = username;
+      //   req.session.isLogin = true;
+      //   console.log(req.session.userId);
+      //   return res.json({ success: true });
+      // } else {
+      //   console.log("false", 123);
+      //   return res.json({ success: false });
+      // }
     } catch (err) {
       errorHandler(err, req, res);
     }
@@ -62,10 +62,12 @@ export class AccountController {
       const result = await this.accountService.login(phoneNumOrEmail, password);
 
       console.log(result);
+      // if (result.success) {
+      //   req.session.userId = result.result.admin_id;
+      //   console.log(req.session.userId);
+      // }
 
       return res.json({ result: result });
-
-      // console.log(req.session.username);
     } catch (err) {
       console.log(err);
     }

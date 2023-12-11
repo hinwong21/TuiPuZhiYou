@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
 
   if (!(await knex.schema.hasTable("admins"))) {
     await knex.schema.createTable("admins", (table) => {
-      table.string("admin_id", 255).notNullable().unique();
+      table.string("user_id", 255).notNullable().unique();
       table.string("username", 60).notNullable();
       table.string("password", 255).notNullable();
       table.boolean("isVolunteer").notNullable().defaultTo(false);

@@ -1,4 +1,3 @@
-import { log } from "console";
 import { Knex } from "knex";
 
 export class AccountService {
@@ -60,7 +59,6 @@ export class AccountService {
         }
       } else {
         console.log("admin login");
-
         return { success: true, result: adminResult };
       }
     } catch (err) {
