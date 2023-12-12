@@ -40,7 +40,7 @@ export class AccountController {
       );
 
       if (result) {
-        return res.json({ success: true });
+        return res.json({ success: true, user_id: userId });
       } else {
         return res.json({ success: false });
       }

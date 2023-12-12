@@ -39,18 +39,10 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       }),
     });
     const json = await res.json();
-
-    if (json.result.success === false) {
-      alert("電話號碼或電郵或密碼錯誤！");
-    } else {
-      alert("成功登入");
-    }
-
-    localStorage.setItem("ef2023_user_id", json.result.result.user_id);
-
-    const rememberMeStatus = rememberMe.toString();
+    console.log(json);
 
     // if clicked remember me, saved to localStorage; else remove
+    const rememberMeStatus = rememberMe.toString();
     if (rememberMe) {
       localStorage.setItem("ef2023_rememberMe", rememberMeStatus);
       localStorage.setItem("ef2023_phoneNumOrEmail", phoneNumOrEmail);
@@ -61,8 +53,22 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       localStorage.removeItem("ef2023_password");
     }
 
-    // temporary
-    onStatusChange("Register");
+    if (json.result.success === false) {
+      alert("電話號碼或電郵或密碼錯誤！");
+    } else {
+      alert("成功登入");
+      localStorage.setItem("ef2023_user_id", json.result.result.user_id);
+
+      const isAdmin = json.result.isAdmin.toString();
+      localStorage.setItem("ef2023_isAdmin", isAdmin);
+
+      // update status, direct to userInfo page
+      if (isAdmin) {
+        handleStatus("adminInfo");
+      } else {
+        handleStatus("userInfo");
+      }
+    }
   };
 
   const handleInputStatus = () => {

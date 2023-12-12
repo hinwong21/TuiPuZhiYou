@@ -5,7 +5,11 @@ import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 
-export const Register = () => {
+interface RegisterProps {
+  onStatusChange: (newStatus: string) => void;
+}
+
+export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   const [username, setUsername] = useState<string>("");
   const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
   const [confirmPhoneNumOrEmail, setConfirmPhoneNumOrEmail] =
@@ -47,6 +51,10 @@ export const Register = () => {
     "閣樓",
     "天台",
   ];
+
+  const handleStatus = (newStatus: string) => {
+    onStatusChange(newStatus);
+  };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -91,7 +99,7 @@ export const Register = () => {
   };
 
   const handleBackBtnClick = () => {
-    window.location.reload();
+    handleStatus("login");
   };
 
   const handleRegisterBtnClick = async () => {
@@ -144,15 +152,17 @@ export const Register = () => {
       }),
     });
 
-    // if success, json = {success:true}
     const json = await res.json();
+
+    // redirect to userInfo page
     if (json.success === true) {
       alert("成功注册");
+      localStorage.setItem("ef2023_user_id", json.user_id);
+      localStorage.setItem("ef2023_isAdmin", "false");
+      handleStatus("userInfo");
     } else {
       alert("未能注册成功");
     }
-
-    window.location.href = "/";
   };
 
   useEffect(() => {

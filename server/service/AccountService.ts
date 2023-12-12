@@ -34,10 +34,7 @@ export class AccountService {
     }
   };
 
-  login = async (
-    emailOrPhoneNum: string,
-    password: string,
-  ) => {
+  login = async (emailOrPhoneNum: string, password: string) => {
     try {
       const [adminResult] = await this.knex("admins")
         .select("user_id", "username")
@@ -54,11 +51,11 @@ export class AccountService {
           return { success: false };
         } else {
           console.log("user login");
-          return { success: true, result: userResult };
+          return { success: true, result: userResult, isAdmin: false };
         }
       } else {
         console.log("admin login");
-        return { success: true, result: adminResult };
+        return { success: true, result: adminResult, isAdmin: true };
       }
     } catch (err) {
       throw new Error((err as Error).message);

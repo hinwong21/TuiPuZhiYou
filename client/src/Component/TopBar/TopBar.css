@@ -39,12 +39,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 100px;
   height: 50px;
   border-radius: 20px;
   background-color: #32a02b;
   color: white;
   margin: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .topBarLoginButton {

@@ -2,6 +2,8 @@ import React from "react";
 import "./TopBar.css";
 import sponsor from "../../uploads/E&Clogo.png";
 import logo from "../../uploads/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 interface TopBarProps {
   userName: string;
@@ -25,7 +27,9 @@ export const TopBar = (props: TopBarProps) => {
       <div className="topBarUsernameBtnContainer">
         <div>{props.userName}</div>
         <section className="topBarLoginContainer">
-          <div className="topBarLoginButton">登入｜注册</div>
+          <div className="topBarLoginButton">
+            {props.userName ? <FontAwesomeIcon icon={faBars} /> : "登入｜注册"}
+          </div>
         </section>
       </div>
     </div>
