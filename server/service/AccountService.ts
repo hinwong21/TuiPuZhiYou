@@ -37,11 +37,10 @@ export class AccountService {
   login = async (
     emailOrPhoneNum: string,
     password: string,
-    rememberMe?: boolean
   ) => {
     try {
       const [adminResult] = await this.knex("admins")
-        .select("admin_id", "username")
+        .select("user_id", "username")
         .where("username", emailOrPhoneNum)
         .andWhere("password", password);
 
@@ -60,6 +59,25 @@ export class AccountService {
       } else {
         console.log("admin login");
         return { success: true, result: adminResult };
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  singleUserDetail = async (id: string | undefined) => {
+    try {
+      const userId = parseInt(id!);
+      if (userId < 13) {
+        const result = await this.knex("admins")
+          .select("*")
+          .where("user_id", id);
+        return result;
+      } else {
+        const result = await this.knex("users")
+          .select("*")
+          .where("user_id", id);
+        return result;
       }
     } catch (err) {
       throw new Error((err as Error).message);

@@ -28,6 +28,13 @@
   height: 30px;
 }
 
+.topBarUsernameBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .topBarLoginContainer {
   display: flex;
   justify-content: center;

@@ -40,12 +40,8 @@ export class AccountController {
       );
 
       if (result) {
-        req.session.userId = userId;
-        req.session.username = username;
-        req.session.isLogin = true;
         return res.json({ success: true });
       } else {
-        console.log("false", 123);
         return res.json({ success: false });
       }
     } catch (err) {
@@ -57,18 +53,20 @@ export class AccountController {
     try {
       const phoneNumOrEmail = req.body.phoneNumOrEmail;
       const password = req.body.password;
-
       const result = await this.accountService.login(phoneNumOrEmail, password);
-
-      console.log(result);
-      if (result.success) {
-        req.session.userId = result.result.admin_id;
-        console.log(req.session.userId);
-      }
-
       return res.json({ result: result });
     } catch (err) {
-      console.log(err);
+      errorHandler(err, req, res);
+    }
+  };
+
+  singleUserDetail = async (req: express.Request, res: express.Response) => {
+    try {
+      const id = req.body.id;
+      const result = await this.accountService.singleUserDetail(id);
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
     }
   };
 }

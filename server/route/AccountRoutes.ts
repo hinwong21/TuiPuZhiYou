@@ -10,3 +10,4 @@ let accountController = new AccountController(accountService);
 
 accountRoutes.post("/register", accountController.registerNewAccount);
 accountRoutes.post("/login", accountController.login);
+accountRoutes.post("/", accountController.singleUserDetail);

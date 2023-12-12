@@ -148,9 +148,11 @@ export const Register = () => {
     const json = await res.json();
     if (json.success === true) {
       alert("成功注册");
-    } else{
+    } else {
       alert("未能注册成功");
     }
+
+    window.location.href = "/";
   };
 
   useEffect(() => {

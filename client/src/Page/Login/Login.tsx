@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../../Component/Input/Input";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import "./Login.css";
@@ -9,8 +9,8 @@ interface LoginProps {
 }
 
 export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
-  const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [phoneNumOrEmail, setPhoneNumOrEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const handlePhoneNumOrEmailChange = (
@@ -39,20 +39,57 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       }),
     });
     const json = await res.json();
-    console.log(json);
 
     if (json.result.success === false) {
       alert("電話號碼或電郵或密碼錯誤！");
     } else {
       alert("成功登入");
     }
+
+    localStorage.setItem("ef2023_user_id", json.result.result.user_id);
+
+    const rememberMeStatus = rememberMe.toString();
+
+    // if clicked remember me, saved to localStorage; else remove
+    if (rememberMe) {
+      localStorage.setItem("ef2023_rememberMe", rememberMeStatus);
+      localStorage.setItem("ef2023_phoneNumOrEmail", phoneNumOrEmail);
+      localStorage.setItem("ef2023_password", password);
+    } else {
+      localStorage.removeItem("ef2023_rememberMe");
+      localStorage.removeItem("ef2023_phoneNumOrEmail");
+      localStorage.removeItem("ef2023_password");
+    }
+
+    // temporary
+    onStatusChange("Register");
   };
+
+  const handleInputStatus = () => {
+    const rememberMeStatus = Boolean(localStorage.getItem("ef2023_rememberMe"));
+    setRememberMe(rememberMeStatus);
+
+    // if localStorage exist, insert it
+    const savedPhoneNumOrEmail = localStorage.getItem("ef2023_phoneNumOrEmail");
+    if (typeof savedPhoneNumOrEmail == "string") {
+      setPhoneNumOrEmail(savedPhoneNumOrEmail!);
+    }
+
+    // if localStorage exist, insert it
+    const savedPassword = localStorage.getItem("ef2023_password");
+    if (typeof savedPassword == "string") {
+      setPassword(savedPassword!);
+    }
+  };
+
+  useEffect(() => {
+    handleInputStatus();
+  }, []);
 
   return (
     <>
       <h2>登入</h2>
-      {/* Login form */}
-      {/* <form> */}
+
       {/* Input fields for username and password */}
       <Input
         title="電話號碼或電郵"
@@ -80,7 +117,6 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       <div className="container-confirmButton" onClick={handleLoginBtnClick}>
         <ConfirmButton type="submit" btnName="登入" />
       </div>
-      {/* </form> */}
 
       {/* Register button */}
       <div className="register-link">

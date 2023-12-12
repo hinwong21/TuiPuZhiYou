@@ -3,7 +3,11 @@ import "./TopBar.css";
 import sponsor from "../../uploads/E&Clogo.png";
 import logo from "../../uploads/logo.png";
 
-export const TopBar = () => {
+interface TopBarProps {
+  userName: string;
+}
+
+export const TopBar = (props: TopBarProps) => {
   return (
     <div className="topBarContainer">
       <section className="topBarLogoContainer">
@@ -18,9 +22,12 @@ export const TopBar = () => {
         </div>
       </section>
 
-      <section className="topBarLoginContainer">
-        <div className="topBarLoginButton">登入｜注册</div>
-      </section>
+      <div className="topBarUsernameBtnContainer">
+        <div>{props.userName}</div>
+        <section className="topBarLoginContainer">
+          <div className="topBarLoginButton">登入｜注册</div>
+        </section>
+      </div>
     </div>
   );
 };
