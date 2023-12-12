@@ -28,6 +28,11 @@ export class AccountService {
         project_id: projectId,
         date_add: dateAdd,
       });
+
+      await this.knex("userRecords").insert({
+        user_id: userId,
+      });
+
       return true;
     } catch (err) {
       throw new Error((err as Error).message);
@@ -70,8 +75,13 @@ export class AccountService {
         return result;
       } else {
         const result = await this.knex("users")
-          .select("*")
-          .where("user_id", id);
+          .select(
+            "users.*",
+            "userRecords.total_point",
+            "userRecords.total_weight"
+          )
+          .leftJoin("userRecords", "users.user_id", "userRecords.user_id")
+          .where("users.user_id", id);
         return result;
       }
     } catch (err) {
