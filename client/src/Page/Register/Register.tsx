@@ -159,7 +159,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       alert("成功注册");
       localStorage.setItem("ef2023_user_id", json.user_id);
       localStorage.setItem("ef2023_isAdmin", "false");
-      handleStatus("userInfo");
+      window.location.href = "/";
     } else {
       alert("未能注册成功");
     }

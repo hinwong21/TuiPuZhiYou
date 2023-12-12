@@ -5,11 +5,24 @@ import { Login } from "./Page/Login/Login";
 import { Register } from "./Page/Register/Register";
 import { api_origin } from "./service/api";
 import { UserInfo } from "./Page/User/Info/UserInfo";
+import { UserGift } from "./Page/User/Gift/UserGift";
+import { UserEvent } from "./Page/User/Event/UserEvent";
+import { SearchUser } from "./Page/Admin/SearchUser/SearchUser";
+import { ProjectDetails } from "./Page/Admin/ProjectDetails/ProjectDetails";
+import { ProjectSetting } from "./Page/Admin/ProjectSetting/ProjectSetting";
+import { DeleteGift } from "./Page/Admin/DeleteGift/DeleteGift";
+import { DeleteEvent } from "./Page/Admin/DeleteEvent/DeleteEvent";
 
 function App() {
   const [status, setStatus] = useState("login");
   const [userName, setUsername] = useState("");
 
+  // change page function
+  const handleStatusChange = (newStatus: string) => {
+    setStatus(newStatus);
+  };
+
+  // call api to pass the username to TopBar
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
     const res = await fetch(`${api_origin}/account/`, {
@@ -29,35 +42,30 @@ function App() {
     }
   };
 
-  const handleStatusChange = (newStatus: string) => {
-    setStatus(newStatus);
-  };
-
   useEffect(() => {
     handleGetUserDetails();
-
-    // if logged in, direct to info
-    const isAdmin = localStorage.getItem("ef2023_isAdmin");
-    console.log(isAdmin, userName);
-
-    if (userName !== "") {
-      if (isAdmin === "false") {
-        setStatus("userInfo");
-      } else {
-        setStatus("adminInfo");
-      }
-    }
-  }, [status, userName]);
+  }, []);
 
   return (
     <div className="wrapper">
-      <TopBar userName={userName} />
+      <TopBar userName={userName} onStatusChange={handleStatusChange} />
 
       {status === "login" && <Login onStatusChange={handleStatusChange} />}
       {status === "register" && (
         <Register onStatusChange={handleStatusChange} />
       )}
+
+      {/* Only for User */}
       {status === "userInfo" && <UserInfo />}
+      {status === "userGift" && <UserGift />}
+      {status === "userEvent" && <UserEvent />}
+
+      {/* Only for Admin */}
+      {status === "searchUser" && <SearchUser />}
+      {status === "projectDetails" && <ProjectDetails />}
+      {status === "projectSetting" && <ProjectSetting />}
+      {status === "deleteGift" && <DeleteGift />}
+      {status === "deleteEvent" && <DeleteEvent />}
     </div>
   );
 }

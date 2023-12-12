@@ -23,9 +23,12 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
     setPassword(event.target.value);
   };
 
-  const handleStatus = (newStatus: string) => {
-    onStatusChange(newStatus);
-  };
+  const handleStatus = React.useCallback(
+    (newStatus: string) => {
+      onStatusChange(newStatus);
+    },
+    [onStatusChange]
+  );
 
   const handleLoginBtnClick = async () => {
     const res = await fetch(`${api_origin}/account/login`, {
@@ -39,7 +42,6 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       }),
     });
     const json = await res.json();
-    console.log(json);
 
     // if clicked remember me, saved to localStorage; else remove
     const rememberMeStatus = rememberMe.toString();
@@ -60,14 +62,11 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
 
       const isAdmin = json.result.isAdmin.toString();
+      console.log(isAdmin);
+      
       localStorage.setItem("ef2023_isAdmin", isAdmin);
 
-      // update status, direct to userInfo page
-      if (isAdmin) {
-        handleStatus("adminInfo");
-      } else {
-        handleStatus("userInfo");
-      }
+      window.location.href = "/";
     }
   };
 
@@ -87,6 +86,40 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       setPassword(savedPassword!);
     }
   };
+
+  const [userName, setUsername] = useState("");
+  const handleGetUserDetails = async () => {
+    const userId = localStorage.getItem("ef2023_user_id");
+    const res = await fetch(`${api_origin}/account/`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userId,
+      }),
+    });
+    const json = await res.json();
+
+    if (json.result && json.result.length > 0) {
+      const username = json.result[0].username;
+      setUsername(username);
+    }
+  };
+
+  useEffect(() => {
+    handleGetUserDetails();
+    // if logged in, direct to info
+    const isAdmin = localStorage.getItem("ef2023_isAdmin");
+
+    if (userName !== "") {
+      if (isAdmin === "false") {
+        handleStatus("userInfo");
+      } else {
+        handleStatus("searchUser");
+      }
+    }
+  }, [handleStatus, userName]);
 
   useEffect(() => {
     handleInputStatus();
