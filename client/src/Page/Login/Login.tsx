@@ -62,10 +62,8 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
 
       const isAdmin = json.result.isAdmin.toString();
-      console.log(isAdmin);
-      
       localStorage.setItem("ef2023_isAdmin", isAdmin);
-
+      
       window.location.href = "/";
     }
   };

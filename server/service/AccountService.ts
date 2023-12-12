@@ -50,11 +50,9 @@ export class AccountService {
         if (userResult === undefined) {
           return { success: false };
         } else {
-          console.log("user login");
           return { success: true, result: userResult, isAdmin: false };
         }
       } else {
-        console.log("admin login");
         return { success: true, result: adminResult, isAdmin: true };
       }
     } catch (err) {
