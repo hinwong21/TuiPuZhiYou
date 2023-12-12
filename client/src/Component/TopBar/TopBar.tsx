@@ -25,7 +25,8 @@ export const TopBar = (props: TopBarProps) => {
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("ef2023_user_id");
+    localStorage.removeItem("ef2023_isAdmin");
     window.location.href = "/";
   };
 
