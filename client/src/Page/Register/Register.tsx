@@ -4,6 +4,7 @@ import "./Register.css";
 import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
+import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -20,37 +21,6 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
-
-  const streetOptions: string[] = [
-    "---請選擇---",
-    "同發坊",
-    "同秀坊",
-    "同茂坊",
-  ];
-
-  const numberOptions: string[] = [
-    "---請選擇---",
-    "1-3",
-    "2-4",
-    "5-7",
-    "6-8",
-    "9-11",
-    "10-12",
-    "13-15",
-    "14-16",
-  ];
-
-  const floorOptions: string[] = [
-    "---請選擇---",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "閣樓",
-    "天台",
-  ];
 
   const handleStatus = (newStatus: string) => {
     onStatusChange(newStatus);
