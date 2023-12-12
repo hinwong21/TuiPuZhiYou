@@ -1,0 +1,78 @@
+.userGiftHeader {
+  font-size: 32px;
+  font-weight: bolder;
+  color: #56412c;
+  margin: 20px;
+}
+
+.userGiftUserPoint {
+  font-size: 24px;
+  font-weight: bold;
+  color: #56412c;
+  margin: 10px;
+}
+
+.giftBoardContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.giftBoard {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 840px;
+}
+
+@media (max-width: 840px) {
+  .giftBoard {
+    width: 630px;
+  }
+}
+
+@media (max-width: 630px) {
+  .giftBoard {
+    width: 420px;
+  }
+}
+
+.giftBoardGiftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 180px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.giftBoardGiftImage {
+  height: 150px;
+  width: 150px;
+  background-color: #ada9a9;
+  overflow: hidden;
+  object-fit: cover;
+  margin: 5px;
+}
+
+.giftBoardGiftTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.giftBoardGiftExchangePoints {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.giftBoardGiftExchangePosition {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 5px;
+  margin-bottom: 10px;
+}

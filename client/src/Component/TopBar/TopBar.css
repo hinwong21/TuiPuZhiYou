@@ -65,6 +65,7 @@
   width: 100px;
   background-color: #32a02b;
   color: white;
+  border-left: white solid 3px;
 }
 
 .topBarSideBarIcon {
