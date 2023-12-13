@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./UserEvent.css";
 import { Events } from "./UesrEventBox";
 import { api_origin } from "../../../service/api";
 
 export const UserEvent = () => {
-  // const handleGetEventDetails = async () => {
-  //   const res = await fetch(`${api_origin}/account/`, {
-  //     method: "GET",
-  //   });
-  //   const json = await res.json();
-  // };
+  const handleGetEventDetails = async () => {
+    const res = await fetch(`${api_origin}/event/`, {
+      method: "GET",
+    });
+    const json = await res.json();
+    console.log(json);
+  };
 
-  // useEffect(() => {
-  //   handleGetEventDetails();
-  // }, []);
+  useEffect(() => {
+    handleGetEventDetails();
+  }, []);
 
   return (
     <>

@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
 import { env } from "./env";
-import { sessionMiddleware } from "./session";
 import { accountRoutes } from "./route/AccountRoutes";
+import { eventRoutes } from "./route/EventRoutes";
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
 
 app.use(cors());
-app.use(sessionMiddleware);
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);
@@ -16,6 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/account", accountRoutes);
+app.use("/event", eventRoutes);
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);

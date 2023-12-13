@@ -49,23 +49,24 @@ function App() {
   return (
     <div className="wrapper">
       <TopBar userName={userName} onStatusChange={handleStatusChange} />
+      <div className="pageContainer">
+        {status === "login" && <Login onStatusChange={handleStatusChange} />}
+        {status === "register" && (
+          <Register onStatusChange={handleStatusChange} />
+        )}
 
-      {status === "login" && <Login onStatusChange={handleStatusChange} />}
-      {status === "register" && (
-        <Register onStatusChange={handleStatusChange} />
-      )}
+        {/* Only for User */}
+        {status === "userInfo" && <UserInfo />}
+        {status === "userGift" && <UserGift />}
+        {status === "userEvent" && <UserEvent />}
 
-      {/* Only for User */}
-      {status === "userInfo" && <UserInfo />}
-      {status === "userGift" && <UserGift />}
-      {status === "userEvent" && <UserEvent />}
-
-      {/* Only for Admin */}
-      {status === "searchUser" && <SearchUser />}
-      {status === "projectDetails" && <ProjectDetails />}
-      {status === "projectSetting" && <ProjectSetting />}
-      {status === "deleteGift" && <DeleteGift />}
-      {status === "deleteEvent" && <DeleteEvent />}
+        {/* Only for Admin */}
+        {status === "searchUser" && <SearchUser />}
+        {status === "projectDetails" && <ProjectDetails />}
+        {status === "projectSetting" && <ProjectSetting />}
+        {status === "deleteGift" && <DeleteGift />}
+        {status === "deleteEvent" && <DeleteEvent />}
+      </div>
     </div>
   );
 }

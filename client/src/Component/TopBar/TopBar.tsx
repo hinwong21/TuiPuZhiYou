@@ -21,7 +21,9 @@ export const TopBar = (props: TopBarProps) => {
   };
 
   const handleStatus = (newStatus: string) => {
+    setShowBar(!showBar);
     props.onStatusChange(newStatus);
+    window.scrollTo(0, 0);
   };
 
   const handleLogout = () => {

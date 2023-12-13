@@ -141,7 +141,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
   return (
     <>
-      <h4>注册帳戶</h4>
+      <h3>注册帳戶</h3>
       <Input
         title="用戶名稱"
         type="text"
