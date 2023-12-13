@@ -8,16 +8,23 @@ import {
   floorOptions,
 } from "../../Register/AddressOption";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
+import { handleKeyPress } from "../../../service/useKeyPress";
+import { AddPoint } from "./AddPoint";
+import { api_origin } from "../../../service/api";
 
 export const SearchUser = () => {
+  const [directToEarnPointRecord, setDirectToEarnPointRecord] =
+    useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(true);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(false);
   const [street, setStreet] = useState<string>("");
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
-  const [phoneNumOrEmail, setPhoneNumOrEmail] = useState<string>("");
-  const [showSearchedUser, setShowSearchedUser] = useState(false);
+  const [emailOrPhoneNum, setEmailOrPhoneNum] = useState<string>("");
+  const [showSearchedUsers, setShowSearchedUsers] = useState<boolean>(false);
+  const [searchedUsers, setSearchedUsers] = useState<any[]>([]);
+  const [userInformation, setUserInformation] = useState<any>({});
 
   const handleStreetChange = (selectedOption: string) => {
     setStreet(selectedOption);
@@ -38,9 +45,10 @@ export const SearchUser = () => {
   const handlePhoneNumOrEmailChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setPhoneNumOrEmail(event.target.value);
+    setEmailOrPhoneNum(event.target.value);
   };
 
+  // set only can search by address or EmailOrPhoneNum
   const handleCheckboxChange = (type: string) => {
     if (type === "address") {
       setAddressSearch(true);
@@ -51,89 +59,130 @@ export const SearchUser = () => {
     }
   };
 
-  const handleSearchBtnClick = () => {
-    setShowSearchedUser(true);
+  const handleSearchBtnClick = async () => {
+    const res = await fetch(`${api_origin}/account/search`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        emailOrPhoneNum: emailOrPhoneNum,
+        street: street,
+        number: number,
+        floor: floor,
+        unit: unit,
+      }),
+    });
+    const json = await res.json();
+
+    setSearchedUsers(json.result);
+    setShowSearchedUsers(true);
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   };
 
-  const testSearchedUser = {
-    street: "同發坊",
-    number: "1-3",
-    floor: "1",
-    unit: "2",
-    name: "陳大文",
+  const handleUserClick = (clickedUser: any) => {
+    setUserInformation(clickedUser);
+    setDirectToEarnPointRecord("addRecord");
+  };
+
+  const addPointGoBack = () => {
+    setDirectToEarnPointRecord("searchUser");
   };
 
   return (
     <div className="searchUserContainer">
-      <header className="searchUserHeader">搜尋用戶</header>
-
-      <div className="searchUserSession">
-        <div className="searchHeaderContainer">
-          <input
-            type="checkbox"
-            checked={addressSearch}
-            onChange={() => handleCheckboxChange("address")}
-            className="searchUserInput"
-          />
-          <div className="searchUserInputTitle">地址搜尋</div>
-        </div>
-        <Select
-          title="街"
-          options={streetOptions}
-          selectedOption={street}
-          onSelectOption={handleStreetChange}
-        />
-        <Select
-          title="號"
-          options={numberOptions}
-          selectedOption={number}
-          onSelectOption={handleNumberChange}
-        />
-        <Select
-          title="樓層"
-          options={floorOptions}
-          selectedOption={floor}
-          onSelectOption={handleFloorChange}
-        />
-        <Input
-          title="單位"
-          type="text"
-          value={unit}
-          onChange={handleUnitChange}
-        />
-      </div>
-
-      <div className="searchUserSession">
-        <div className="searchHeaderContainer">
-          <input
-            type="checkbox"
-            checked={emailOrPhoneNumSearch}
-            onChange={() => handleCheckboxChange("email")}
-            className="searchUserInput"
-          />
-          <div className="searchUserInputTitle">電話 / 電郵搜尋</div>
-        </div>
-        <Input
-          title="電話號碼或電郵地址"
-          type="text"
-          value={phoneNumOrEmail}
-          onChange={handlePhoneNumOrEmailChange}
-        />
-      </div>
-
-      <div onClick={handleSearchBtnClick}>
-        <ConfirmButton btnName="搜尋" type={"button"} />
-      </div>
-
-      {showSearchedUser && (
-        <div className="searchUserResultContainer">
-          <div className="searchUserResultHeader">搜尋結果</div>
-          <div className="searchUserResult">
-            {testSearchedUser.street + " "}
-            {testSearchedUser.number}號 {testSearchedUser.floor}樓{" "}
-            {testSearchedUser.unit} {testSearchedUser.name}
+      {directToEarnPointRecord === "searchUser" ? (
+        <>
+          <header className="searchUserHeader">搜尋用戶</header>
+          <div className="searchUserSession">
+            <div className="searchHeaderContainer">
+              <input
+                type="checkbox"
+                checked={addressSearch}
+                onChange={() => handleCheckboxChange("address")}
+                className="searchUserInput"
+              />
+              <div className="searchUserInputTitle">地址搜尋</div>
+            </div>
+            <Select
+              title="街"
+              options={streetOptions}
+              selectedOption={street}
+              onSelectOption={handleStreetChange}
+            />
+            <Select
+              title="號"
+              options={numberOptions}
+              selectedOption={number}
+              onSelectOption={handleNumberChange}
+            />
+            <Select
+              title="樓層"
+              options={floorOptions}
+              selectedOption={floor}
+              onSelectOption={handleFloorChange}
+            />
+            <Input
+              title="單位"
+              type="text"
+              value={unit}
+              onChange={handleUnitChange}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                handleKeyPress(e, "Enter", handleSearchBtnClick)
+              }
+            />
           </div>
-        </div>
+          <div className="searchUserSession">
+            <div className="searchHeaderContainer">
+              <input
+                type="checkbox"
+                checked={emailOrPhoneNumSearch}
+                onChange={() => handleCheckboxChange("email")}
+                className="searchUserInput"
+              />
+              <div className="searchUserInputTitle">
+                電話號碼 / 電郵地址搜尋
+              </div>
+            </div>
+            <Input
+              title="電話號碼或電郵地址"
+              type="text"
+              value={emailOrPhoneNum}
+              onChange={handlePhoneNumOrEmailChange}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                handleKeyPress(e, "Enter", handleSearchBtnClick)
+              }
+            />
+          </div>
+          <div onClick={handleSearchBtnClick}>
+            <ConfirmButton btnName="搜尋" type={"button"} />
+          </div>
+          {showSearchedUsers && (
+            <div className="searchUserResultContainer">
+              <div className="searchUserResultHeader">搜尋結果</div>
+              {searchedUsers.length > 0 ? (
+                searchedUsers.map((user, index) => (
+                  <div
+                    key={index}
+                    className="searchUserResult"
+                    onClick={() => handleUserClick(user)}
+                  >
+                    {user.street + " "}
+                    {user.number}號 {user.floor}樓 {user.unit} {user.username}
+                  </div>
+                ))
+              ) : (
+                <div className="searchUserResultNone">未找到符合條件的用戶</div>
+              )}
+            </div>
+          )}
+        </>
+      ) : (
+        <AddPoint userInformation={userInformation} goBack={addPointGoBack} />
       )}
     </div>
   );

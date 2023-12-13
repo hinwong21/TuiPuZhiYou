@@ -3,6 +3,7 @@ import { Input } from "../../Component/Input/Input";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import "./Login.css";
 import { api_origin } from "../../service/api";
+import { handleKeyPress } from "../../service/useKeyPress";
 
 interface LoginProps {
   onStatusChange: (newStatus: string) => void;
@@ -62,7 +63,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
 
       const isAdmin = json.result.isAdmin.toString();
       localStorage.setItem("ef2023_isAdmin", isAdmin);
-      
+
       window.location.href = "/";
     }
   };
@@ -138,6 +139,9 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
         type="text"
         value={password}
         onChange={handlePasswordChange}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+          handleKeyPress(e, "Enter", handleLoginBtnClick)
+        }
       />
 
       <div className="rememberMe">
@@ -145,6 +149,9 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
           type="checkbox"
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
+          onKeyDown={(e) =>
+            handleKeyPress(e, "Enter", handleLoginBtnClick)
+          }
         />
         <label>記住帳號密碼</label>
       </div>

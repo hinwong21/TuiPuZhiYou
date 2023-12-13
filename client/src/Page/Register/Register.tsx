@@ -5,6 +5,7 @@ import { Select } from "../../Interaction/Select/Select";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
+import { handleKeyPress } from "../../service/useKeyPress";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -205,6 +206,9 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
         type="text"
         value={unit}
         onChange={handleUnitChange}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+          handleKeyPress(e, "Enter", handleRegisterBtnClick)
+        }
       />
 
       <div className="registerBtnContainer">

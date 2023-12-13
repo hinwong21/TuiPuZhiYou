@@ -88,4 +88,32 @@ export class AccountService {
       throw new Error((err as Error).message);
     }
   };
+
+  searchUser = async (
+    emailOrPhoneNum: string,
+    street: string,
+    number: string,
+    floor: string,
+    unit: string
+  ) => {
+    try {
+      let result;
+      if (emailOrPhoneNum !== "") {
+        result = await this.knex("users")
+          .select("*")
+          .where("emailOrPhoneNum", emailOrPhoneNum)
+        return result;
+      } else {
+        result = await this.knex("users")
+          .select("*")
+          .where("street", street)
+          .andWhere("number", number)
+          .andWhere("floor", floor)
+          .andWhere("unit", unit);
+        return result;
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

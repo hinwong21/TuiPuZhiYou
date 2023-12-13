@@ -42,19 +42,36 @@
   font-size: 27px;
   font-weight: bolder;
   color: #56412c;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .searchUserResult {
   color: #56412c;
   font-size: 21px;
+  font-weight: 500;
   margin-bottom: 10px;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   cursor: pointer;
-  border-radius: 5px;
+  border-bottom: 2px solid #56412c;
 }
 
 .searchUserResult:hover {
   background-color: #32a02b;
+  font-weight: bold;
   color: white;
+  border-radius: 5px;
+  border-bottom: 0;
+  padding: 5px;
+}
+
+.searchUserResultNone {
+  color: #56412c;
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #56412c;
 }

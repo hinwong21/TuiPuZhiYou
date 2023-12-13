@@ -69,4 +69,25 @@ export class AccountController {
       errorHandler(err, req, res);
     }
   };
+
+  searchUser = async (req: express.Request, res: express.Response) => {
+    try {
+      const emailOrPhoneNum: string = req.body.emailOrPhoneNum;
+      const street: string = req.body.street;
+      const number: string = req.body.number;
+      const floor: string = req.body.floor;
+      const unit: string = req.body.unit;
+
+      const result = await this.accountService.searchUser(
+        emailOrPhoneNum,
+        street,
+        number,
+        floor,
+        unit
+      );
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

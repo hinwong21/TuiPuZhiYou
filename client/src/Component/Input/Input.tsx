@@ -7,6 +7,7 @@ type InputProps = {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   component?: any;
+  onKeyDown?: any;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -15,6 +16,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   component,
+  onKeyDown,
 }) => {
   return (
     <>
@@ -26,6 +28,7 @@ export const Input: React.FC<InputProps> = ({
           placeholder={title}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
         ></input>
         {component}
       </div>

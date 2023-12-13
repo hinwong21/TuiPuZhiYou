@@ -1,0 +1,22 @@
+.addPointContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin-top: 20px;
+}
+
+.addPointBackBtnContainer {
+  width: 80vw;
+}
+
+.addPointBackBtn {
+  color: white;
+  background-color: #32a02b;
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  padding: 5px;
+  cursor: pointer;
+}
