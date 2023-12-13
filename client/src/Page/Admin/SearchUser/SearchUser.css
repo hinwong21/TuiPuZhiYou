@@ -1,0 +1,60 @@
+.searchUserContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchUserHeader {
+  font-size: 32px;
+  font-weight: bolder;
+  color: #56412c;
+  margin: 20px;
+}
+
+.searchUserSession {
+  margin: 5px;
+}
+
+.searchHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.searchUserInput {
+  margin-right: 10px;
+}
+
+.searchUserInputTitle {
+  font-weight: bold;
+  color: #56412c;
+}
+
+.searchUserResultContainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+}
+
+.searchUserResultHeader {
+  font-size: 27px;
+  font-weight: bolder;
+  color: #56412c;
+  margin-bottom: 10px;
+}
+
+.searchUserResult {
+  color: #56412c;
+  font-size: 21px;
+  margin-bottom: 10px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.searchUserResult:hover {
+  background-color: #32a02b;
+  color: white;
+}
