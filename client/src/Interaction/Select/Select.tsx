@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from "react";
-import "./Dropdown.css";
+import "./Select.css";
 
-type DropdownProps = {
+type SelectProps = {
   title: string;
   options: string[];
   selectedOption: string;
   onSelectOption: (selectedOption: string) => void;
 };
 
-export const Dropdown: React.FC<DropdownProps> = ({
+export const Select: React.FC<SelectProps> = ({
   title,
   options,
   selectedOption,
@@ -20,12 +20,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div className="dropDownContainer">
-      <label className="dropDownTitle">{title}</label>
+    <div className="selectContainer">
+      <label className="selectTitle">{title}</label>
       <select
         value={selectedOption}
         onChange={handleOptionChange}
-        className="dropDownHeader"
+        className="selectHeader"
       >
         {options.map((option) => (
           <option key={option} value={option}>

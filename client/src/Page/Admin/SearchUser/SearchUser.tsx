@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchUser.css";
 import { Input } from "../../../Component/Input/Input";
-import { Dropdown } from "../../../Interaction/Dropdown/Dropdown/Dropdown";
+import { Select } from "../../../Interaction/Select/Select";
 import {
   streetOptions,
   numberOptions,
@@ -77,19 +77,19 @@ export const SearchUser = () => {
           />
           <div className="searchUserInputTitle">地址搜尋</div>
         </div>
-        <Dropdown
+        <Select
           title="街"
           options={streetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
-        <Dropdown
+        <Select
           title="號"
           options={numberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />
-        <Dropdown
+        <Select
           title="樓層"
           options={floorOptions}
           selectedOption={floor}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "../../Component/Input/Input";
 import "./Register.css";
-import { Dropdown } from "../../Interaction/Dropdown/Dropdown/Dropdown";
+import { Select } from "../../Interaction/Select/Select";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
@@ -182,19 +182,19 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
       <div className="registerAddressTitle">地址</div>
 
-      <Dropdown
+      <Select
         title="街"
         options={streetOptions}
         selectedOption={street}
         onSelectOption={handleStreetChange}
       />
-      <Dropdown
+      <Select
         title="號"
         options={numberOptions}
         selectedOption={number}
         onSelectOption={handleNumberChange}
       />
-      <Dropdown
+      <Select
         title="樓層"
         options={floorOptions}
         selectedOption={floor}

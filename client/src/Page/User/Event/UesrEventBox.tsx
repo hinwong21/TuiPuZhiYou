@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./UserEvent.css";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
+import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 
 interface EventProps {
   details: string;
@@ -8,11 +9,11 @@ interface EventProps {
 }
 
 export const Events: React.FC<EventProps> = ({ details, image }) => {
-  const [showDetails, setShowDetails] = useState<Boolean>(true);
+  const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
 
   useEffect(() => {
-    if (details === "") {
-      setShowDetails(false);
+    if (details !== "") {
+      setIsDetailEmpty(false);
     }
   }, [details]);
   return (
@@ -22,13 +23,11 @@ export const Events: React.FC<EventProps> = ({ details, image }) => {
           <img src={image} alt="" className="eventImage" />
         </div>
 
-        <div className="eventDetailsBox">
-          {showDetails ? (
-            <div className="eventDetails">{`活動內容：${details}`}</div>
-          ) : (
-            <div className="eventDetails">活動內容：詳情看海報</div>
-          )}
-        </div>
+        {isDetailEmpty ? (
+          <div className="eventDescription">活動內容：詳情看海報</div>
+        ) : (
+          <Dropdown details={`活動內容：${details}`} />
+        )}
       </div>
       <div className="btnBox">
         <ConfirmButton type="button" btnName="參加" />

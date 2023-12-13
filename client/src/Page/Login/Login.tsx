@@ -58,7 +58,6 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
     if (json.result.success === false) {
       alert("電話號碼或電郵或密碼錯誤！");
     } else {
-      alert("成功登入");
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
 
       const isAdmin = json.result.isAdmin.toString();
