@@ -32,6 +32,9 @@ export const UserInfo = () => {
   }, []);
   return (
     <div className="userInfoContainer">
+      <div className="userInfoGap"></div>
+      <div className="userInfoProjectHeader">三無大廈環保回收你我出力 </div>
+      <div className="userInfoProjectSubHeader">（廚餘回收）</div>
       <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
       <div className="userInfoWasteRecord">本月廚餘： 0.00 公斤</div>
       <div className="userInfoWasteRecord">總累積廚餘： {totalWaste} 公斤</div>
@@ -40,6 +43,7 @@ export const UserInfo = () => {
       <ConfirmButton btnName="換領禮物詳情" type={"button"} />
       <div className="userInfoGap"></div>
       <ConfirmButton btnName="活動報名詳情" type={"button"} />
+      <div className="userInfoGap"></div>
     </div>
   );
 };

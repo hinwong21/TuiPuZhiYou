@@ -6,20 +6,35 @@
   color: #56412c;
 }
 
+.userInfoProjectHeader {
+  font-weight: bolder;
+  font-size: 46px;
+  margin: 10px;
+  text-align: center;
+}
+
+.userInfoProjectSubHeader {
+  font-weight: bolder;
+  font-size: 46px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
 .userInfoPoints {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   font-weight: bold;
-  font-size: 40px;
-  margin: 40px;
-  width: 350px;
+  font-size: 30px;
+  margin: 10px;
+  width: 360px;
 }
 
 .userInfoWasteRecord {
   font-size: 30px;
   font-weight: bold;
-  margin: 20px;
+  margin: 10px;
+  width: 360px;
 }
 
 .userInfoGap {
