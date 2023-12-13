@@ -50,7 +50,9 @@ function App() {
     <div className="wrapper">
       <TopBar userName={userName} onStatusChange={handleStatusChange} />
       <div className="pageContainer">
-        {status === "login" && <Login onStatusChange={handleStatusChange} />}
+        {status === "login" && (
+          <Login username={userName} onStatusChange={handleStatusChange} />
+        )}
         {status === "register" && (
           <Register onStatusChange={handleStatusChange} />
         )}

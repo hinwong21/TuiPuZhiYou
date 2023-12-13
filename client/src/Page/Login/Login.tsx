@@ -7,9 +7,10 @@ import { handleKeyPress } from "../../service/useKeyPress";
 
 interface LoginProps {
   onStatusChange: (newStatus: string) => void;
+  username: string;
 }
 
-export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
+export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   const [phoneNumOrEmail, setPhoneNumOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -85,39 +86,18 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
     }
   };
 
-  const [userName, setUsername] = useState("");
-  const handleGetUserDetails = async () => {
-    const userId = localStorage.getItem("ef2023_user_id");
-    const res = await fetch(`${api_origin}/account/`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        id: userId,
-      }),
-    });
-    const json = await res.json();
-
-    if (json.result && json.result.length > 0) {
-      const username = json.result[0].username;
-      setUsername(username);
-    }
-  };
-
   useEffect(() => {
-    handleGetUserDetails();
     // if logged in, direct to info
     const isAdmin = localStorage.getItem("ef2023_isAdmin");
 
-    if (userName !== "") {
+    if (username !== "") {
       if (isAdmin === "false") {
         handleStatus("userInfo");
       } else {
         handleStatus("searchUser");
       }
     }
-  }, [handleStatus, userName]);
+  }, [handleStatus, username]);
 
   useEffect(() => {
     handleInputStatus();
@@ -149,9 +129,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange }) => {
           type="checkbox"
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
-          onKeyDown={(e) =>
-            handleKeyPress(e, "Enter", handleLoginBtnClick)
-          }
+          onKeyDown={(e) => handleKeyPress(e, "Enter", handleLoginBtnClick)}
         />
         <label>記住帳號密碼</label>
       </div>
