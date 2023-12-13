@@ -26,15 +26,21 @@
   width: 840px;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 839px) {
   .giftBoard {
     width: 630px;
   }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 629px) {
   .giftBoard {
     width: 420px;
+  }
+}
+
+@media (max-width: 419px) {
+  .giftBoard {
+    width: 210px;
   }
 }
 

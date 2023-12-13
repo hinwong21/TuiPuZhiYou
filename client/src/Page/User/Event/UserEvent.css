@@ -1,0 +1,85 @@
+.eventContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.eventBox {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: left; */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.eventImageBox {
+  width: 35vw;
+  height: 70vh;
+  padding: 5px;
+  background-color: #ada9a9;
+  /* margin-right: 20px; */
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+@media (max-width: 630px) {
+  .eventImageBox {
+    width: 60vw;
+    height: 40vh;
+    padding: 5px;
+    background-color: #ada9a9;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+}
+
+.eventDetailsBox {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eventDetails {
+  width: 60vw;
+  font-size: 18px;
+  color: #56412c;
+  margin-bottom: 10px;
+}
+
+.btnBox {
+  width: 50vw;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-left: 380px; */
+  margin-bottom: 50px;
+  flex-direction: column;
+}
+
+.userEventHeader {
+  font-size: 32px;
+  font-weight: bolder;
+  color: #56412c;
+  margin: 20px;
+}
+
+.eventBoardContainer {
+  width: 100vw;
+}
+
+/* @media (max-width: 630px) {
+  .eventDetailsBox {
+ 
+    display: flex;
+    flex-direction: column;
+  }
+} */
