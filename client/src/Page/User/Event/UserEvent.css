@@ -71,6 +71,11 @@
   font-size: 18px;
 }
 
+.eventDropdownContainer {
+  width: 50vw;
+  font-size: 18px;
+}
+
 .btnBox {
   width: 50vw;
   display: flex;

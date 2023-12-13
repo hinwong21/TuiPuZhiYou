@@ -76,9 +76,9 @@
   margin: 5px;
 }
 
-.giftBoardGiftExchangePosition {
+.giftDropdownContainer {
+  width: 150px;
   font-size: 14px;
-  font-weight: bold;
   margin: 5px;
   margin-bottom: 10px;
 }

@@ -26,7 +26,9 @@ export const Events: React.FC<EventProps> = ({ details, image }) => {
         {isDetailEmpty ? (
           <div className="eventDescription">活動內容：詳情看海報</div>
         ) : (
-          <Dropdown details={`活動內容：${details}`} />
+          <div className="eventDropdownContainer">
+            <Dropdown details={`活動內容：${details}`} />
+          </div>
         )}
       </div>
       <div className="btnBox">
