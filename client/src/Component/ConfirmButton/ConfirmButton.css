@@ -1,5 +1,5 @@
 .ConButton {
-  background-color: #32a02b;
+  background-color: var(--secondary-color);
   border-radius: 5px;
   font-size: 20px;
   padding: 5px 20px 5px 20px;
@@ -10,5 +10,5 @@
 }
 
 .ConButton:active {
-  background-color: #267921;
+  background-color: darken(var(--secondary-color), 90%);
 }

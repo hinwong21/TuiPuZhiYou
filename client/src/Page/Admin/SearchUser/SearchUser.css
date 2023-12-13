@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--tertiary-color);
 }
 
 .searchUserHeader {
   font-size: 32px;
   font-weight: bolder;
-  color: #56412c;
   margin: 20px;
 }
 
@@ -28,37 +28,34 @@
 
 .searchUserInputTitle {
   font-weight: bold;
-  color: #56412c;
 }
 
 .searchUserResultContainer {
   margin: 20px;
   display: flex;
   flex-direction: column;
-  width: 60vw;
+  width: 80vw;
 }
 
 .searchUserResultHeader {
   font-size: 27px;
   font-weight: bolder;
-  color: #56412c;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .searchUserResult {
-  color: #56412c;
   font-size: 21px;
   font-weight: 500;
   margin-bottom: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   cursor: pointer;
-  border-bottom: 2px solid #56412c;
+  border-bottom: 2px solid var(--tertiary-color);
 }
 
 .searchUserResult:hover {
-  background-color: #32a02b;
+  background-color: var(--secondary-color);
   font-weight: bold;
   color: white;
   border-radius: 5px;
@@ -67,11 +64,10 @@
 }
 
 .searchUserResultNone {
-  color: #56412c;
   font-size: 21px;
   font-weight: 500;
   margin-bottom: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 2px solid #56412c;
+  border-bottom: 2px solid var(--tertiary-color);
 }

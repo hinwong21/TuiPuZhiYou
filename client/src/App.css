@@ -1,12 +1,18 @@
+:root {
+  --primary-color: #fdece4;
+  --secondary-color: #32a02b;
+  --tertiary-color: #56412c;
+}
+
 body {
-  background-color: #fdece4;
+  background-color: var(--primary-color);
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fdece4;
+  background-color: var(--primary-color);
   width: 100vw;
 }
 

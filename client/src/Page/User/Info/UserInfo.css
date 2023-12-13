@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  color: #56412c;
+  color: var(--tertiary-color);
 }
 
 .userInfoProjectHeader {
@@ -21,9 +21,6 @@
 }
 
 .userInfoPoints {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   font-weight: bold;
   font-size: 30px;
   margin: 10px;

@@ -13,7 +13,7 @@
 
 .addPointBackBtn {
   color: white;
-  background-color: #32a02b;
+  background-color: var(--secondary-color);
   border-radius: 50%;
   width: 27px;
   height: 27px;

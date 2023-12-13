@@ -1,8 +1,6 @@
 .topBarContainer {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: white;
   height: 100px;
   width: 100vw;
@@ -46,7 +44,7 @@
   align-items: center;
   height: 50px;
   border-radius: 20px;
-  background-color: #32a02b;
+  background-color: var(--secondary-color);
   color: white;
   margin: 10px;
   padding-left: 20px;
@@ -67,7 +65,7 @@
   right: 0;
   height: 100vh;
   width: 100px;
-  background-color: #32a02b;
+  background-color: var(--secondary-color);
   color: white;
   border-left: white solid 3px;
 }
