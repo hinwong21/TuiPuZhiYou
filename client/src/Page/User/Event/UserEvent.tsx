@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./UserEvent.css";
-import { Events } from "./UesrEventBox";
+import { Events } from "./UserEventBox";
 import { api_origin } from "../../../service/api";
 
 export const UserEvent = () => {
