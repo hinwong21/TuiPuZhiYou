@@ -36,6 +36,22 @@ export const UserGift = () => {
 
       <div className="giftBoardContainer">
         <div className="giftBoard">
+          <Gift
+            title="5kg金象米"
+            position="換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點"
+            point={50}
+          />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
+          <Gift title="5kg金象米" position="換領地點" point={50} />
           <Gift title="5kg金象米" position="換領地點" point={50} />
           <Gift title="5kg金象米" position="換領地點" point={50} />
           <Gift title="5kg金象米" position="換領地點" point={50} />
