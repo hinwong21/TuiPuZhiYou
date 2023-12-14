@@ -7,7 +7,7 @@ interface GiftItem {
   giftID: string;
   details: string;
   point: number;
-  btnCall: string;
+  image: string;
 }
 
 export const UserGift = () => {

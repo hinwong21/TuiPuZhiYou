@@ -72,4 +72,23 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  joinEventRecord = async (req: express.Request, res: express.Response) => {
+    try {
+      const userId = req.body.userId;
+      const eventId = req.body.eventId;
+      const projectId = "P001";
+      const today = new Date();
+      const dateAdd = today;
+      await this.recordService.joinEventRecord(
+        userId,
+        eventId,
+        projectId,
+        dateAdd
+      );
+      return res.json({ success: true });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

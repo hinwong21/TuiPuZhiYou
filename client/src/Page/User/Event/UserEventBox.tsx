@@ -8,6 +8,7 @@ interface EventProps {
   details: string;
   image: string;
   btnCall: string;
+  onClick?: any;
 }
 
 export const Events: React.FC<EventProps> = ({
@@ -15,6 +16,7 @@ export const Events: React.FC<EventProps> = ({
   details,
   image,
   btnCall,
+  onClick,
 }) => {
   const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
 
@@ -39,7 +41,7 @@ export const Events: React.FC<EventProps> = ({
         )}
       </div>
       <div className="btnBox">
-        <ConfirmButton type="button" btnName={btnCall} />
+        <ConfirmButton type="button" btnName={btnCall} onClick={onClick} />
       </div>
     </div>
   );

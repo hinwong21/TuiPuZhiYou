@@ -75,4 +75,19 @@ export class RecordService {
     });
     return true;
   };
+
+  joinEventRecord = async (
+    userId: string,
+    eventId: string,
+    projectId: string,
+    dateAdd: Date
+  ) => {
+    await this.knex("joinedEventRecords").insert({
+      user_id: userId,
+      event_id: eventId,
+      project_id: projectId,
+      apply_date: dateAdd,
+    });
+    return true;
+  };
 }

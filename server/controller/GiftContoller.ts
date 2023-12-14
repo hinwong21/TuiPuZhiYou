@@ -41,8 +41,8 @@ export class GiftController {
     }
   };
 
-  getAllGift = async (req: express.Request, res: express.Response) => {
-    const result = await this.giftService.getAllGift();
+  getAllGifts = async (req: express.Request, res: express.Response) => {
+    const result = await this.giftService.getAllGifts();
     res.status(200).json(result);
   };
 }

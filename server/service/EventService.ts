@@ -25,4 +25,13 @@ export class EventService {
       throw new Error((err as Error).message);
     }
   };
+
+  getAllEvents = async () => {
+    try {
+      const result = await this.knex("events").select("*");
+      return result;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

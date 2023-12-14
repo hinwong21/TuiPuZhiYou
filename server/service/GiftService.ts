@@ -27,7 +27,7 @@ export class GiftService {
     }
   };
 
-  getAllGift = async () => {
+  getAllGifts = async () => {
     try {
       const result = await this.knex("gifts").select("*");
       return result;
