@@ -45,4 +45,14 @@ export class GiftController {
     const result = await this.giftService.getAllGifts();
     res.status(200).json(result);
   };
+
+  deleteGift = async (req: express.Request, res: express.Response) => {
+    try {
+      const giftId = req.body.giftId;
+      await this.giftService.deleteGift(giftId);
+      return res.json({ success: true });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

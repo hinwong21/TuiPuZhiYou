@@ -44,4 +44,14 @@ export class EventController {
     const result = await this.eventService.getAllEvents();
     res.status(200).json(result);
   };
+
+  deleteEvent = async (req: express.Request, res: express.Response) => {
+    try {
+      const eventId = req.body.eventId;
+      await this.eventService.deleteEvent(eventId);
+      return res.json({ success: true });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

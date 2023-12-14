@@ -34,4 +34,11 @@ export class EventService {
       throw new Error((err as Error).message);
     }
   };
+
+  deleteEvent = async (eventId: string) => {
+    await this.knex("events").where("event_id", eventId).update({
+      isDeleted: true,
+    });
+    return true;
+  };
 }

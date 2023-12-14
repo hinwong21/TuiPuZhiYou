@@ -63,16 +63,6 @@ export class RecordController {
     }
   };
 
-  deleteGiftRecord = async (req: express.Request, res: express.Response) => {
-    try {
-      const giftId = req.body.giftId;
-      await this.recordService.deleteGiftRecord(giftId);
-      return res.json({ success: true });
-    } catch (err) {
-      errorHandler(err, req, res);
-    }
-  };
-
   joinEventRecord = async (req: express.Request, res: express.Response) => {
     try {
       const userId = req.body.userId;

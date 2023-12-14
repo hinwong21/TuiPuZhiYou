@@ -69,13 +69,6 @@ export class RecordService {
     }
   };
 
-  deleteGiftRecord = async (giftId: string) => {
-    await this.knex("gifts").where("gift_id", giftId).update({
-      isDeleted: true,
-    });
-    return true;
-  };
-
   joinEventRecord = async (
     userId: string,
     eventId: string,

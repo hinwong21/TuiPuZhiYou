@@ -23,7 +23,7 @@ export const DeleteGift = () => {
   };
 
   const handleDeleteGift = async (giftId: string) => {
-    const res = await fetch(`${api_origin}/record/gift/delete`, {
+    const res = await fetch(`${api_origin}/gift/delete`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -35,6 +35,7 @@ export const DeleteGift = () => {
     const json = await res.json();
     if (json.success) {
       alert("成功刪除禮物");
+      handleGetAllGifts();
     } else {
       alert("未能刪除禮物");
     }
