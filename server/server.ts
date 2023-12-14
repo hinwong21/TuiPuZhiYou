@@ -4,6 +4,7 @@ import { env } from "./env";
 import { accountRoutes } from "./route/AccountRoutes";
 import { eventRoutes } from "./route/EventRoutes";
 import { recordRoutes } from "./route/RecordRoutes";
+import { giftRoutes } from "./route/GiftRoutes";
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 app.use("/account", accountRoutes);
 app.use("/event", eventRoutes);
 app.use("/record", recordRoutes);
+app.use("/gift", giftRoutes);
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);

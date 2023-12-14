@@ -94,7 +94,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       if (isAdmin === "false") {
         handleStatus("userInfo");
       } else {
-        handleStatus("searchUser");
+        handleStatus("projectSetting");
       }
     }
   }, [handleStatus, username]);

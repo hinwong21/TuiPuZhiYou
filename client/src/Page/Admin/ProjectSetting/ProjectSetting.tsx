@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./ProjectSetting.css";
-import { EditGift } from "./EditGift";
-import { EditEvent } from "./EditEvent";
-import { ChangePassword } from "./ChangePassword";
+import { EditGift } from "./EditGift/EditGift";
+import { EditEvent } from "./EditEvent/EditEvent";
+import { ChangePassword } from "./ChangePassword/ChangePassword";
 
 export const ProjectSetting = () => {
   const [status, setStatus] = useState<string>("");
@@ -37,9 +37,15 @@ export const ProjectSetting = () => {
         </>
       )}
 
-      {status === "editGift" && <EditGift />}
-      {status === "editEvent" && <EditEvent />}
-      {status === "changePassword" && <ChangePassword />}
+      {status === "editGift" && (
+        <EditGift goBack={() => handleSessionClick("")} />
+      )}
+      {status === "editEvent" && (
+        <EditEvent goBack={() => handleSessionClick("")} />
+      )}
+      {status === "changePassword" && (
+        <ChangePassword goBack={() => handleSessionClick("")} />
+      )}
     </div>
   );
 };

@@ -1,0 +1,43 @@
+.editGiftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  color: var(--tertiary-color);
+}
+
+.uploadImageBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(60vw - 10px);
+  height: 30px;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.uploadedImage {
+  width: 60vw;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.editGiftGiftDetail {
+  font-size: 16px;
+  min-height: 100px;
+  width: calc(60vw - 10px);
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  resize: vertical;
+  line-height: 1.5;
+}
