@@ -94,7 +94,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       if (isAdmin === "false") {
         handleStatus("userInfo");
       } else {
-        handleStatus("projectSetting");
+        handleStatus("searchUser");
       }
     }
   }, [handleStatus, username]);
@@ -135,12 +135,11 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       </div>
 
       {/* Button to submit the login form */}
-        <ConfirmButton
-          type="submit"
-          btnName="登入"
-          onClick={handleLoginBtnClick}
-        />
-    
+      <ConfirmButton
+        type="submit"
+        btnName="登入"
+        onClick={handleLoginBtnClick}
+      />
 
       {/* Register button */}
       <div className="register-link">
