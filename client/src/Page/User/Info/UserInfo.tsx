@@ -42,7 +42,6 @@ export const UserInfo = () => {
     const json = await res.json();
     if (json.result && json.result.length > 0) {
       const currentMonth = new Date().getMonth() + 1;
-
       const thisMonthRecords = json.result.filter((record: any) => {
         const recordDate = new Date(record.date_add);
         return recordDate.getMonth() + 1 === currentMonth;
