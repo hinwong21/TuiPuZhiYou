@@ -6,6 +6,7 @@ import { api_origin } from "../../../service/api";
 export const UserInfo = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [totalWaste, setTotalWaste] = useState(0);
+  const [thisMonthWaste, setThisMonthWaste] = useState(0);
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -27,8 +28,41 @@ export const UserInfo = () => {
     }
   };
 
+  const handleGetUserThisMonthWasteRecord = async () => {
+    const userId = localStorage.getItem("ef2023_user_id");
+    const res = await fetch(`${api_origin}/record/waste`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userId,
+      }),
+    });
+    const json = await res.json();
+    if (json.result && json.result.length > 0) {
+      const currentMonth = new Date().getMonth() + 1;
+
+      const thisMonthRecords = json.result.filter((record: any) => {
+        const recordDate = new Date(record.date_add);
+        return recordDate.getMonth() + 1 === currentMonth;
+      });
+
+      const totalWeightThisMonth = thisMonthRecords.reduce(
+        (sum: number, record: any) => {
+          return sum + parseFloat(record.weight);
+        },
+        0
+      );
+
+      // set this month waste and set number is formatted with two decimal places
+      setThisMonthWaste(totalWeightThisMonth.toFixed(2));
+    }
+  };
+
   useEffect(() => {
     handleGetUserDetails();
+    handleGetUserThisMonthWasteRecord();
   }, []);
   return (
     <div className="userInfoContainer">
@@ -36,7 +70,9 @@ export const UserInfo = () => {
       <div className="userInfoProjectHeader">三無大廈環保回收你我出力 </div>
       <div className="userInfoProjectSubHeader">（廚餘回收）</div>
       <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
-      <div className="userInfoWasteRecord">本月廚餘： 0.00 公斤</div>
+      <div className="userInfoWasteRecord">
+        本月廚餘： {thisMonthWaste} 公斤
+      </div>
       <div className="userInfoWasteRecord">總累積廚餘： {totalWaste} 公斤</div>
 
       <div className="userInfoGap"></div>

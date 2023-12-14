@@ -9,3 +9,4 @@ export let recordService = new RecordService(knex);
 let recordController = new RecordController(recordService);
 
 recordRoutes.post("/point", recordController.addPointRecord);
+recordRoutes.post("/waste", recordController.getWasteRecord);

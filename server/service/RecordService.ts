@@ -30,4 +30,15 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  getWasteRecord = async (userId: string) => {
+    try {
+      const result = await this.knex("earnPointRecords")
+        .select("*")
+        .where("user_id", userId);
+      return result;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

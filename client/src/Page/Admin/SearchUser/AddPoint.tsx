@@ -54,9 +54,9 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
       });
       const json = await res.json();
       if (json.success) {
-        alert("成功輸入");
+        alert("添加成功");
       } else {
-        alert("輸入未成功");
+        alert("未能添加");
       }
 
       goBack();

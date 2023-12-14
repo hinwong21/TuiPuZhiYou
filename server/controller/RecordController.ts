@@ -22,10 +22,20 @@ export class RecordController {
         dateAdd
       );
       if (result) {
-        return res.json({ success: true});
+        return res.json({ success: true });
       } else {
         return res.json({ success: false });
       }
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  getWasteRecord = async (req: express.Request, res: express.Response) => {
+    try {
+      const userId = req.body.id;
+      const result = await this.recordService.getWasteRecord(userId);
+      return res.json({ result: result });
     } catch (err) {
       errorHandler(err, req, res);
     }
