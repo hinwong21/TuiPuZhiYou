@@ -6,9 +6,10 @@ import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 interface EventProps {
   details: string;
   image: string;
+  btnCall: string;
 }
 
-export const Events: React.FC<EventProps> = ({ details, image }) => {
+export const Events: React.FC<EventProps> = ({ details, image, btnCall }) => {
   const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const Events: React.FC<EventProps> = ({ details, image }) => {
         )}
       </div>
       <div className="btnBox">
-        <ConfirmButton type="button" btnName="參加" />
+        <ConfirmButton type="button" btnName={btnCall} />
       </div>
     </div>
   );

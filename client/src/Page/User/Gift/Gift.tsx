@@ -4,11 +4,13 @@ import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 
 interface GiftProps {
+  giftID: string;
   details: string;
   point: number;
+  btnCall: string;
 }
 
-export const Gift: React.FC<GiftProps> = ({ details, point }) => {
+export const Gift: React.FC<GiftProps> = ({ details, point, btnCall }) => {
   return (
     <div className="giftBoardGiftContainer">
       <img src="#" alt="" className="giftBoardGiftImage" />
@@ -16,7 +18,7 @@ export const Gift: React.FC<GiftProps> = ({ details, point }) => {
       <div className="giftDropdownContainer">
         <Dropdown details={details} />
       </div>
-      <ConfirmButton type="button" btnName="換領" />
+      <ConfirmButton type="button" btnName={btnCall} />
     </div>
   );
 };

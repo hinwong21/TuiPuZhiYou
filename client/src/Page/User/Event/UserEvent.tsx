@@ -21,10 +21,11 @@ export const UserEvent = () => {
       <div className="userEventHeader">活動報名</div>
 
       <div className="eventBoardContainer">
-        <Events details="" image="#" />
+        <Events details="" image="#" btnCall="參加" />
         <Events
           details="活動2,活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名活動報名"
           image=""
+          btnCall="參加"
         />
       </div>
     </>
