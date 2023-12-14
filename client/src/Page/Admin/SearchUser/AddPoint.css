@@ -8,20 +8,6 @@
   color: var(--tertiary-color);
 }
 
-.addPointBackBtnContainer {
-  width: 80vw;
-}
-
-.addPointBackBtn {
-  color: white;
-  background-color: var(--secondary-color);
-  border-radius: 50%;
-  width: 27px;
-  height: 27px;
-  padding: 5px;
-  cursor: pointer;
-}
-
 .searchResultSession {
   display: flex;
   flex-direction: column;

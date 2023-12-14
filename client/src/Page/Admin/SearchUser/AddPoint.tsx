@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./AddPoint.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "../../../Component/Input/Input";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
+import { BackBtn } from "../../../Component/BackBtn/BackBtn";
 
 interface UserDetail {
   user_id: number;
@@ -65,9 +64,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
   return (
     <div className="addPointContainer">
-      <div onClick={goBack} className="addPointBackBtnContainer">
-        <FontAwesomeIcon icon={faArrowLeft} className="addPointBackBtn" />
-      </div>
+     <BackBtn goBack={goBack}/>
 
       <div className="searchResultSession">
         <div className="searchResultSessionHeader">地址：</div>
