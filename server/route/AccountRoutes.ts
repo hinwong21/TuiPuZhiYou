@@ -11,4 +11,8 @@ let accountController = new AccountController(accountService);
 accountRoutes.post("/register", accountController.registerNewAccount);
 accountRoutes.post("/login", accountController.login);
 accountRoutes.post("/", accountController.singleUserDetail);
-accountRoutes.post("/search", accountController.searchUser);
+accountRoutes.post("/search/address", accountController.searchUserByAddress);
+accountRoutes.post(
+  "/search/emailOrPhoneNum",
+  accountController.searchUserByEmailOrPhoneNum
+);

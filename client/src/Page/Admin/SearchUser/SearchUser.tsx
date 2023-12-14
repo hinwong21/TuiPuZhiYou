@@ -60,22 +60,47 @@ export const SearchUser = () => {
   };
 
   const handleSearchBtnClick = async () => {
-    const res = await fetch(`${api_origin}/account/search`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        emailOrPhoneNum: emailOrPhoneNum,
-        street: street,
-        number: number,
-        floor: floor,
-        unit: unit,
-      }),
-    });
-    const json = await res.json();
-    
-    setSearchedUsers(json.result);
+    // use address search
+    if (addressSearch) {
+      if (street === "" || number === "" || floor === "" || unit === "") {
+        alert("未輸入完整地址");
+        return;
+      }
+
+      const res = await fetch(`${api_origin}/account/search/address`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          street: street,
+          number: number,
+          floor: floor,
+          unit: unit,
+        }),
+      });
+      const json = await res.json();
+      setSearchedUsers(json.result);
+    }
+
+    // use emailOrPhoneNum search
+    if (emailOrPhoneNumSearch) {
+      if (emailOrPhoneNum === "") {
+        alert("未輸入電話號碼或電郵地址");
+        return;
+      }
+      const res = await fetch(`${api_origin}/account/search/emailOrPhoneNum`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          emailOrPhoneNum: emailOrPhoneNum,
+        }),
+      });
+      const json = await res.json();
+      setSearchedUsers(json.result);
+    }
     setShowSearchedUsers(true);
 
     window.scrollTo({
