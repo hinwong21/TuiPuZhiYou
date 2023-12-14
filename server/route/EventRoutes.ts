@@ -8,4 +8,5 @@ export let eventRoutes = express.Router();
 export let eventService = new EventService(knex);
 let eventController = new EventController(eventService);
 
-eventRoutes.get("/", eventController.eventDetails)
+eventRoutes.get("/", eventController.eventDetails);
+eventRoutes.post("/", eventController.addEvent);

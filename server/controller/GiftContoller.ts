@@ -8,6 +8,7 @@ function getRandomSixDigitNumber() {
   const randomSixDigits = timestamp.substr(timestamp.length - 6).toString();
   return randomSixDigits;
 }
+
 export class GiftController {
   constructor(private giftService: GiftService) {}
 
