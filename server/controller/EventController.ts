@@ -54,4 +54,21 @@ export class EventController {
       errorHandler(err, req, res);
     }
   };
+
+  checkEventFullAndJoined = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const eventId = req.body.eventId;
+      const userId = req.body.userId;
+      const result = await this.eventService.checkEventFullAndJoined(
+        eventId,
+        userId
+      );
+      return res.json({ result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

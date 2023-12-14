@@ -83,12 +83,12 @@ export const TopBar = (props: TopBarProps) => {
             handleStatus={() => handleStatus("searchUser")}
           />
           <SideBarSession
-            title="計劃詳情"
-            handleStatus={() => handleStatus("projectDetails")}
-          />
-          <SideBarSession
             title="計劃設置"
             handleStatus={() => handleStatus("projectSetting")}
+          />
+          <SideBarSession
+            title="計劃詳情"
+            handleStatus={() => handleStatus("projectDetails")}
           />
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
             登出

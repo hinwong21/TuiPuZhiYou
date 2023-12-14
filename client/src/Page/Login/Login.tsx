@@ -106,6 +106,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
 
   return (
     <div className="loginContainer">
+      <div className="userInfoGap"></div>
       <div className="projectHeader">三無大廈環保回收你我出力 </div>
       <div className="projectSubHeader">（廚餘回收）</div>
 

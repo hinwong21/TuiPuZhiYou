@@ -11,3 +11,4 @@ let eventController = new EventController(eventService);
 eventRoutes.get("/", eventController.getAllEvents);
 eventRoutes.post("/", eventController.addEvent);
 eventRoutes.post("/delete", eventController.deleteEvent);
+eventRoutes.post("/participant", eventController.checkEventFullAndJoined);
