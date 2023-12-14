@@ -9,6 +9,7 @@ interface GiftItem {
   point: number;
   btnCall: string;
 }
+
 export const UserGift = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
@@ -38,7 +39,8 @@ export const UserGift = () => {
       method: "GET",
     });
     const json = await res.json();
-    setGifts(json);
+    const filteredGifts = json.filter((gift: any) => gift.isDeleted === false);
+    setGifts(filteredGifts);
   };
 
   const handleExchangeGift = async (point: string, giftId: string) => {

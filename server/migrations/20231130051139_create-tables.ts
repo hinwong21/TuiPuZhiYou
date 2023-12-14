@@ -62,6 +62,7 @@ export async function up(knex: Knex): Promise<void> {
       table.decimal("exchange_point").notNullable();
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
+      table.boolean("isDeleted").defaultTo(false);
     });
   }
 
@@ -82,6 +83,7 @@ export async function up(knex: Knex): Promise<void> {
       table.integer("participant").notNullable();
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
+      table.boolean("isDeleted").defaultTo(false);
     });
   }
 

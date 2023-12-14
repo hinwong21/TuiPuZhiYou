@@ -68,4 +68,11 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  deleteGiftRecord = async (giftId: string) => {
+    await this.knex("gifts").where("gift_id", giftId).update({
+      isDeleted: true,
+    });
+    return true;
+  };
 }

@@ -11,3 +11,4 @@ let recordController = new RecordController(recordService);
 recordRoutes.post("/point", recordController.addPointRecord);
 recordRoutes.post("/waste", recordController.getWasteRecord);
 recordRoutes.post("/gift", recordController.exchangeGiftRecord);
+recordRoutes.post("/gift/delete", recordController.deleteGiftRecord);
