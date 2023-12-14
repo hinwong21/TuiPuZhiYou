@@ -10,9 +10,14 @@ interface GiftProps {
   btnCall: string;
 }
 
-export const Gift: React.FC<GiftProps> = ({ details, point, btnCall }) => {
+export const Gift: React.FC<GiftProps> = ({
+  giftID,
+  details,
+  point,
+  btnCall,
+}) => {
   return (
-    <div className="giftBoardGiftContainer">
+    <div className="giftBoardGiftContainer" id={giftID}>
       <img src="#" alt="" className="giftBoardGiftImage" />
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${point} 分`}</div>
       <div className="giftDropdownContainer">
