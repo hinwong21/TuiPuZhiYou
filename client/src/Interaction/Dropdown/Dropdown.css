@@ -3,21 +3,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   cursor: pointer;
 }
 
 .hideDetails {
+  width: 100%;
+  font-size: 18px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* Number of lines to show */
-  -webkit-box-orient: vertical;
 }
 
 .details {
+  width: 100%;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.5;
+  word-wrap: break-word;
 }
 
 .showDetailsNotice {
