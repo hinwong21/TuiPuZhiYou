@@ -32,7 +32,7 @@ export const ProjectSetting = () => {
             className="projectSettingSession"
             onClick={() => handleSessionClick("changePassword")}
           >
-            更改密碼
+            更改管理員密碼
           </div>
         </>
       )}

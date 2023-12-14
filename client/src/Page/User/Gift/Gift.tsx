@@ -27,9 +27,7 @@ export const Gift: React.FC<GiftProps> = ({
       <div className="giftDropdownContainer">
         <Dropdown details={details} />
       </div>
-      <div onClick={onClick}>
-        <ConfirmButton type="button" btnName={btnName} />
-      </div>
+      <ConfirmButton type="button" btnName={btnName} onClick={onClick} />
     </div>
   );
 };

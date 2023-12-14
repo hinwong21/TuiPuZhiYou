@@ -64,7 +64,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
   return (
     <div className="addPointContainer">
-     <BackBtn goBack={goBack}/>
+      <BackBtn goBack={goBack} />
 
       <div className="searchResultSession">
         <div className="searchResultSessionHeader">地址：</div>
@@ -94,9 +94,11 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
         onChange={handlePointChange}
       />
 
-      <div onClick={handleConfirmBtn}>
-        <ConfirmButton btnName="確認" type={"button"} />
-      </div>
+      <ConfirmButton
+        btnName="確認"
+        type={"button"}
+        onClick={handleConfirmBtn}
+      />
     </div>
   );
 };

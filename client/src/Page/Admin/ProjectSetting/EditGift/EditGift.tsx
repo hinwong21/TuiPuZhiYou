@@ -119,9 +119,11 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
         ></textarea>
       </div>
 
-      <div onClick={handleInsertGift}>
-        <ConfirmButton type={"button"} btnName="確認" />
-      </div>
+      <ConfirmButton
+        type={"button"}
+        btnName="確認"
+        onClick={handleInsertGift}
+      />
     </div>
   );
 };

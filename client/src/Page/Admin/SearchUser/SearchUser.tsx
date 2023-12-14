@@ -183,9 +183,13 @@ export const SearchUser = () => {
               }
             />
           </div>
-          <div onClick={handleSearchBtnClick}>
-            <ConfirmButton btnName="搜尋" type={"button"} />
-          </div>
+
+          <ConfirmButton
+            btnName="搜尋"
+            type={"button"}
+            onClick={handleSearchBtnClick}
+          />
+
           {showSearchedUsers && (
             <div className="searchUserResultContainer">
               <div className="searchUserResultHeader">搜尋結果</div>

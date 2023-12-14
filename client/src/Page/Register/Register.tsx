@@ -212,12 +212,8 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       />
 
       <div className="registerBtnContainer">
-        <div onClick={handleBackBtnClick}>
-          <ConfirmButton btnName="返回" />
-        </div>
-        <div onClick={handleRegisterBtnClick}>
-          <ConfirmButton btnName="注册" />
-        </div>
+        <ConfirmButton btnName="返回" onClick={handleBackBtnClick} />
+        <ConfirmButton btnName="注册" onClick={handleRegisterBtnClick} />
       </div>
 
       <div className="registerGap"></div>

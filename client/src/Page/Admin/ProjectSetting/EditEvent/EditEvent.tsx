@@ -118,9 +118,11 @@ export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
         ></textarea>
       </div>
 
-      <div onClick={handleInsertEvent}>
-        <ConfirmButton type={"button"} btnName="確認" />
-      </div>
+      <ConfirmButton
+        type={"button"}
+        btnName="確認"
+        onClick={handleInsertEvent}
+      />
     </div>
   );
 };

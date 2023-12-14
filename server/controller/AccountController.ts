@@ -96,11 +96,28 @@ export class AccountController {
   ) => {
     try {
       const emailOrPhoneNum = req.body.emailOrPhoneNum;
-
       const result = await this.accountService.searchUserByEmailOrPhoneNum(
         emailOrPhoneNum
       );
       return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  changePassword = async (req: express.Request, res: express.Response) => {
+    try {
+      const adminName = req.body.adminName;
+      const password = req.body.password;
+      const result = await this.accountService.changePassword(
+        adminName,
+        password
+      );
+      if (result) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
     } catch (err) {
       errorHandler(err, req, res);
     }

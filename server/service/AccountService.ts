@@ -118,4 +118,15 @@ export class AccountService {
       throw new Error((err as Error).message);
     }
   };
+
+  changePassword = async (adminName: string, password: string) => {
+    try {
+      const result = await this.knex("admins")
+        .where("username", adminName)
+        .update({ password: password });
+      return true;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

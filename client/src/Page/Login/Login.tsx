@@ -135,9 +135,12 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       </div>
 
       {/* Button to submit the login form */}
-      <div className="container-confirmButton" onClick={handleLoginBtnClick}>
-        <ConfirmButton type="submit" btnName="登入" />
-      </div>
+        <ConfirmButton
+          type="submit"
+          btnName="登入"
+          onClick={handleLoginBtnClick}
+        />
+    
 
       {/* Register button */}
       <div className="register-link">
