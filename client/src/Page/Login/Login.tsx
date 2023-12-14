@@ -28,6 +28,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   const handleStatus = React.useCallback(
     (newStatus: string) => {
       onStatusChange(newStatus);
+      window.scrollTo(0, 0);
     },
     [onStatusChange]
   );
@@ -104,7 +105,10 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   }, []);
 
   return (
-    <>
+    <div className="loginContainer">
+      <div className="projectHeader">三無大廈環保回收你我出力 </div>
+      <div className="projectSubHeader">（廚餘回收）</div>
+
       <h2>登入</h2>
 
       {/* Input fields for username and password */}
@@ -155,6 +159,6 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
           </span>
         </p>
       </div>
-    </>
+    </div>
   );
 };

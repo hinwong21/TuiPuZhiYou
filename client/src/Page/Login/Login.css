@@ -1,3 +1,25 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--tertiary-color);
+}
+
+.projectHeader {
+  font-weight: bolder;
+  font-size: 46px;
+  margin: 10px;
+  text-align: center;
+}
+
+.projectSubHeader {
+  font-weight: bolder;
+  font-size: 46px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
 .register-link {
   margin-top: 2%;
 }

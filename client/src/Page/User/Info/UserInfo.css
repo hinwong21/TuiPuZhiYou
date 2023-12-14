@@ -6,20 +6,6 @@
   color: var(--tertiary-color);
 }
 
-.userInfoProjectHeader {
-  font-weight: bolder;
-  font-size: 46px;
-  margin: 10px;
-  text-align: center;
-}
-
-.userInfoProjectSubHeader {
-  font-weight: bolder;
-  font-size: 46px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
 .userInfoPoints {
   font-weight: bold;
   font-size: 30px;

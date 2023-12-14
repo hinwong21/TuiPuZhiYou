@@ -70,6 +70,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   };
 
   const handleBackBtnClick = () => {
+    window.scrollTo(0, 0);
     handleStatus("login");
   };
 
@@ -141,8 +142,11 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   }, [confirmPhoneNumOrEmail]);
 
   return (
-    <>
-      <h3>注册帳戶</h3>
+    <div className="registerContainer">
+      <div className="projectHeader">三無大廈環保回收你我出力 </div>
+      <div className="projectSubHeader">（廚餘回收）</div>
+
+      <h2>注册帳戶</h2>
       <Input
         title="用戶名稱"
         type="text"
@@ -217,6 +221,6 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       </div>
 
       <div className="registerGap"></div>
-    </>
+    </div>
   );
 };
