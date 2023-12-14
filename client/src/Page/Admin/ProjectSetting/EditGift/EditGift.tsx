@@ -33,7 +33,7 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
     setGiftDetail(event.target.value);
   };
 
-  // Trigger the file input
+  // click the div to trigger the file input
   const handleUploadImageBtnClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -60,11 +60,14 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
         const json = await res.json();
         if (json.success) {
           alert("成功添加禮物");
+          setImage(null);
+          setExchangePoint("");
+          setGiftDetail("");
         } else {
           alert("未能添加禮物");
         }
       } else {
-        console.error("No image selected");
+        alert("未上傳禮物圖片");
       }
     } catch (error) {
       console.error("Error handling gift insertion:", error);
