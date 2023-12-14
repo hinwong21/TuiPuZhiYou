@@ -4,12 +4,18 @@ import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 
 interface EventProps {
+  eventID: string;
   details: string;
   image: string;
   btnCall: string;
 }
 
-export const Events: React.FC<EventProps> = ({ details, image, btnCall }) => {
+export const Events: React.FC<EventProps> = ({
+  eventID,
+  details,
+  image,
+  btnCall,
+}) => {
   const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
 
   useEffect(() => {
@@ -18,7 +24,7 @@ export const Events: React.FC<EventProps> = ({ details, image, btnCall }) => {
     }
   }, [details]);
   return (
-    <div className="eventContainer">
+    <div className="eventContainer" id={eventID}>
       <div className="eventBox">
         <div className="eventImageBox">
           <img src={image} alt="" className="eventImage" />
