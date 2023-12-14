@@ -24,7 +24,7 @@ export const SearchUser = () => {
   const [emailOrPhoneNum, setEmailOrPhoneNum] = useState<string>("");
   const [showSearchedUsers, setShowSearchedUsers] = useState<boolean>(false);
   const [searchedUsers, setSearchedUsers] = useState<any[]>([]);
-  const [userInformation, setUserInformation] = useState<any>({});
+  const [userDetail, setUserDetail] = useState<any>({});
 
   const handleStreetChange = (selectedOption: string) => {
     setStreet(selectedOption);
@@ -74,7 +74,7 @@ export const SearchUser = () => {
       }),
     });
     const json = await res.json();
-
+    
     setSearchedUsers(json.result);
     setShowSearchedUsers(true);
 
@@ -85,7 +85,7 @@ export const SearchUser = () => {
   };
 
   const handleUserClick = (clickedUser: any) => {
-    setUserInformation(clickedUser);
+    setUserDetail(clickedUser);
     setDirectToEarnPointRecord("addRecord");
   };
 
@@ -182,7 +182,7 @@ export const SearchUser = () => {
           )}
         </>
       ) : (
-        <AddPoint userInformation={userInformation} goBack={addPointGoBack} />
+        <AddPoint userDetail={userDetail} goBack={addPointGoBack} />
       )}
     </div>
   );

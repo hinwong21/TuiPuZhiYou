@@ -10,5 +10,5 @@
 }
 
 .ConButton:active {
-  background-color: darken(var(--secondary-color), 90%);
+  background-color: #117b41;
 }

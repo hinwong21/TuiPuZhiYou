@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddPoint.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Input } from "../../../Component/Input/Input";
+import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
+import { api_origin } from "../../../service/api";
 
-interface UserInformation {
+interface UserDetail {
+  user_id: number;
   street: string;
   number: string;
   floor: string;
@@ -12,30 +16,90 @@ interface UserInformation {
 }
 
 interface AddPointProps {
-  userInformation: UserInformation;
+  userDetail: UserDetail;
   goBack: () => void;
 }
 
-export const AddPoint: React.FC<AddPointProps> = ({
-  userInformation,
-  goBack,
-}) => {
-  // Your AddPoint component logic here
+export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
+  const [wasteWeight, setWasteWeight] = useState<string>("");
+  const [point, setPoint] = useState<string>("");
+
+  const handleWasteWeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setWasteWeight(event.target.value);
+  };
+
+  const handlePointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPoint(event.target.value);
+  };
+
+  const handleConfirmBtn = async () => {
+    if (wasteWeight === "" || point === "") {
+      alert("未輸入積分或廚餘");
+      return;
+    }
+
+    if (parseFloat(point) && parseFloat(wasteWeight)) {
+      const res = await fetch(`${api_origin}/record/point`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          id: userDetail.user_id,
+          point: parseFloat(point),
+          weight: parseFloat(wasteWeight),
+        }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        alert("成功輸入");
+      } else {
+        alert("輸入未成功");
+      }
+
+      goBack();
+    }
+  };
+
   return (
     <div className="addPointContainer">
       <div onClick={goBack} className="addPointBackBtnContainer">
-        <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="addPointBackBtn"
-        />
+        <FontAwesomeIcon icon={faArrowLeft} className="addPointBackBtn" />
       </div>
 
-      {/* Display user information in AddPoint component */}
-      <p>Street: {userInformation.street}</p>
-      <p>Number: {userInformation.number}</p>
-      <p>Floor: {userInformation.floor}</p>
-      <p>Unit: {userInformation.unit}</p>
-      <p>Name: {userInformation.username}</p>
+      <div className="searchResultSession">
+        <div className="searchResultSessionHeader">地址：</div>
+        <div>
+          {userDetail.street} {userDetail.number}號 {userDetail.floor}樓{" "}
+          {userDetail.unit}
+        </div>
+      </div>
+
+      <div className="searchResultSession">
+        <div className="searchResultSessionHeader">用戶：</div>
+        <div>{userDetail.username}</div>
+      </div>
+
+      <div className="addPointAndWasteRecordHeader">紀錄積分和廚餘</div>
+
+      <Input
+        title="廚餘重量"
+        type="text"
+        value={wasteWeight}
+        onChange={handleWasteWeightChange}
+      />
+      <Input
+        title="添加積分"
+        type="text"
+        value={point}
+        onChange={handlePointChange}
+      />
+
+      <div onClick={handleConfirmBtn}>
+        <ConfirmButton btnName="確認" type={"button"} />
+      </div>
     </div>
   );
 };

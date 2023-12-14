@@ -3,6 +3,7 @@ import cors from "cors";
 import { env } from "./env";
 import { accountRoutes } from "./route/AccountRoutes";
 import { eventRoutes } from "./route/EventRoutes";
+import { recordRoutes } from "./route/RecordRoutes";
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 
 app.use("/account", accountRoutes);
 app.use("/event", eventRoutes);
+app.use("/record", recordRoutes);
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);

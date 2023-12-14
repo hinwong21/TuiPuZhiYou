@@ -5,6 +5,7 @@
   align-items: center;
   width: 100vw;
   margin-top: 20px;
+  color: var(--tertiary-color);
 }
 
 .addPointBackBtnContainer {
@@ -19,4 +20,29 @@
   height: 27px;
   padding: 5px;
   cursor: pointer;
+}
+
+.searchResultSession {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  font-size: 28px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.searchResultSessionHeader {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.addPointAndWasteRecordHeader {
+  width: 60vw;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
