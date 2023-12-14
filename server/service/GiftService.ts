@@ -26,4 +26,13 @@ export class GiftService {
       throw new Error((err as Error).message);
     }
   };
+
+  getAllGift = async () => {
+    try {
+      const result = await this.knex("gifts").select("*");
+      return result;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

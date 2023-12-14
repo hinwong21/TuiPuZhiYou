@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./UserGift.css";
 import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
-import { json } from "stream/consumers";
 
+interface GiftItem {
+  giftID: string;
+  details: string;
+  point: number;
+  btnCall: string;
+}
 export const UserGift = () => {
   const [totalPoint, setTotalPoint] = useState(0);
+  const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -26,21 +32,49 @@ export const UserGift = () => {
     }
   };
 
-  useEffect(() => {
-    handleGetUserDetails();
-  }, []);
-
   //Get all gifts
-  const handleGetGiftDetails = async () => {
-    const res = await fetch(`${api_origin}/user/`, {
+  const handleGetAllGifts = async () => {
+    const res = await fetch(`${api_origin}/gift/`, {
       method: "GET",
     });
     const json = await res.json();
-    console.log(json);
+    setGifts(json);
+  };
+
+  const handleExchangeGift = async (point: string, giftId: string) => {
+    const exchangePoint = parseInt(point);
+    if (totalPoint < exchangePoint) {
+      alert("積分不足夠換領禮物");
+      return;
+    }
+
+    const userId = localStorage.getItem("ef2023_user_id");
+
+    const res = await fetch(`${api_origin}/record/gift`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        exchangePoint: exchangePoint,
+        giftId: giftId,
+        userId: userId,
+      }),
+    });
+    const json = await res.json();
+
+    if (json.success) {
+      const updatedTotalPoint = parseInt(json.result);
+      setTotalPoint(updatedTotalPoint);
+      alert("成功換領禮物");
+    } else {
+      alert("未能換領禮物，請稍後再嘗試");
+    }
   };
 
   useEffect(() => {
-    handleGetGiftDetails();
+    handleGetUserDetails();
+    handleGetAllGifts();
   }, []);
 
   return (
@@ -50,84 +84,19 @@ export const UserGift = () => {
 
       <div className="giftBoardContainer">
         <div className="giftBoard">
-          <Gift
-            giftID="1"
-            details="5kg金象米, 換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="2"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="3"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="4"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="5"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="6"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="7"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="8"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="9"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="10"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="11"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="12"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
-          <Gift
-            giftID="13"
-            details="5kg金象米, 換領地點"
-            point={50}
-            btnCall="換領"
-          />
+          {gifts?.map((gift: any) => (
+            <Gift
+              key={gift.gift_id}
+              giftID={gift.gift_id}
+              image={gift.gift_image}
+              details={gift.gift_detail}
+              point={gift.exchange_point}
+              onClick={() =>
+                handleExchangeGift(gift.exchange_point, gift.gift_id)
+              }
+              btnName="換領"
+            />
+          ))}
         </div>
       </div>
     </>

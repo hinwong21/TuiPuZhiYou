@@ -5,25 +5,31 @@ import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 
 interface GiftProps {
   giftID: string;
+  image: string;
   details: string;
   point: number;
-  btnCall: string;
+  btnName: string;
+  onClick: any;
 }
 
 export const Gift: React.FC<GiftProps> = ({
   giftID,
+  image,
   details,
   point,
-  btnCall,
+  btnName,
+  onClick,
 }) => {
   return (
     <div className="giftBoardGiftContainer" id={giftID}>
-      <img src="#" alt="" className="giftBoardGiftImage" />
+      <img src={image} alt="giftImage" className="giftBoardGiftImage" />
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${point} 分`}</div>
       <div className="giftDropdownContainer">
         <Dropdown details={details} />
       </div>
-      <ConfirmButton type="button" btnName={btnCall} />
+      <div onClick={onClick}>
+        <ConfirmButton type="button" btnName={btnName} />
+      </div>
     </div>
   );
 };

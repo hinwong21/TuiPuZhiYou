@@ -40,4 +40,26 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  exchangeGiftRecord = async (req: express.Request, res: express.Response) => {
+    try {
+      const today = new Date();
+      const userId = req.body.userId;
+      const giftId = req.body.giftId;
+      const exchangePoint = req.body.exchangePoint;
+      const projectId = "P001";
+      const dateAdd = today;
+
+      const result = await this.recordService.exchangeGiftRecord(
+        userId,
+        giftId,
+        exchangePoint,
+        projectId,
+        dateAdd
+      );
+      return res.json({ success: true, result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

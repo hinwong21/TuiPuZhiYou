@@ -40,4 +40,9 @@ export class GiftController {
       errorHandler(err, req, res);
     }
   };
+
+  getAllGift = async (req: express.Request, res: express.Response) => {
+    const result = await this.giftService.getAllGift();
+    res.status(200).json(result);
+  };
 }

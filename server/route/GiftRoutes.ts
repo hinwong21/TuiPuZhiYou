@@ -9,3 +9,4 @@ export let giftService = new GiftService(knex);
 let giftController = new GiftController(giftService);
 
 giftRoutes.post("/", giftController.addGift);
+giftRoutes.get("/", giftController.getAllGift);
