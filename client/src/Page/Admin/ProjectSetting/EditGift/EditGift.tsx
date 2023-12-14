@@ -74,6 +74,7 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
   return (
     <div className="editGiftContainer">
       <BackBtn goBack={goBack} />
+      <header className="editGiftHeader">添加禮物</header>
 
       <div className="inputCompoContainer">
         <div className="inputCompoTitle">禮物圖片</div>

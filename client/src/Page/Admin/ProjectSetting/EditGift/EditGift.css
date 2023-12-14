@@ -9,6 +9,12 @@
   color: var(--tertiary-color);
 }
 
+.editGiftHeader {
+  font-size: 32px;
+  font-weight: bolder;
+  margin: 20px;
+}
+
 .uploadImageBtn {
   display: flex;
   justify-content: center;
