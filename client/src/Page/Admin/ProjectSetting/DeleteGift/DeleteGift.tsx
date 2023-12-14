@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Gift } from "../../User/Gift/Gift";
-import { api_origin } from "../../../service/api";
+import { Gift } from "../../../User/Gift/Gift";
+import { api_origin } from "../../../../service/api";
+import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 
 interface GiftItem {
   giftID: string;
@@ -9,7 +10,11 @@ interface GiftItem {
   btnCall: string;
 }
 
-export const DeleteGift = () => {
+interface DeleteGiftProps {
+  goBack: () => void;
+}
+
+export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
   //Get all gifts
@@ -46,7 +51,8 @@ export const DeleteGift = () => {
   }, []);
 
   return (
-    <>
+    <div className="changePasswordContainer">
+      <BackBtn goBack={goBack} />
       <div className="userGiftHeader">刪除禮物</div>
       <div className="giftBoardContainer">
         <div className="giftBoard">
@@ -63,6 +69,6 @@ export const DeleteGift = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };

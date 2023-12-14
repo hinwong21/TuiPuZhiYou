@@ -3,6 +3,8 @@ import "./ProjectSetting.css";
 import { EditGift } from "./EditGift/EditGift";
 import { EditEvent } from "./EditEvent/EditEvent";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
+import { DeleteGift } from "./DeleteGift/DeleteGift";
+import { DeleteEvent } from "./DeleteEvent/DeleteEvent";
 
 export const ProjectSetting = () => {
   const [status, setStatus] = useState<string>("");
@@ -30,6 +32,18 @@ export const ProjectSetting = () => {
           </div>
           <div
             className="projectSettingSession"
+            onClick={() => handleSessionClick("deleteGift")}
+          >
+            刪除禮物
+          </div>
+          <div
+            className="projectSettingSession"
+            onClick={() => handleSessionClick("deleteEvent")}
+          >
+            刪除活動
+          </div>
+          <div
+            className="projectSettingSession"
             onClick={() => handleSessionClick("changePassword")}
           >
             更改管理員密碼
@@ -43,6 +57,13 @@ export const ProjectSetting = () => {
       {status === "editEvent" && (
         <EditEvent goBack={() => handleSessionClick("")} />
       )}
+      {status === "deleteGift" && (
+        <DeleteGift goBack={() => handleSessionClick("")} />
+      )}
+      {status === "deleteEvent" && (
+        <DeleteEvent goBack={() => handleSessionClick("")} />
+      )}
+
       {status === "changePassword" && (
         <ChangePassword goBack={() => handleSessionClick("")} />
       )}

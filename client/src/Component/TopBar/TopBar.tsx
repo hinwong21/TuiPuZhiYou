@@ -90,14 +90,6 @@ export const TopBar = (props: TopBarProps) => {
             title="計劃設置"
             handleStatus={() => handleStatus("projectSetting")}
           />
-          <SideBarSession
-            title="刪除禮物"
-            handleStatus={() => handleStatus("deleteGift")}
-          />
-          <SideBarSession
-            title="刪除活動"
-            handleStatus={() => handleStatus("deleteEvent")}
-          />
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
             登出
           </div>

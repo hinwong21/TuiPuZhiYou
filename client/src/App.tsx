@@ -10,8 +10,8 @@ import { UserEvent } from "./Page/User/Event/UserEvent";
 import { SearchUser } from "./Page/Admin/SearchUser/SearchUser";
 import { ProjectDetails } from "./Page/Admin/ProjectDetails/ProjectDetails";
 import { ProjectSetting } from "./Page/Admin/ProjectSetting/ProjectSetting";
-import { DeleteGift } from "./Page/Admin/DeleteGift/DeleteGift";
-import { DeleteEvent } from "./Page/Admin/DeleteEvent/DeleteEvent";
+import { DeleteGift } from "./Page/Admin/ProjectSetting/DeleteGift/DeleteGift";
+import { DeleteEvent } from "./Page/Admin/ProjectSetting/DeleteEvent/DeleteEvent";
 
 function App() {
   const [status, setStatus] = useState("login");
@@ -66,8 +66,6 @@ function App() {
         {status === "searchUser" && <SearchUser />}
         {status === "projectDetails" && <ProjectDetails />}
         {status === "projectSetting" && <ProjectSetting />}
-        {status === "deleteGift" && <DeleteGift />}
-        {status === "deleteEvent" && <DeleteEvent />}
       </div>
     </div>
   );

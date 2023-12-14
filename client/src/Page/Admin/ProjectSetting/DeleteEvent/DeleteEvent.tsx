@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Events } from "../../User/Event/UserEventBox";
-import { api_origin } from "../../../service/api";
+import { Events } from "../../../User/Event/UserEventBox";
+import { api_origin } from "../../../../service/api";
+import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 
 interface EventItem {
   eventId: string;
@@ -8,7 +9,11 @@ interface EventItem {
   details: string;
 }
 
-export const DeleteEvent = () => {
+interface DeleteEventProps {
+  goBack: () => void;
+}
+
+export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   const [events, setEvents] = useState<EventItem[] | null>(null);
 
   const handleGetAllEvents = async () => {
@@ -46,7 +51,8 @@ export const DeleteEvent = () => {
   }, []);
 
   return (
-    <>
+    <div className="changePasswordContainer">
+      <BackBtn goBack={goBack} />
       <div className="userEventHeader">刪除活動</div>
 
       <div className="eventBoardContainer">
@@ -61,6 +67,6 @@ export const DeleteEvent = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
