@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { ConfirmButton } from "../ConfirmButton/ConfirmButton";
+import { ConfirmButton, ButtonName } from "../ConfirmButton/ConfirmButton";
 import "./AlertBox.css";
 
 interface Alert {
   header: string;
-  btnNameOne: string;
-  btnNameTwo: string;
+  btnNameOne: ButtonName;
+  btnNameTwo: ButtonName;
   onClick?: any;
 }
 
@@ -16,7 +16,7 @@ export const AlertYesNoBox = (props: Alert) => {
   // [{title:1, onClick:handleShow}, title:2, onClick:onClick}]
   const handleShow = () => {
     if (btnNameOne) {
-      onClick();
+      onClick(btnNameOne);
     }
     setShow(false);
   };
@@ -30,12 +30,12 @@ export const AlertYesNoBox = (props: Alert) => {
             <div className="alertBtnBox">
               <ConfirmButton
                 type="button"
-                btnName={btnNameOne}
+                btnName={btnNameOne.btnName}
                 onClick={handleShow}
               />
               <ConfirmButton
                 type="button"
-                btnName={btnNameTwo}
+                btnName={btnNameTwo.btnName}
                 onClick={handleShow}
               />
             </div>
