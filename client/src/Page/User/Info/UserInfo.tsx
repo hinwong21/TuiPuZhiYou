@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./UserInfo.css";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
+import { GiftDetail } from "./GiftDetail/GiftDetail";
+import { EventDetail } from "./EventDetail/EventDetail";
 
 export const UserInfo = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [totalWaste, setTotalWaste] = useState(0);
   const [thisMonthWaste, setThisMonthWaste] = useState(0);
+  const [status, setStatus] = useState("");
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -59,26 +62,54 @@ export const UserInfo = () => {
     }
   };
 
+  const handleUpdateStatus = (newString: string) => {
+    setStatus(newString);
+  };
+
   useEffect(() => {
     handleGetUserDetails();
     handleGetUserThisMonthWasteRecord();
   }, []);
   return (
-    <div className="userInfoContainer">
-      <div className="userInfoGap"></div>
-      <div className="projectHeader">三無大廈環保回收你我出力 </div>
-      <div className="projectSubHeader">（廚餘回收）</div>
-      <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
-      <div className="userInfoWasteRecord">
-        本月廚餘： {thisMonthWaste} 公斤
-      </div>
-      <div className="userInfoWasteRecord">總累積廚餘： {totalWaste} 公斤</div>
+    <>
+      {status === "" && (
+        <div className="userInfoContainer">
+          <div className="userInfoGap"></div>
+          <div className="projectHeader">三無大廈環保回收你我出力 </div>
+          <div className="projectSubHeader">（廚餘回收）</div>
+          <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
+          <div className="userInfoWasteRecord">
+            本月廚餘： {thisMonthWaste} 公斤
+          </div>
+          <div className="userInfoWasteRecord">
+            總累積廚餘： {totalWaste} 公斤
+          </div>
+          <div className="userInfoGap"></div>
+          <ConfirmButton
+            btnName="換領禮物詳情"
+            type={"button"}
+            onClick={() => {
+              handleUpdateStatus("giftDetail");
+            }}
+          />
+          <div className="userInfoGap"></div>
+          <ConfirmButton
+            btnName="活動報名詳情"
+            type={"button"}
+            onClick={() => {
+              handleUpdateStatus("eventDetail");
+            }}
+          />
+          <div className="userInfoGap"></div>
+        </div>
+      )}
 
-      <div className="userInfoGap"></div>
-      <ConfirmButton btnName="換領禮物詳情" type={"button"} />
-      <div className="userInfoGap"></div>
-      <ConfirmButton btnName="活動報名詳情" type={"button"} />
-      <div className="userInfoGap"></div>
-    </div>
+      {status === "giftDetail" && (
+        <GiftDetail goBack={() => handleUpdateStatus("")} />
+      )}
+      {status === "eventDetail" && (
+        <EventDetail goBack={() => handleUpdateStatus("")} />
+      )}
+    </>
   );
 };

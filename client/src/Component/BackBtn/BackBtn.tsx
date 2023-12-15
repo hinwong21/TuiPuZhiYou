@@ -9,7 +9,7 @@ interface BackBtnProps {
 
 export const BackBtn: React.FC<BackBtnProps> = ({ goBack }) => {
   return (
-    <div onClick={goBack} className="backBtnContainer">
+    <div onClick={goBack}>
       <FontAwesomeIcon icon={faArrowLeft} className="backBtn" />
     </div>
   );

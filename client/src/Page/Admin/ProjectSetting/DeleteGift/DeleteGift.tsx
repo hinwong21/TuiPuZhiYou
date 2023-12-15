@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Gift } from "../../../User/Gift/Gift";
 import { api_origin } from "../../../../service/api";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
 interface GiftItem {
   giftID: string;
@@ -52,8 +52,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
 
   return (
     <div className="changePasswordContainer">
-      <BackBtn goBack={goBack} />
-      <div className="userGiftHeader">刪除禮物</div>
+      <SubPageHeader title="刪除禮物" goBack={goBack} />
       <div className="giftBoardContainer">
         <div className="giftBoard">
           {gifts?.map((gift: any) => (

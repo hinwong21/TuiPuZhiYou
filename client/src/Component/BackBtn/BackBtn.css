@@ -1,7 +1,3 @@
-.backBtnContainer {
-  width: 80vw;
-}
-
 .backBtn {
   color: white;
   background-color: var(--secondary-color);

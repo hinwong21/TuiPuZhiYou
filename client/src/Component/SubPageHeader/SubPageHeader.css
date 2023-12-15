@@ -1,0 +1,14 @@
+.subPageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80vw;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.subPageHeaderTitle {
+  font-size: 32px;
+  font-weight: bolder;
+  color: var(--tertiary-color);
+}

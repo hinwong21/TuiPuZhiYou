@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./ChangePassword.css";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 import { Input } from "../../../../Component/Input/Input";
 import { Select } from "../../../../Interaction/Select/Select";
 import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
 interface ChangePasswordProps {
   goBack: () => void;
@@ -72,8 +72,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
 
   return (
     <div className="editGiftContainer">
-      <BackBtn goBack={goBack} />
-      <header className="editGiftHeader">更改管理員密碼</header>
+      <SubPageHeader title="更改管理員密碼" goBack={goBack} />
 
       <div className="changePasswordContainer">
         <Select

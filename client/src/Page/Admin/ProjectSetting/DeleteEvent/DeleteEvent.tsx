@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Events } from "../../../User/Event/UserEventBox";
 import { api_origin } from "../../../../service/api";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
 interface EventItem {
   eventId: string;
@@ -52,8 +52,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
 
   return (
     <div className="changePasswordContainer">
-      <BackBtn goBack={goBack} />
-      <div className="userEventHeader">刪除活動</div>
+      <SubPageHeader title="刪除活動" goBack={goBack} />
 
       <div className="eventBoardContainer">
         {events?.map((event: any) => (

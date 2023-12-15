@@ -1,8 +1,8 @@
 import React from "react";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 interface UserDetailProps {
   goBack: () => void;
 }
 export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
-  return <BackBtn goBack={goBack} />;
+  return <SubPageHeader title="用戶詳情" goBack={goBack} />;
 };

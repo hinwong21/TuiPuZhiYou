@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import "./EditEvent.css";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 import { Input } from "../../../../Component/Input/Input";
 import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
 interface EditEventProps {
   goBack: () => void;
@@ -75,8 +75,7 @@ export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
 
   return (
     <div className="editGiftContainer">
-      <BackBtn goBack={goBack} />
-      <header className="editGiftHeader">添加活動</header>
+      <SubPageHeader title="添加活動" goBack={goBack} />
 
       <div className="inputCompoContainer">
         <div className="inputCompoTitle">活動圖片</div>

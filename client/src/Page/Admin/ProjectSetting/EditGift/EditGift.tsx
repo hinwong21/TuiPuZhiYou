@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import "./EditGift.css";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 import { Input } from "../../../../Component/Input/Input";
 import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
+import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
 interface EditGiftProps {
   goBack: () => void;
@@ -76,8 +76,7 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
 
   return (
     <div className="editGiftContainer">
-      <BackBtn goBack={goBack} />
-      <header className="editGiftHeader">添加禮物</header>
+      <SubPageHeader title="添加禮物" goBack={goBack} />
 
       <div className="inputCompoContainer">
         <div className="inputCompoTitle">禮物圖片</div>
