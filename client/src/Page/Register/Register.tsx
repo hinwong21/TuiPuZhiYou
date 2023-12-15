@@ -6,6 +6,8 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
 import { handleKeyPress } from "../../service/useKeyPress";
+import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
+import { AlertYesNoBox } from "../../Component/AlertBox/AlertYesNoBox";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -142,86 +144,88 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   }, [confirmPhoneNumOrEmail]);
 
   return (
-    <div className="registerContainer">
-      <div className="userInfoGap"></div>
-      <div className="projectHeader">三無大廈環保回收你我出力 </div>
-      <div className="projectSubHeader">（廚餘回收）</div>
+    <>
+      <div className="registerContainer">
+        <div className="userInfoGap"></div>
+        <div className="projectHeader">三無大廈環保回收你我出力 </div>
+        <div className="projectSubHeader">（廚餘回收）</div>
 
-      <h2>注册帳戶</h2>
-      <Input
-        title="用戶名稱"
-        type="text"
-        value={username}
-        onChange={handleUsernameChange}
-      />
-      <Input
-        title="電話號碼或電郵地址"
-        type="text"
-        value={phoneNumOrEmail}
-        onChange={handlePhoneNumOrEmailChange}
-      />
-      <Input
-        title="確認您的電話號碼或電郵地址"
-        type="text"
-        value={confirmPhoneNumOrEmail}
-        onChange={handleConfirmPhoneNumOrEmailChange}
-      />
+        <h2>注册帳戶</h2>
+        <Input
+          title="用戶名稱"
+          type="text"
+          value={username}
+          onChange={handleUsernameChange}
+        />
+        <Input
+          title="電話號碼或電郵地址"
+          type="text"
+          value={phoneNumOrEmail}
+          onChange={handlePhoneNumOrEmailChange}
+        />
+        <Input
+          title="確認您的電話號碼或電郵地址"
+          type="text"
+          value={confirmPhoneNumOrEmail}
+          onChange={handleConfirmPhoneNumOrEmailChange}
+        />
 
-      <Input
-        title="密碼"
-        type="text"
-        value={password}
-        onChange={handlePasswordChange}
-        component={
-          <div className="registerDefaultNotice">
-            *密碼默認為電話號碼或電郵地址
-          </div>
-        }
-      />
+        <Input
+          title="密碼"
+          type="text"
+          value={password}
+          onChange={handlePasswordChange}
+          component={
+            <div className="registerDefaultNotice">
+              *密碼默認為電話號碼或電郵地址
+            </div>
+          }
+        />
 
-      <Input
-        title="確認您的密碼"
-        type="text"
-        value={confirmPassword}
-        onChange={handleConfirmPasswordChange}
-      />
+        <Input
+          title="確認您的密碼"
+          type="text"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+        />
 
-      <div className="registerAddressTitle">地址</div>
+        <div className="registerAddressTitle">地址</div>
 
-      <Select
-        title="街"
-        options={streetOptions}
-        selectedOption={street}
-        onSelectOption={handleStreetChange}
-      />
-      <Select
-        title="號"
-        options={numberOptions}
-        selectedOption={number}
-        onSelectOption={handleNumberChange}
-      />
-      <Select
-        title="樓層"
-        options={floorOptions}
-        selectedOption={floor}
-        onSelectOption={handleFloorChange}
-      />
-      <Input
-        title="單位"
-        type="text"
-        value={unit}
-        onChange={handleUnitChange}
-        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-          handleKeyPress(e, "Enter", handleRegisterBtnClick)
-        }
-      />
+        <Select
+          title="街"
+          options={streetOptions}
+          selectedOption={street}
+          onSelectOption={handleStreetChange}
+        />
+        <Select
+          title="號"
+          options={numberOptions}
+          selectedOption={number}
+          onSelectOption={handleNumberChange}
+        />
+        <Select
+          title="樓層"
+          options={floorOptions}
+          selectedOption={floor}
+          onSelectOption={handleFloorChange}
+        />
+        <Input
+          title="單位"
+          type="text"
+          value={unit}
+          onChange={handleUnitChange}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyPress(e, "Enter", handleRegisterBtnClick)
+          }
+        />
 
-      <div className="registerBtnContainer">
-        <ConfirmButton btnName="返回" onClick={handleBackBtnClick} />
-        <ConfirmButton btnName="注册" onClick={handleRegisterBtnClick} />
+        <div className="registerBtnContainer">
+          <ConfirmButton btnName="返回" onClick={handleBackBtnClick} />
+          <ConfirmButton btnName="注册" onClick={handleRegisterBtnClick} />
+        </div>
+
+        <div className="registerGap"></div>
       </div>
-
-      <div className="registerGap"></div>
-    </div>
+    </>
   );
 };
