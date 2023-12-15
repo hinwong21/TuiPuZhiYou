@@ -93,6 +93,7 @@ export const UserInfo = () => {
             }}
           />
           <div className="userInfoGap"></div>
+          <div className="userInfoGap"></div>
           <ConfirmButton
             btnName="活動報名詳情"
             type={"button"}
@@ -100,7 +101,7 @@ export const UserInfo = () => {
               handleUpdateStatus("eventDetail");
             }}
           />
-          <div className="userInfoGap"></div>
+         
         </div>
       )}
 
