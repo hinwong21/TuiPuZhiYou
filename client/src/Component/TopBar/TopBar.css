@@ -92,13 +92,20 @@
   font-weight: bold;
 }
 
+.topBarSideBarSession:hover {
+  font-size: 18px;
+}
+
 .topBarSideBarSessionLogout {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
-  width: 80px;
-
+  width: 100px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.topBarSideBarSessionLogout:hover {
+  font-size: 19px;
 }
