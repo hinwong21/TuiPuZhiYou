@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProjectSetting.css";
-import { EditGift } from "./EditGift/EditGift";
-import { EditEvent } from "./EditEvent/EditEvent";
+import { AddGift } from "./AddGift/AddGift";
+import { AddEvent } from "./AddEvent/AddEvent";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteGift } from "./DeleteGift/DeleteGift";
 import { DeleteEvent } from "./DeleteEvent/DeleteEvent";
@@ -20,13 +20,13 @@ export const ProjectSetting = () => {
           <header className="projectSettingHeader">計劃設置</header>
           <div
             className="projectSettingSession"
-            onClick={() => handleSessionClick("editGift")}
+            onClick={() => handleSessionClick("addGift")}
           >
             添加禮物
           </div>
           <div
             className="projectSettingSession"
-            onClick={() => handleSessionClick("editEvent")}
+            onClick={() => handleSessionClick("addEvent")}
           >
             添加活動
           </div>
@@ -51,11 +51,11 @@ export const ProjectSetting = () => {
         </>
       )}
 
-      {status === "editGift" && (
-        <EditGift goBack={() => handleSessionClick("")} />
+      {status === "addGift" && (
+        <AddGift goBack={() => handleSessionClick("")} />
       )}
-      {status === "editEvent" && (
-        <EditEvent goBack={() => handleSessionClick("")} />
+      {status === "addEvent" && (
+        <AddEvent goBack={() => handleSessionClick("")} />
       )}
       {status === "deleteGift" && (
         <DeleteGift goBack={() => handleSessionClick("")} />

@@ -1,36 +1,33 @@
 import React, { useRef, useState } from "react";
-import "./EditGift.css";
 import { Input } from "../../../../Component/Input/Input";
 import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 
-interface EditGiftProps {
+interface AddEventProps {
   goBack: () => void;
 }
-
-export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
+export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
+  const [name, setName] = useState("");
+  const [participant, setParticipant] = useState("");
   const [image, setImage] = useState<File | null | undefined>(null);
-  const [exchangePoint, setExchangePoint] = useState("");
-  const [giftDetail, setGiftDetail] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [detail, setDetail] = useState("");
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleParticipantChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setParticipant(event.target.value);
+  };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
     setImage(selectedImage);
-  };
-
-  const handleExchangePointChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setExchangePoint(event.target.value);
-  };
-
-  const handleGiftDetailChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setGiftDetail(event.target.value);
   };
 
   // click the div to trigger the file input
@@ -40,34 +37,42 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
     }
   };
 
-  const handleInsertGift = async () => {
+  const handleEventDetailChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDetail(event.target.value);
+  };
+
+  const handleInsertEvent = async () => {
     try {
       if (image) {
         const base64Image = await convertFileToBase64(image);
 
-        const res = await fetch(`${api_origin}/gift`, {
+        const res = await fetch(`${api_origin}/event`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
+            name: name,
+            participant: participant,
+            detail: detail,
             image: base64Image,
-            exchangePoint: exchangePoint,
-            giftDetail: giftDetail,
           }),
         });
 
         const json = await res.json();
         if (json.success) {
-          alert("成功添加禮物");
+          alert("成功添加活動");
+          setName("");
           setImage(null);
-          setExchangePoint("");
-          setGiftDetail("");
+          setParticipant("");
+          setDetail("");
         } else {
-          alert("未能添加禮物");
+          alert("未能添加活動");
         }
       } else {
-        alert("未上傳禮物圖片");
+        alert("未上傳禮物活動");
       }
     } catch (error) {
       console.error("Error handling gift insertion:", error);
@@ -76,10 +81,17 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
 
   return (
     <div className="editGiftContainer">
-      <SubPageHeader title="添加禮物" goBack={goBack} />
+      <SubPageHeader title="添加活動" goBack={goBack} />
+
+      <Input
+        title="活動名稱"
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+      />
 
       <div className="inputCompoContainer">
-        <div className="inputCompoTitle">禮物圖片</div>
+        <div className="inputCompoTitle">活動圖片</div>
         <input
           type="file"
           accept="image/*"
@@ -102,26 +114,26 @@ export const EditGift: React.FC<EditGiftProps> = ({ goBack }) => {
       </div>
 
       <Input
-        title="兌換分數"
-        type={"text"}
-        value={exchangePoint}
-        onChange={handleExchangePointChange}
+        title="活動人數"
+        type="text"
+        value={participant}
+        onChange={handleParticipantChange}
       />
 
       <div className="inputCompoContainer">
-        <div className="inputCompoTitle">禮物詳情</div>
+        <div className="inputCompoTitle">活動詳情</div>
         <textarea
           className="editGiftGiftDetail"
-          placeholder="禮物詳情"
-          value={giftDetail}
-          onChange={handleGiftDetailChange}
+          placeholder="活動詳情"
+          value={detail}
+          onChange={handleEventDetailChange}
         ></textarea>
       </div>
 
       <ConfirmButton
         type={"button"}
         btnName="確認"
-        onClick={handleInsertGift}
+        onClick={handleInsertEvent}
       />
     </div>
   );
