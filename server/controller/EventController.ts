@@ -16,6 +16,7 @@ export class EventController {
     const today = new Date();
     try {
       const id = getRandomSixDigitNumber();
+      const name = req.body.name;
       const image = req.body.image;
       const participant = req.body.participant;
       const detail = req.body.detail;
@@ -24,6 +25,7 @@ export class EventController {
 
       const result = await this.eventService.addEvent(
         id,
+        name,
         image,
         participant,
         detail,

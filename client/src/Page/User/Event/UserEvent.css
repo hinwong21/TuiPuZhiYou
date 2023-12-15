@@ -30,6 +30,15 @@
   color: var(--tertiary-color);
 }
 
+.eventName {
+  width: 35vw;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
 .eventImageBox {
   width: 35vw;
   min-height: 70vh;

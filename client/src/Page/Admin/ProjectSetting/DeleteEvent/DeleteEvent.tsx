@@ -6,6 +6,7 @@ import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 
 interface EventItem {
   eventId: string;
+  name: string;
   image: string;
   details: string;
 }
@@ -62,6 +63,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
           {events?.map((event: any) => (
             <Events
               key={event.event_id}
+              name={event.event_name}
               eventID={event.event_id}
               image={event.event_image}
               details={event.event_detail}

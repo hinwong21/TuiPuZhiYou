@@ -5,6 +5,7 @@ export class EventService {
 
   addEvent = async (
     id: string,
+    name: string,
     image: string,
     participant: number | string,
     detail: string,
@@ -14,6 +15,7 @@ export class EventService {
     try {
       await this.knex("events").insert({
         event_id: id,
+        event_name:name,
         event_detail: detail,
         event_image: image,
         participant: participant,

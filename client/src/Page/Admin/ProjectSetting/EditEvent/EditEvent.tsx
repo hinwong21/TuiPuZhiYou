@@ -55,6 +55,7 @@ export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
+            name: name,
             participant: participant,
             detail: detail,
             image: base64Image,
@@ -64,6 +65,7 @@ export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
         const json = await res.json();
         if (json.success) {
           alert("成功添加活動");
+          setName("");
           setImage(null);
           setParticipant("");
           setDetail("");

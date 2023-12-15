@@ -5,6 +5,7 @@ import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 
 interface EventProps {
   eventID: string;
+  name: string;
   details: string;
   image: string;
   btnCall: string;
@@ -13,6 +14,7 @@ interface EventProps {
 
 export const Events: React.FC<EventProps> = ({
   eventID,
+  name,
   details,
   image,
   btnCall,
@@ -28,6 +30,7 @@ export const Events: React.FC<EventProps> = ({
   return (
     <div className="eventContainer" id={eventID}>
       <div className="eventBox">
+        <div className="eventName">{name}</div>
         <div className="eventImageBox">
           <img src={image} alt="" className="eventImage" />
         </div>

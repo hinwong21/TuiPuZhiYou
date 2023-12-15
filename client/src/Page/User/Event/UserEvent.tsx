@@ -5,6 +5,7 @@ import { api_origin } from "../../../service/api";
 
 interface EventItem {
   eventId: string;
+  name: string;
   image: string;
   details: string;
 }
@@ -87,6 +88,7 @@ export const UserEvent = () => {
           <Events
             key={event.event_id}
             eventID={event.event_id}
+            name={event.event_name}
             image={event.event_image}
             details={event.event_detail}
             btnCall="參加"
