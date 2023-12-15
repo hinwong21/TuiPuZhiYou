@@ -83,6 +83,10 @@ export const TopBar = (props: TopBarProps) => {
             handleStatus={() => handleStatus("searchUser")}
           />
           <SideBarSession
+            title="禮物登記"
+            handleStatus={() => handleStatus("giftRegistration")}
+          />
+          <SideBarSession
             title="計劃設置"
             handleStatus={() => handleStatus("projectSetting")}
           />
@@ -97,15 +101,16 @@ export const TopBar = (props: TopBarProps) => {
       ) : (
         <div className="topBarUsernameBtnContainer">
           <div>{props.userName}</div>
-          <section className="topBarLoginContainer" onClick={handleShowBar}>
-            <div className="topBarLoginButton">
-              {props.userName ? (
+
+          {props.userName ? (
+            <section className="topBarLoginContainer" onClick={handleShowBar}>
+              <div className="topBarLoginButton">
                 <FontAwesomeIcon icon={faBars} />
-              ) : (
-                "登入｜注册"
-              )}
-            </div>
-          </section>
+              </div>
+            </section>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>
