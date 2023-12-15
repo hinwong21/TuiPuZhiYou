@@ -20,6 +20,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
   const [showAlert, setShowAlert] = useState("");
+  const [selectedGiftID, setSelectedGiftID] = useState("");
 
   //Get all gifts
   const handleGetAllGifts = async () => {
@@ -41,6 +42,8 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
     giftId: string,
     CheckIsConfirmYes?: string
   ) => {
+    setSelectedGiftID(giftId);
+
     if (CheckIsConfirmYes === "") {
       setShowAlert("是否確認刪除？");
       return;
@@ -90,25 +93,25 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
                   onClick={() => handleDeleteGift(gift.gift_id, "")}
                   btnName="刪除"
                 />
-                {showAlert === "是否確認刪除？" && (
-                  <AlertYesNoBox
-                    header={showAlert}
-                    btnNameOne={{
-                      btnName: "是",
-                      onClick: () => handleDeleteGift(gift.gift_id),
-                    }}
-                    btnNameTwo={{
-                      btnName: "否",
-                      onClick: () => handleDeleteGift(gift.gift_id, "false"),
-                    }}
-                  />
-                )}
               </>
             ))}
           </div>
         </div>
       </div>
 
+      {showAlert === "是否確認刪除？" && (
+        <AlertYesNoBox
+          header={showAlert}
+          btnNameOne={{
+            btnName: "是",
+            onClick: () => handleDeleteGift(selectedGiftID),
+          }}
+          btnNameTwo={{
+            btnName: "否",
+            onClick: () => handleDeleteGift(selectedGiftID, "false"),
+          }}
+        />
+      )}
       {showAlert === "成功刪除禮物!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

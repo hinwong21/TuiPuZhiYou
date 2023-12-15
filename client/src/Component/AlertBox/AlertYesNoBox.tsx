@@ -31,12 +31,12 @@ export const AlertYesNoBox = (props: Alert) => {
               <ConfirmButton
                 type="button"
                 btnName={btnNameOne.btnName}
-                onClick={handleShow}
+                onClick={btnNameOne.onClick}
               />
               <ConfirmButton
                 type="button"
                 btnName={btnNameTwo.btnName}
-                onClick={handleShow}
+                onClick={btnNameTwo.onClick}
               />
             </div>
             <br />
