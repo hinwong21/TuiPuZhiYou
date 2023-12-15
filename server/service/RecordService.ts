@@ -97,7 +97,7 @@ export class RecordService {
     }
   };
 
-  getAllJoinedEventRecord = async (userId: string) => {
+  getAllJoinedEventRecords = async (userId: string) => {
     try {
       const records = await this.knex("joinedEventRecords")
         .select("joinedEventRecords.*", "events.*")

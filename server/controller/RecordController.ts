@@ -101,7 +101,7 @@ export class RecordController {
   ) => {
     try {
       const userId = req.body.userId;
-      const result = await this.recordService.getAllExchangeGiftRecord(userId);
+      const result = await this.recordService.getAllJoinedEventRecords(userId);
       return res.json({ result: result });
     } catch (err) {
       errorHandler(err, req, res);
