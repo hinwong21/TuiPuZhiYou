@@ -10,10 +10,15 @@ interface EditEventProps {
   goBack: () => void;
 }
 export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
+  const [name, setName] = useState("");
   const [participant, setParticipant] = useState("");
   const [image, setImage] = useState<File | null | undefined>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [detail, setDetail] = useState("");
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
 
   const handleParticipantChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -76,6 +81,13 @@ export const EditEvent: React.FC<EditEventProps> = ({ goBack }) => {
   return (
     <div className="editGiftContainer">
       <SubPageHeader title="添加活動" goBack={goBack} />
+
+      <Input
+        title="活動名稱"
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+      />
 
       <div className="inputCompoContainer">
         <div className="inputCompoTitle">活動圖片</div>

@@ -94,4 +94,17 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  getAllJoinedEventRecords = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const userId = req.body.userId;
+      const result = await this.recordService.getAllExchangeGiftRecord(userId);
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

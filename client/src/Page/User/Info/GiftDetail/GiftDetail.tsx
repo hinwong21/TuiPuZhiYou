@@ -7,7 +7,7 @@ interface GiftDetailProps {
   goBack: () => void;
 }
 export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
-  const [records, setRecord] = useState<any>([]);
+  const [records, setRecords] = useState<any>([]);
 
   const getAllExchangeGiftRecords = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -25,7 +25,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
       ...record,
       exchangePoint: Math.round(record.exchange_point),
     }));
-    setRecord(updatedRecords);
+    setRecords(updatedRecords);
   };
 
   useEffect(() => {

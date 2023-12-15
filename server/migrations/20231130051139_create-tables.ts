@@ -79,6 +79,7 @@ export async function up(knex: Knex): Promise<void> {
   if (!(await knex.schema.hasTable("events"))) {
     await knex.schema.createTable("events", (table) => {
       table.string("event_id", 255).notNullable().unique();
+      table.text("event_name").notNullable();
       table.text("event_image");
       table.text("event_detail").notNullable();
       table.integer("participant").notNullable();

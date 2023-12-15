@@ -96,4 +96,16 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  getAllJoinedEventRecord = async (userId: string) => {
+    try {
+      const records = await this.knex("joinedEventRecords")
+        .select("joinedEventRecords.*", "events.*")
+        .join("events", "joinedEventRecords.event_id", "=", "events.event_id")
+        .where("joinedEventRecords.user_id", userId);
+      return records;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }
