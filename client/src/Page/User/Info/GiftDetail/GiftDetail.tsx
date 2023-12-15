@@ -1,5 +1,4 @@
 import React from "react";
-import { BackBtn } from "../../../../Component/BackBtn/BackBtn";
 import "./GiftDetail.css";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 

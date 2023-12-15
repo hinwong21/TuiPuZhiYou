@@ -9,7 +9,7 @@ interface GiftProps {
   details: string;
   point: number;
   btnName: string;
-  onClick: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Gift: React.FC<GiftProps> = ({
@@ -20,10 +20,12 @@ export const Gift: React.FC<GiftProps> = ({
   btnName,
   onClick,
 }) => {
+  const exchangePoint = typeof point === "string" ? parseInt(point) : point;
+
   return (
     <div className="giftBoardGiftContainer" id={giftID}>
       <img src={image} alt="giftImage" className="giftBoardGiftImage" />
-      <div className="giftBoardGiftExchangePoints">{`需換領分數：${point} 分`}</div>
+      <div className="giftBoardGiftExchangePoints">{`需換領分數：${exchangePoint} 分`}</div>
       <div className="giftDropdownContainer">
         <Dropdown details={`禮物內容: ${details}`} />
       </div>

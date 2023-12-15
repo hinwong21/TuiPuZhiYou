@@ -70,6 +70,8 @@ export async function up(knex: Knex): Promise<void> {
     await knex.schema.createTable("exchangeGiftRecords", (table) => {
       table.string("user_id").references("users.user_id");
       table.string("gift_id").references("gifts.gift_id");
+      table.boolean("isExchanged").defaultTo(false);
+      table.date("exchange_date").notNullable();
       table.string("project_id").references("projects.project_id");
       table.date("apply_date").notNullable();
     });

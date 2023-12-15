@@ -4,7 +4,7 @@ import "./ConfirmButton.css";
 interface ButtonName {
   btnName: string;
   type?: any;
-  onClick?: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ConfirmButton = (props: ButtonName) => {
