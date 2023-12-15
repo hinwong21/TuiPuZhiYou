@@ -6,6 +6,7 @@ import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { adminOptions } from "../../../../service/projectOption";
 
 interface ChangePasswordProps {
   goBack: () => void;
@@ -15,23 +16,6 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showAlert, setShowAlert] = useState("");
-
-  const adminOptions: string[] = [
-    "---請選擇---",
-    "manager",
-    "volunteer_tpzy01",
-    "volunteer_tpzy02",
-    "volunteer_ndvg01",
-    "volunteer_ndvg02",
-    "volunteer_hksun01",
-    "volunteer_hksun02",
-    "volunteer_sumyee01",
-    "volunteer_sumyee02",
-    "admin_tpzy",
-    "admin_ndvg",
-    "admin_hksun",
-    "admin_sumyee",
-  ];
 
   const handleAdminNameChange = (selectedOption: string) => {
     setAdminName(selectedOption);

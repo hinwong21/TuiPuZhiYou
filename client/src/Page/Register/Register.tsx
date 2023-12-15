@@ -4,8 +4,8 @@ import "./Register.css";
 import { Select } from "../../Interaction/Select/Select";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
-import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
 import { handleKeyPress } from "../../service/useKeyPress";
+import { tpzyStreetOptions, tpzyNumberOptions, tpzyFloorOptions } from "../../service/projectOption";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -191,19 +191,19 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <Select
           title="街"
-          options={streetOptions}
+          options={tpzyStreetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
         <Select
           title="號"
-          options={numberOptions}
+          options={tpzyNumberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />
         <Select
           title="樓層"
-          options={floorOptions}
+          options={tpzyFloorOptions}
           selectedOption={floor}
           onSelectOption={handleFloorChange}
         />

@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import "./SearchUser.css";
 import { Input } from "../../../Component/Input/Input";
 import { Select } from "../../../Interaction/Select/Select";
-import {
-  streetOptions,
-  numberOptions,
-  floorOptions,
-} from "../../Register/AddressOption";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
+import { tpzyStreetOptions, tpzyNumberOptions, tpzyFloorOptions } from "../../../service/projectOption";
 
 export const SearchUser = () => {
   const [directToEarnPointRecord, setDirectToEarnPointRecord] =
@@ -135,19 +131,19 @@ export const SearchUser = () => {
             </div>
             <Select
               title="街"
-              options={streetOptions}
+              options={tpzyStreetOptions}
               selectedOption={street}
               onSelectOption={handleStreetChange}
             />
             <Select
               title="號"
-              options={numberOptions}
+              options={tpzyNumberOptions}
               selectedOption={number}
               onSelectOption={handleNumberChange}
             />
             <Select
               title="樓層"
-              options={floorOptions}
+              options={tpzyFloorOptions}
               selectedOption={floor}
               onSelectOption={handleFloorChange}
             />

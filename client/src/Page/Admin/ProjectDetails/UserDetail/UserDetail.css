@@ -1,0 +1,11 @@
+.userDetailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  color: var(--tertiary-color);
+}
+
+.userDetailGap {
+  height: 30px;
+}
