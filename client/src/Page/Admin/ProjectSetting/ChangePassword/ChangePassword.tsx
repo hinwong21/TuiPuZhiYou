@@ -5,6 +5,7 @@ import { Select } from "../../../../Interaction/Select/Select";
 import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
+import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 
 interface ChangePasswordProps {
   goBack: () => void;
@@ -13,6 +14,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   const [adminName, setAdminName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showAlert, setShowAlert] = useState("");
 
   const adminOptions: string[] = [
     "---請選擇---",
@@ -48,6 +50,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   };
 
   const handleChangePasswordBtnClick = async () => {
+    await setShowAlert("");
     if (newPassword === confirmNewPassword) {
       const res = await fetch(`${api_origin}/account/admin`, {
         method: "POST",
@@ -61,43 +64,58 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
       });
       const json = await res.json();
       if (json.success) {
-        alert("成功更改密碼");
+        setShowAlert("成功更改密碼!");
       } else {
-        alert("未能更改密碼，請稍後再嘗試");
+        setShowAlert("未能更改密碼，請稍後再嘗試!");
       }
     } else {
-      alert("新密碼不相符");
+      setShowAlert("新密碼不相符!");
     }
   };
 
   return (
-    <div className="editGiftContainer">
-      <SubPageHeader title="更改管理員密碼" goBack={goBack} />
+    <>
+      <div className="editGiftContainer">
+        <SubPageHeader title="更改管理員密碼" goBack={goBack} />
 
-      <div className="changePasswordContainer">
-        <Select
-          title="用戶名稱"
-          options={adminOptions}
-          selectedOption={adminName}
-          onSelectOption={handleAdminNameChange}
-        />
+        <div className="changePasswordContainer">
+          <Select
+            title="用戶名稱"
+            options={adminOptions}
+            selectedOption={adminName}
+            onSelectOption={handleAdminNameChange}
+          />
 
-        <Input
-          title="新密碼"
-          type="text"
-          value={newPassword}
-          onChange={handleNewPasswordChange}
-        />
+          <Input
+            title="新密碼"
+            type="text"
+            value={newPassword}
+            onChange={handleNewPasswordChange}
+          />
 
-        <Input
-          title="再次確認新密碼"
-          type="text"
-          value={confirmNewPassword}
-          onChange={handleConfirmNewPasswordChange}
-        />
+          <Input
+            title="再次確認新密碼"
+            type="text"
+            value={confirmNewPassword}
+            onChange={handleConfirmNewPasswordChange}
+          />
 
-        <ConfirmButton btnName="確認" onClick={handleChangePasswordBtnClick} />
+          <ConfirmButton
+            btnName="確認"
+            onClick={handleChangePasswordBtnClick}
+          />
+        </div>
       </div>
-    </div>
+
+      {showAlert === "成功更改密碼!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能更改密碼，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "新密碼不相符!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+    </>
   );
 };

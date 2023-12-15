@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Gift } from "../../../User/Gift/Gift";
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
+import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
 
 interface GiftItem {
   giftID: string;
@@ -17,6 +19,8 @@ interface DeleteGiftProps {
 export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
+  const [showAlert, setShowAlert] = useState("");
+
   //Get all gifts
   const handleGetAllGifts = async () => {
     const res = await fetch(`${api_origin}/gift/`, {
@@ -27,7 +31,26 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
     setGifts(filteredGifts);
   };
 
-  const handleDeleteGift = async (giftId: string) => {
+  const handleCheckIsConfirmYes = (str: string) => {
+    if (str === "true") {
+      return true;
+    }
+  };
+
+  const handleDeleteGift = async (
+    giftId: string,
+    CheckIsConfirmYes?: string
+  ) => {
+    if (CheckIsConfirmYes === "") {
+      setShowAlert("是否確認刪除？");
+      return;
+    }
+
+    if (CheckIsConfirmYes === "false") {
+      setShowAlert("");
+      return;
+    }
+
     const res = await fetch(`${api_origin}/gift/delete`, {
       method: "POST",
       headers: {
@@ -39,10 +62,10 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
     });
     const json = await res.json();
     if (json.success) {
-      alert("成功刪除禮物");
+      setShowAlert("成功刪除禮物!");
       handleGetAllGifts();
     } else {
-      alert("未能刪除禮物");
+      setShowAlert("未能刪除禮物!");
     }
   };
 
@@ -51,23 +74,47 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   }, []);
 
   return (
-    <div className="changePasswordContainer">
-      <SubPageHeader title="刪除禮物" goBack={goBack} />
-      <div className="giftBoardContainer">
-        <div className="giftBoard">
-          {gifts?.map((gift: any) => (
-            <Gift
-              key={gift.gift_id}
-              giftID={gift.gift_id}
-              image={gift.gift_image}
-              details={gift.gift_detail}
-              point={gift.exchange_point}
-              onClick={() => handleDeleteGift(gift.gift_id)}
-              btnName="刪除"
-            />
-          ))}
+    <>
+      <div className="changePasswordContainer">
+        <SubPageHeader title="刪除禮物" goBack={goBack} />
+        <div className="giftBoardContainer">
+          <div className="giftBoard">
+            {gifts?.map((gift: any) => (
+              <>
+                <Gift
+                  key={gift.gift_id}
+                  giftID={gift.gift_id}
+                  image={gift.gift_image}
+                  details={gift.gift_detail}
+                  point={gift.exchange_point}
+                  onClick={() => handleDeleteGift(gift.gift_id, "")}
+                  btnName="刪除"
+                />
+                {showAlert === "是否確認刪除？" && (
+                  <AlertYesNoBox
+                    header={showAlert}
+                    btnNameOne={{
+                      btnName: "是",
+                      onClick: () => handleDeleteGift(gift.gift_id),
+                    }}
+                    btnNameTwo={{
+                      btnName: "否",
+                      onClick: () => handleDeleteGift(gift.gift_id, "false"),
+                    }}
+                  />
+                )}
+              </>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      {showAlert === "成功刪除禮物!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能刪除禮物!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+    </>
   );
 };
