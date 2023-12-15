@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Events } from "../../../User/Event/UserEventBox";
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
+import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 
 interface EventItem {
   eventId: string;
@@ -27,6 +28,8 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
     setEvents(filteredEvents);
   };
 
+  const [showAlert, setShowAlert] = useState("");
+
   const handleDeleteEvent = async (eventId: string) => {
     const res = await fetch(`${api_origin}/event/delete`, {
       method: "POST",
@@ -39,10 +42,10 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
     });
     const json = await res.json();
     if (json.success) {
-      alert("成功刪除");
+      setShowAlert("成功刪除!");
       handleGetAllEvents();
     } else {
-      alert("未能刪除，請稍後再嘗試");
+      setShowAlert("未能刪除，請稍後再嘗試!");
     }
   };
 
@@ -51,21 +54,30 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   }, []);
 
   return (
-    <div className="changePasswordContainer">
-      <SubPageHeader title="刪除活動" goBack={goBack} />
+    <>
+      <div className="changePasswordContainer">
+        <SubPageHeader title="刪除活動" goBack={goBack} />
 
-      <div className="eventBoardContainer">
-        {events?.map((event: any) => (
-          <Events
-            key={event.event_id}
-            eventID={event.event_id}
-            image={event.event_image}
-            details={event.event_detail}
-            btnCall="刪除"
-            onClick={() => handleDeleteEvent(event.event_id)}
-          />
-        ))}
+        <div className="eventBoardContainer">
+          {events?.map((event: any) => (
+            <Events
+              key={event.event_id}
+              eventID={event.event_id}
+              image={event.event_image}
+              details={event.event_detail}
+              btnCall="刪除"
+              onClick={() => handleDeleteEvent(event.event_id)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+
+      {showAlert === "成功刪除!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能刪除，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+    </>
   );
 };

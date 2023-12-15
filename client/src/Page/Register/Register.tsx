@@ -6,8 +6,6 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { streetOptions, numberOptions, floorOptions } from "./AddressOption";
 import { handleKeyPress } from "../../service/useKeyPress";
-import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
-import { AlertYesNoBox } from "../../Component/AlertBox/AlertYesNoBox";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
