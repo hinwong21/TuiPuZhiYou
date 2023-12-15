@@ -4,6 +4,7 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import "./Login.css";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
+import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
 
 interface LoginProps {
   onStatusChange: (newStatus: string) => void;
@@ -14,6 +15,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   const [phoneNumOrEmail, setPhoneNumOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [showAlert, setShowAlert] = useState("");
 
   const handlePhoneNumOrEmailChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -59,7 +61,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
     }
 
     if (json.result.success === false) {
-      alert("電話號碼或電郵或密碼錯誤！");
+      setShowAlert("電話號碼或電郵或密碼錯誤！");
     } else {
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
 
@@ -105,61 +107,67 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   }, []);
 
   return (
-    <div className="loginContainer">
-      <div className="userInfoGap"></div>
-      <div className="projectHeader">三無大廈環保回收你我出力 </div>
-      <div className="projectSubHeader">（廚餘回收）</div>
+    <>
+      <div className="loginContainer">
+        <div className="userInfoGap"></div>
+        <div className="projectHeader">三無大廈環保回收你我出力 </div>
+        <div className="projectSubHeader">（廚餘回收）</div>
 
-      <h2>登入</h2>
+        <h2>登入</h2>
 
-      {/* Input fields for username and password */}
-      <Input
-        title="電話號碼或電郵"
-        type="text"
-        value={phoneNumOrEmail}
-        onChange={handlePhoneNumOrEmailChange}
-      />
-      <Input
-        title="密碼"
-        type="text"
-        value={password}
-        onChange={handlePasswordChange}
-        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-          handleKeyPress(e, "Enter", handleLoginBtnClick)
-        }
-      />
-
-      <div className="rememberMe">
-        <input
-          type="checkbox"
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
-          onKeyDown={(e) => handleKeyPress(e, "Enter", handleLoginBtnClick)}
+        {/* Input fields for username and password */}
+        <Input
+          title="電話號碼或電郵"
+          type="text"
+          value={phoneNumOrEmail}
+          onChange={handlePhoneNumOrEmailChange}
         />
-        <label>記住帳號密碼</label>
+        <Input
+          title="密碼"
+          type="text"
+          value={password}
+          onChange={handlePasswordChange}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyPress(e, "Enter", handleLoginBtnClick)
+          }
+        />
+
+        <div className="rememberMe">
+          <input
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+            onKeyDown={(e) => handleKeyPress(e, "Enter", handleLoginBtnClick)}
+          />
+          <label>記住帳號密碼</label>
+        </div>
+
+        {/* Button to submit the login form */}
+        <ConfirmButton
+          type="submit"
+          btnName="登入"
+          onClick={handleLoginBtnClick}
+        />
+
+        {/* Register button */}
+        <div className="register-link">
+          <p>
+            沒有帳戶？{" "}
+            <span
+              style={{ color: "green", fontWeight: "bold", cursor: "pointer" }}
+              onClick={() => {
+                handleStatus("register");
+              }}
+            >
+              立即註冊！
+            </span>
+          </p>
+        </div>
       </div>
 
-      {/* Button to submit the login form */}
-      <ConfirmButton
-        type="submit"
-        btnName="登入"
-        onClick={handleLoginBtnClick}
-      />
-
-      {/* Register button */}
-      <div className="register-link">
-        <p>
-          沒有帳戶？{" "}
-          <span
-            style={{ color: "green", fontWeight: "bold", cursor: "pointer" }}
-            onClick={() => {
-              handleStatus("register");
-            }}
-          >
-            立即註冊！
-          </span>
-        </p>
-      </div>
-    </div>
+      {showAlert === "電話號碼或電郵或密碼錯誤！" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+    </>
   );
 };

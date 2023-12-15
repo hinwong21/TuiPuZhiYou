@@ -3,6 +3,7 @@ import { Events } from "../../../User/Event/UserEventBox";
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
 
 interface EventItem {
   eventId: string;
@@ -18,6 +19,9 @@ interface DeleteEventProps {
 export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   const [events, setEvents] = useState<EventItem[] | null>(null);
 
+  const [getEventID, setGetEventID] = useState("");
+
+  //Get all events
   const handleGetAllEvents = async () => {
     const res = await fetch(`${api_origin}/event/`, {
       method: "GET",
@@ -31,7 +35,23 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
 
   const [showAlert, setShowAlert] = useState("");
 
-  const handleDeleteEvent = async (eventId: string) => {
+  const handleDeleteEvent = async (
+    eventId: string,
+    CheckIsConfirmYes?: string
+  ) => {
+    setGetEventID(eventId);
+
+    if (CheckIsConfirmYes === "") {
+      setShowAlert("是否確認刪除？");
+      return;
+    }
+
+    if (CheckIsConfirmYes === "false") {
+      setShowAlert("");
+      return;
+    }
+
+    //Get DB data
     const res = await fetch(`${api_origin}/event/delete`, {
       method: "POST",
       headers: {
@@ -68,11 +88,25 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
               image={event.event_image}
               details={event.event_detail}
               btnCall="刪除"
-              onClick={() => handleDeleteEvent(event.event_id)}
+              onClick={() => handleDeleteEvent(event.event_id, "")}
             />
           ))}
         </div>
       </div>
+
+      {showAlert === "是否確認刪除？" && (
+        <AlertYesNoBox
+          header={showAlert}
+          btnNameOne={{
+            btnName: "是",
+            onClick: () => handleDeleteEvent(getEventID),
+          }}
+          btnNameTwo={{
+            btnName: "否",
+            onClick: () => handleDeleteEvent(getEventID, "false"),
+          }}
+        />
+      )}
 
       {showAlert === "成功刪除!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />

@@ -5,7 +5,12 @@ import { Select } from "../../Interaction/Select/Select";
 import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
-import { tpzyStreetOptions, tpzyNumberOptions, tpzyFloorOptions } from "../../service/projectOption";
+import {
+  tpzyStreetOptions,
+  tpzyNumberOptions,
+  tpzyFloorOptions,
+} from "../../service/projectOption";
+import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -22,6 +27,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
+  const [showAlert, setShowAlert] = useState("");
 
   const handleStatus = (newStatus: string) => {
     onStatusChange(newStatus);
@@ -76,18 +82,18 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
   const handleRegisterBtnClick = async () => {
     if (username === "") {
-      alert("請填寫用戶名稱！");
+      setShowAlert("請填寫用戶名稱！");
       return;
     }
 
     if (phoneNumOrEmail !== confirmPhoneNumOrEmail) {
-      alert("確認電話號碼或電郵地址不相符");
+      setShowAlert("確認電話號碼或電郵地址不相符!");
       setConfirmPhoneNumOrEmail("");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("確認密碼不相符");
+      setShowAlert("確認密碼不相符!");
       setConfirmPassword("");
       return;
     }
@@ -98,7 +104,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       floor === "---請選擇---" ||
       unit === ""
     ) {
-      alert("請填寫完整地址");
+      setShowAlert("請填寫完整地址!");
       return;
     }
 
@@ -128,12 +134,12 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
     // redirect to userInfo page
     if (json.success === true) {
-      alert("成功注册");
+      setShowAlert("注册成功!");
       localStorage.setItem("ef2023_user_id", json.user_id);
       localStorage.setItem("ef2023_isAdmin", "false");
       window.location.href = "/";
     } else {
-      alert("未能注册成功");
+      setShowAlert("未能注册成功!");
     }
   };
 
@@ -224,6 +230,25 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <div className="registerGap"></div>
       </div>
+
+      {showAlert === "請填寫用戶名稱！" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "確認電話號碼或電郵地址不相符!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "確認密碼不相符!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "請填寫完整地址!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "注册成功!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能注册成功!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
     </>
   );
 };

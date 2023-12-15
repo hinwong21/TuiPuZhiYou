@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./UserGift.css";
 import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
+import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 
 interface GiftItem {
   giftID: string;
@@ -11,6 +12,7 @@ interface GiftItem {
 }
 
 export const UserGift = () => {
+  const [showAlert, setShowAlert] = useState("");
   const [totalPoint, setTotalPoint] = useState(0);
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
@@ -46,7 +48,7 @@ export const UserGift = () => {
   const handleExchangeGift = async (point: string, giftId: string) => {
     const exchangePoint = parseInt(point);
     if (totalPoint < exchangePoint) {
-      alert("積分不足夠換領禮物");
+      setShowAlert("積分不足以換領禮物!");
       return;
     }
 
@@ -68,9 +70,10 @@ export const UserGift = () => {
     if (json.success) {
       const updatedTotalPoint = parseInt(json.result);
       setTotalPoint(updatedTotalPoint);
-      alert("成功換領禮物");
+
+      setShowAlert("換領禮物成功!");
     } else {
-      alert("未能換領禮物，請稍後再嘗試");
+      setShowAlert("未能換領禮物，請稍後再嘗試!");
     }
   };
 
@@ -101,6 +104,16 @@ export const UserGift = () => {
           ))}
         </div>
       </div>
+
+      {showAlert === "積分不足以換領禮物!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "換領禮物成功!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能換領禮物，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
     </>
   );
 };

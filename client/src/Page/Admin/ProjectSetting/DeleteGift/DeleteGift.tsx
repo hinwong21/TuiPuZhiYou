@@ -20,6 +20,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
 
   const [showAlert, setShowAlert] = useState("");
+
   const [selectedGiftID, setSelectedGiftID] = useState("");
 
   //Get all gifts
@@ -48,6 +49,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
       return;
     }
 
+    //Get DB data
     const res = await fetch(`${api_origin}/gift/delete`, {
       method: "POST",
       headers: {

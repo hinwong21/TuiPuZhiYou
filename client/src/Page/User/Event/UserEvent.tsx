@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./UserEvent.css";
 import { Events } from "./UserEventBox";
 import { api_origin } from "../../../service/api";
+import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 
 interface EventItem {
   eventId: string;
@@ -11,6 +12,7 @@ interface EventItem {
 }
 
 export const UserEvent = () => {
+  const [showAlert, setShowAlert] = useState("");
   const [events, setEvents] = useState<EventItem[] | null>(null);
   const userId = localStorage.getItem("ef2023_user_id");
 
@@ -48,7 +50,7 @@ export const UserEvent = () => {
     console.log(result);
 
     if (result.joined === true) {
-      alert("已報名活動");
+      setShowAlert("已報名活動!");
       return;
     }
 
@@ -66,12 +68,12 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
-        alert("成功報名");
+        setShowAlert("報名成功!");
       } else {
-        alert("未能報名，請稍後再嘗試");
+        setShowAlert("未能報名，請稍後再嘗試!");
       }
     } else {
-      alert("活動人數已滿");
+      setShowAlert("活動人數已滿!");
     }
   };
 
@@ -96,6 +98,19 @@ export const UserEvent = () => {
           />
         ))}
       </div>
+
+      {showAlert === "已報名活動!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "報名成功!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能報名，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "活動人數已滿!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
     </>
   );
 };

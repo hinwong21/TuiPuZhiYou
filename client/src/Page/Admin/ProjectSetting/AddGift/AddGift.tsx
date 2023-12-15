@@ -5,6 +5,7 @@ import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton
 import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
+import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 
 interface AddGiftProps {
   goBack: () => void;
@@ -14,6 +15,8 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const [image, setImage] = useState<File | null | undefined>(null);
   const [exchangePoint, setExchangePoint] = useState("");
   const [giftDetail, setGiftDetail] = useState("");
+  const [showAlert, setShowAlert] = useState("");
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,15 +62,15 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
 
         const json = await res.json();
         if (json.success) {
-          alert("成功添加禮物");
+          setShowAlert("添加禮物成功!");
           setImage(null);
           setExchangePoint("");
           setGiftDetail("");
         } else {
-          alert("未能添加禮物");
+          setShowAlert("未能添加禮物!");
         }
       } else {
-        alert("未上傳禮物圖片");
+        setShowAlert("未上傳禮物圖片!");
       }
     } catch (error) {
       console.error("Error handling gift insertion:", error);
@@ -75,54 +78,66 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   return (
-    <div className="editGiftContainer">
-      <SubPageHeader title="添加禮物" goBack={goBack} />
+    <>
+      <div className="editGiftContainer">
+        <SubPageHeader title="添加禮物" goBack={goBack} />
 
-      <div className="inputCompoContainer">
-        <div className="inputCompoTitle">禮物圖片</div>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          style={{ display: "none" }}
-          ref={fileInputRef}
-        />
-        {image && (
-          <div className="uploadedImageContainer">
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Uploaded Gift"
-              className="uploadedImage"
-            />
+        <div className="inputCompoContainer">
+          <div className="inputCompoTitle">禮物圖片</div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+            ref={fileInputRef}
+          />
+          {image && (
+            <div className="uploadedImageContainer">
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Uploaded Gift"
+                className="uploadedImage"
+              />
+            </div>
+          )}
+          <div className="uploadImageBtn" onClick={handleUploadImageBtnClick}>
+            上傳圖片
           </div>
-        )}
-        <div className="uploadImageBtn" onClick={handleUploadImageBtnClick}>
-          上傳圖片
         </div>
+
+        <Input
+          title="兌換分數"
+          type={"text"}
+          value={exchangePoint}
+          onChange={handleExchangePointChange}
+        />
+
+        <div className="inputCompoContainer">
+          <div className="inputCompoTitle">禮物詳情</div>
+          <textarea
+            className="editGiftGiftDetail"
+            placeholder="禮物詳情"
+            value={giftDetail}
+            onChange={handleGiftDetailChange}
+          ></textarea>
+        </div>
+
+        <ConfirmButton
+          type={"button"}
+          btnName="確認"
+          onClick={handleInsertGift}
+        />
       </div>
 
-      <Input
-        title="兌換分數"
-        type={"text"}
-        value={exchangePoint}
-        onChange={handleExchangePointChange}
-      />
-
-      <div className="inputCompoContainer">
-        <div className="inputCompoTitle">禮物詳情</div>
-        <textarea
-          className="editGiftGiftDetail"
-          placeholder="禮物詳情"
-          value={giftDetail}
-          onChange={handleGiftDetailChange}
-        ></textarea>
-      </div>
-
-      <ConfirmButton
-        type={"button"}
-        btnName="確認"
-        onClick={handleInsertGift}
-      />
-    </div>
+      {showAlert === "添加禮物成功!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未能禮物活動!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未上傳禮物圖片!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+    </>
   );
 };
