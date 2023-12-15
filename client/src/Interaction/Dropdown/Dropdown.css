@@ -9,15 +9,14 @@
 
 .hideDetails {
   width: 100%;
-  font-size: 18px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .details {
   width: 100%;
-  font-size: 18px;
   font-weight: bold;
   line-height: 1.5;
   word-wrap: break-word;

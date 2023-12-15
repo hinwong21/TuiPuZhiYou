@@ -36,7 +36,7 @@ export const Events: React.FC<EventProps> = ({
           <div className="eventDescription">活動內容：詳情看海報</div>
         ) : (
           <div className="eventDropdownContainer">
-            <Dropdown details={`活動內容：${details}`} />
+            <Dropdown details={`活動內容： ${details}`} />
           </div>
         )}
       </div>

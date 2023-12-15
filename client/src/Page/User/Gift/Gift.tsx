@@ -25,7 +25,7 @@ export const Gift: React.FC<GiftProps> = ({
       <img src={image} alt="giftImage" className="giftBoardGiftImage" />
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${point} 分`}</div>
       <div className="giftDropdownContainer">
-        <Dropdown details={details} />
+        <Dropdown details={`禮物內容: ${details}`} />
       </div>
       <ConfirmButton type="button" btnName={btnName} onClick={onClick} />
     </div>

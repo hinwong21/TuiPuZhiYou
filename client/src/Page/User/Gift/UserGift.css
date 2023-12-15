@@ -54,6 +54,7 @@
   width: 180px;
   padding: 5px;
   margin: 10px;
+  color: var(--tertiary-color);
 }
 
 .giftBoardGiftImage {
