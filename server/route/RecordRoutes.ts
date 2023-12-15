@@ -12,3 +12,4 @@ recordRoutes.post("/point", recordController.addPointRecord);
 recordRoutes.post("/waste", recordController.getWasteRecord);
 recordRoutes.post("/gift", recordController.exchangeGiftRecord);
 recordRoutes.post("/event", recordController.joinEventRecord);
+recordRoutes.post("/exchangeGift", recordController.getAllExchangeGiftRecord);

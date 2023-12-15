@@ -83,4 +83,17 @@ export class RecordService {
     });
     return true;
   };
+
+  getAllExchangeGiftRecord = async (userId: string) => {
+    try {
+      const records = await this.knex("exchangeGiftRecords")
+        .select("exchangeGiftRecords.*", "gifts.*")
+        .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
+        .where("exchangeGiftRecords.user_id", userId);
+
+      return records;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

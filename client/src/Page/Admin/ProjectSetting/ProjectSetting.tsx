@@ -22,13 +22,13 @@ export const ProjectSetting = () => {
             className="projectSettingSession"
             onClick={() => handleSessionClick("editGift")}
           >
-            編輯禮物
+            添加禮物
           </div>
           <div
             className="projectSettingSession"
             onClick={() => handleSessionClick("editEvent")}
           >
-            編輯活動
+            添加活動
           </div>
           <div
             className="projectSettingSession"

@@ -2,14 +2,15 @@
   width: 95vw;
   border: 2px solid;
   border-collapse: collapse;
+  margin-top: 40px;
 }
 
 td,
 th {
   text-align: center;
   border-bottom: 2px solid;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  border-right: 2px solid;
+  padding: 10px 5px;
 }
 
 .giftDetailTableExchangeId {
@@ -17,6 +18,7 @@ th {
 }
 
 .giftDetailTableDetail {
+  text-align: start;
   width: calc(95vw - 25vw - 25vw - 20vw - 4px);
 }
 
