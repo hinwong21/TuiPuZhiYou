@@ -32,12 +32,6 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
     setGifts(filteredGifts);
   };
 
-  const handleCheckIsConfirmYes = (str: string) => {
-    if (str === "true") {
-      return true;
-    }
-  };
-
   const handleDeleteGift = async (
     giftId: string,
     CheckIsConfirmYes?: string
