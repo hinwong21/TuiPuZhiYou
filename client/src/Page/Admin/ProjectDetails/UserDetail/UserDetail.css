@@ -9,3 +9,30 @@
 .userDetailGap {
   height: 30px;
 }
+
+.adminUserDetailTableContainer {
+  width: 95vw;
+  border: 2px solid;
+  border-collapse: collapse;
+  margin-top: 40px;
+}
+
+.adminUserDetailTableUsername {
+  width: 15vw;
+}
+
+.adminUserDetailTableAddress {
+  width: calc(95vw - 12vw - 10vw - 15vw - 15vw - 4px);
+}
+
+.adminUserDetailTableTotalPoint {
+  width: 10vw;
+}
+
+.adminUserDetailTableTotalWeight {
+  width: 15vw;
+}
+
+.adminUserDetailTableSelectedWeight {
+  width: 15vw;
+}
