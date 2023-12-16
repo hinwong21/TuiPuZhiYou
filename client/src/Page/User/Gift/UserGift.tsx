@@ -15,6 +15,7 @@ export const UserGift = () => {
   const [showAlert, setShowAlert] = useState("");
   const [totalPoint, setTotalPoint] = useState(0);
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
+  const [getGiftID, setGetGiftID] = useState("");
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -47,7 +48,7 @@ export const UserGift = () => {
 
   const handleExchangeGift = async (point: string, giftId: string) => {
     await setShowAlert("");
-
+    setGetGiftID(getGiftID);
     const exchangePoint = parseInt(point);
     if (totalPoint < exchangePoint) {
       setShowAlert("積分不足以換領禮物!");
@@ -111,7 +112,10 @@ export const UserGift = () => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "換領禮物成功!" && (
-        <AlertConBox header={showAlert} btnName={"確認"} />
+        <AlertConBox
+          header={`換領禮物成功! 禮物換領號：EX-${getGiftID}，詳情可在“我的資料-換領禮物詳情查看。”`}
+          btnName={"確認"}
+        />
       )}
       {showAlert === "未能換領禮物，請稍後再嘗試!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
