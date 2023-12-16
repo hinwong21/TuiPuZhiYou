@@ -3,6 +3,7 @@ import "./UserGift.css";
 import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import { log } from "console";
 
 interface GiftItem {
   giftID: string;
@@ -15,7 +16,7 @@ export const UserGift = () => {
   const [showAlert, setShowAlert] = useState("");
   const [totalPoint, setTotalPoint] = useState(0);
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
-  const [getGiftID, setGetGiftID] = useState("");
+  const [getEXGiftID, setGetEXGiftID] = useState("");
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -48,7 +49,7 @@ export const UserGift = () => {
 
   const handleExchangeGift = async (point: string, giftId: string) => {
     await setShowAlert("");
-    setGetGiftID(getGiftID);
+
     const exchangePoint = parseInt(point);
     if (totalPoint < exchangePoint) {
       setShowAlert("積分不足以換領禮物!");
@@ -71,10 +72,14 @@ export const UserGift = () => {
     const json = await res.json();
 
     if (json.success) {
-      const updatedTotalPoint = parseInt(json.result);
+      const updatedTotalPoint = parseInt(json.result.point);
+      console.log(json, "ccc");
+
+      setGetEXGiftID(json.result.exGiftID);
       setTotalPoint(updatedTotalPoint);
 
       setShowAlert("換領禮物成功!");
+      //setGetEXGiftID(json.result.);
     } else {
       setShowAlert("未能換領禮物，請稍後再嘗試!");
     }
@@ -113,7 +118,7 @@ export const UserGift = () => {
       )}
       {showAlert === "換領禮物成功!" && (
         <AlertConBox
-          header={`換領禮物成功! 禮物換領號：EX-${getGiftID}，詳情可在“我的資料-換領禮物詳情查看。”`}
+          header={`換領禮物成功! 禮物換領號：EX-${getEXGiftID}，詳情可在“我的資料-換領禮物詳情查看。”`}
           btnName={"確認"}
         />
       )}

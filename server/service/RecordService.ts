@@ -51,21 +51,26 @@ export class RecordService {
     dateAdd: Date
   ) => {
     try {
-      await this.knex("exchangeGiftRecords").insert({
-        exchangeGiftRecords_id: id,
-        user_id: userId,
-        gift_id: giftId,
-        project_id: projectId,
-        apply_date: dateAdd,
-      });
+      const exGiftID = await this.knex("exchangeGiftRecords")
+        .insert({
+          exchangeGiftRecords_id: id,
+          user_id: userId,
+          gift_id: giftId,
+          project_id: projectId,
+          apply_date: dateAdd,
+        })
+        .returning("exchangeGiftRecords_id");
 
-      const result = await this.knex("userRecords")
+      const totalPoint = await this.knex("userRecords")
         .where("user_id", userId)
         .update({
           total_point: this.knex.raw(`total_point - ${exchangePoint}`),
         })
         .returning("total_point");
-      return result[0].total_point;
+      return {
+        exGiftID: exGiftID[0].exchangeGiftRecords_id,
+        point: totalPoint[0].total_point,
+      };
     } catch (err) {
       throw new Error((err as Error).message);
     }

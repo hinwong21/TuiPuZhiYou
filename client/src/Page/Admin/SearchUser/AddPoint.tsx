@@ -37,6 +37,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
   const handleConfirmBtn = async () => {
     await setShowAlert("");
+
     if (wasteWeight === "" || point === "") {
       setShowAlert("未輸入積分或廚餘!");
       return;
@@ -57,11 +58,12 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
       const json = await res.json();
       if (json.success) {
         setShowAlert("添加成功!");
+        //goBack();
       } else {
         setShowAlert("未能添加!");
       }
 
-      goBack();
+      //goBack();
     }
   };
 
@@ -112,7 +114,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "添加成功!" && (
-        <AlertConBox header={showAlert} btnName={"確認"} />
+        <AlertConBox header={showAlert} btnName={"確認"} onClick={goBack()} />
       )}
     </>
   );

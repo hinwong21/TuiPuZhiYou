@@ -5,10 +5,11 @@ import "./AlertBox.css";
 interface Alert {
   header: string;
   btnName: string;
+  onClick?: any;
 }
 
 export const AlertConBox = (props: Alert) => {
-  const { header, btnName } = props;
+  const { header, btnName, onClick } = props;
 
   const [show, setShow] = useState(true);
   // [{title:1, onClick:handleShow}, title:2, onClick:onClick}]
