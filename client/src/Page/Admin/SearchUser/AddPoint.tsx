@@ -3,8 +3,8 @@ import "./AddPoint.css";
 import { Input } from "../../../Component/Input/Input";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
-import { BackBtn } from "../../../Component/BackBtn/BackBtn";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import { SubPageHeader } from "../../../Component/SubPageHeader/SubPageHeader";
 
 interface UserDetail {
   user_id: number;
@@ -70,7 +70,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
   return (
     <>
       <div className="addPointContainer">
-        <BackBtn goBack={goBack} />
+        <SubPageHeader title="添加積分和廚餘" goBack={goBack} />
 
         <div className="searchResultSession">
           <div className="searchResultSessionHeader">地址：</div>
