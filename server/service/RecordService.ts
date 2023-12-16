@@ -84,6 +84,7 @@ export class RecordService {
     return true;
   };
 
+  // user
   getAllExchangeGiftRecord = async (userId: string) => {
     try {
       const records = await this.knex("exchangeGiftRecords")
@@ -97,6 +98,7 @@ export class RecordService {
     }
   };
 
+  // user
   getAllJoinedEventRecords = async (userId: string) => {
     try {
       const records = await this.knex("joinedEventRecords")
@@ -158,7 +160,7 @@ export class RecordService {
     }
   };
 
-  getAllProjectExchangeGiftRecord = async (project: string) => {
+  getAllProjectExchangeGiftDetails = async (project: string) => {
     try {
       if (project === "全部") {
         const records = await this.knex("exchangeGiftRecords")
@@ -172,6 +174,41 @@ export class RecordService {
           .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
           .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
           .where("exchangeGiftRecords.project_id", project);
+        return records;
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  getAllProjectJoinedEventDetails = async (project: string) => {
+    try {
+      if (project === "全部") {
+        const records = await this.knex("events")
+          .select("events.*", "joinedEventRecords.participantJoined")
+          .leftJoin(
+            this.knex("joinedEventRecords")
+              .select("event_id")
+              .count("user_id as participantJoined")
+              .groupBy("event_id")
+              .as("joinedEventRecords"),
+            "events.event_id",
+            "joinedEventRecords.event_id"
+          );
+        return records;
+      } else {
+        const records = await this.knex("events")
+          .select("events.*", "joinedEventRecords.participantJoined")
+          .where("events.project_id", project)
+          .leftJoin(
+            this.knex("joinedEventRecords")
+              .select("event_id")
+              .count("user_id as participantJoined")
+              .groupBy("event_id")
+              .as("joinedEventRecords"),
+            "events.event_id",
+            "joinedEventRecords.event_id"
+          );
         return records;
       }
     } catch (err) {

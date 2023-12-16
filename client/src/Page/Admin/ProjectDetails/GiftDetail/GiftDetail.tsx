@@ -16,7 +16,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
     setProject(selectedOption);
   };
 
-  const handleGetExchangedGiftRecord = useCallback(async () => {
+  const handleGetExchangedGiftDetail = useCallback(async () => {
     const res = await fetch(`${api_origin}/record/admin/gift`, {
       method: "POST",
       headers: {
@@ -27,14 +27,12 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
-    console.log(json.result);
-
     setDetails(json.result);
   }, [project]);
 
   useEffect(() => {
-    handleGetExchangedGiftRecord();
-  }, [handleGetExchangedGiftRecord]);
+    handleGetExchangedGiftDetail();
+  }, [handleGetExchangedGiftDetail]);
 
   return (
     <div className="adminDetailContainer">

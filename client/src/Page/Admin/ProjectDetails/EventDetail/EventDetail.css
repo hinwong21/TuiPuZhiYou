@@ -1,0 +1,11 @@
+.adminEventDetailTableName {
+  width: calc(95vw - 15vw -15vw - 4px);
+}
+
+.adminEventDetailTableParticipant {
+  width: 15vw;
+}
+
+.adminEventDetailTableJoinedParticipant {
+  width: 15vw;
+}

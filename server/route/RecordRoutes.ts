@@ -15,5 +15,11 @@ recordRoutes.post("/event", recordController.joinEventRecord);
 recordRoutes.post("/exchangeGift", recordController.getAllExchangeGiftRecord);
 recordRoutes.post("/joinedEvent", recordController.getAllJoinedEventRecords);
 recordRoutes.post("/user", recordController.getAllProjectUserDetail);
-recordRoutes.post("/admin/gift", recordController.getAllProjectExchangeGiftRecord);
-
+recordRoutes.post(
+  "/admin/gift",
+  recordController.getAllProjectExchangeGiftDetails
+);
+recordRoutes.post(
+  "/admin/event",
+  recordController.getAllProjectJoinedEventDetails
+);

@@ -1,0 +1,15 @@
+.adminGiftDetailTableId {
+  width: 20vw;
+}
+
+.adminGiftDetailTableUsername {
+  width: 15vw;
+}
+
+.adminGiftDetailTableAddress {
+  width: calc(95vw - 20vw - 15vw - 15vw - 4px);
+}
+
+.adminGiftDetailIsExchanged {
+  width: 15vw;
+}

@@ -127,13 +127,28 @@ export class RecordController {
     }
   };
 
-  getAllProjectExchangeGiftRecord = async (
+  getAllProjectExchangeGiftDetails = async (
     req: express.Request,
     res: express.Response
   ) => {
     try {
       const project = req.body.project;
-      const result = await this.recordService.getAllProjectExchangeGiftRecord(
+      const result = await this.recordService.getAllProjectExchangeGiftDetails(
+        project
+      );
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  getAllProjectJoinedEventDetails = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const project = req.body.project;
+      const result = await this.recordService.getAllProjectJoinedEventDetails(
         project
       );
       return res.json({ result: result });
