@@ -107,4 +107,16 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  getAllUser = async (req: express.Request, res: express.Response) => {
+    try {
+      const project = req.body.project;
+      const start = req.body.start;
+      const end = req.body.end;
+      const result = await this.recordService.getAllUser(project, start, end);
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

@@ -108,4 +108,53 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  getAllUser = async (project: string, start: Date, end: Date) => {
+    try {
+      if (project === "" || project === "全部") {
+        const records = await this.knex("users")
+          .select(
+            "users.*",
+            "userRecords.total_point",
+            "userRecords.total_weight",
+            "thisSelectedDateRangeWeight.selectedWeight"
+          )
+          .leftJoin("userRecords", "users.user_id", "userRecords.user_id")
+          .leftJoin(
+            this.knex("earnPointRecords")
+              .select("user_id")
+              .sum("weight as selectedWeight")
+              .whereBetween("date_add", [start, end])
+              .groupBy("user_id")
+              .as("thisSelectedDateRangeWeight"),
+            "users.user_id",
+            "thisSelectedDateRangeWeight.user_id"
+          );
+        return records;
+      } else {
+        const records = await this.knex("users")
+          .select(
+            "users.*",
+            "userRecords.total_point",
+            "userRecords.total_weight",
+            "thisSelectedDateRangeWeight.selectedWeight"
+          )
+          .leftJoin("userRecords", "users.user_id", "userRecords.user_id")
+          .leftJoin(
+            this.knex("earnPointRecords")
+              .select("user_id")
+              .sum("weight as selectedWeight")
+              .whereBetween("date_add", [start, end])
+              .groupBy("user_id")
+              .as("thisSelectedDateRangeWeight"),
+            "users.user_id",
+            "thisSelectedDateRangeWeight.user_id"
+          )
+          .where("users.project_id", "=", project);
+        return records;
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

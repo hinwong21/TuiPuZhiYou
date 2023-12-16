@@ -1,5 +1,5 @@
 export const projectOptions: string[] = [
-  "---請選擇---",
+  "全部",
   "P001",
   "P002",
   "P003",
