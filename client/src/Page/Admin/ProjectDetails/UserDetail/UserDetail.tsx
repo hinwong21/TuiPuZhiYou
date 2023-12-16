@@ -4,7 +4,6 @@ import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader
 import { projectOptions } from "../../../../service/projectOption";
 import { Select } from "../../../../Interaction/Select/Select";
 import { DatePickerRange } from "../../../../Component/DatePickerRange/DatePickerRange";
-import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../../service/api";
 
 interface UserDetailProps {
@@ -68,9 +67,9 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
   }, [handleGetAllUser]);
 
   return (
-    <div className="userDetailContainer">
+    <div className="adminDetailContainer">
       <SubPageHeader title="用戶詳情" goBack={goBack} />
-      <div className="userDetailGap"></div>
+      <div className="adminDetailGap"></div>
       <Select
         title="計劃"
         options={projectOptions}
@@ -79,8 +78,6 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
       />
 
       <DatePickerRange onDateChange={handleDateChange} />
-
-      <ConfirmButton btnName="確認" onClick={handleGetAllUser} />
 
       <table className="adminUserDetailTableContainer">
         <thead>

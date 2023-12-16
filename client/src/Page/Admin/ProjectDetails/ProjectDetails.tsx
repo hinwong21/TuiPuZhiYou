@@ -24,13 +24,13 @@ export const ProjectDetails = () => {
             className="projectSettingSession"
             onClick={() => handleSessionClick("giftDetail")}
           >
-            禮物詳情
+            換領禮物詳情
           </div>
           <div
             className="projectSettingSession"
             onClick={() => handleSessionClick("eventDetail")}
           >
-            活動詳情
+            活動報名詳情
           </div>
         </>
       )}

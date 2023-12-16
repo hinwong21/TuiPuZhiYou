@@ -109,7 +109,7 @@ export class RecordService {
     }
   };
 
-  getAllUser = async (project: string, start: Date, end: Date) => {
+  getAllProjectUserDetail = async (project: string, start: Date, end: Date) => {
     try {
       if (project === "全部") {
         const records = await this.knex("users")
@@ -151,6 +151,27 @@ export class RecordService {
             "thisSelectedDateRangeWeight.user_id"
           )
           .where("users.project_id", "=", project);
+        return records;
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  getAllProjectExchangeGiftRecord = async (project: string) => {
+    try {
+      if (project === "全部") {
+        const records = await this.knex("exchangeGiftRecords")
+          .select("exchangeGiftRecords.*", "gifts.*", "users.*")
+          .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
+          .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id");
+        return records;
+      } else {
+        const records = await this.knex("exchangeGiftRecords")
+          .select("exchangeGiftRecords.*", "gifts.*", "users.*")
+          .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
+          .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
+          .where("exchangeGiftRecords.project_id", project);
         return records;
       }
     } catch (err) {
