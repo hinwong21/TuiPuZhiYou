@@ -2,6 +2,13 @@ import express from "express";
 import { errorHandler } from "../error";
 import { RecordService } from "../service/RecordService";
 
+function getRandomSixDigitNumber() {
+  const dateNow = new Date();
+  const timestamp = dateNow.getTime().toString();
+  const randomSixDigits = timestamp.substr(timestamp.length - 6).toString();
+  return randomSixDigits;
+}
+
 export class RecordController {
   constructor(private recordService: RecordService) {}
 
@@ -43,6 +50,7 @@ export class RecordController {
 
   exchangeGiftRecord = async (req: express.Request, res: express.Response) => {
     try {
+      const id = getRandomSixDigitNumber();
       const today = new Date();
       const userId = req.body.userId;
       const giftId = req.body.giftId;
@@ -51,6 +59,7 @@ export class RecordController {
       const dateAdd = today;
 
       const result = await this.recordService.exchangeGiftRecord(
+        id,
         userId,
         giftId,
         exchangePoint,
@@ -152,6 +161,33 @@ export class RecordController {
         project
       );
       return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  getGiftExchangeRecordByGiftId = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const id = req.body.id;
+      const result = await this.recordService.getGiftExchangeRecordByGiftId(id);
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  setGiftIsExchanged = async (req: express.Request, res: express.Response) => {
+    try {
+      const id = req.body.id;
+      const result = await this.recordService.setGiftIsExchanged(id);
+      if (result) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
     } catch (err) {
       errorHandler(err, req, res);
     }

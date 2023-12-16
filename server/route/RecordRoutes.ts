@@ -23,3 +23,8 @@ recordRoutes.post(
   "/admin/event",
   recordController.getAllProjectJoinedEventDetails
 );
+recordRoutes.post(
+  "/admin/giftId",
+  recordController.getGiftExchangeRecordByGiftId
+);
+recordRoutes.post("/admin/tookGift", recordController.setGiftIsExchanged);

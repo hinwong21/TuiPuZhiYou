@@ -58,7 +58,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
         <tbody>
           {details.map((detail: any, index: number) => (
             <tr key={index}>
-              <td>EX- {detail.gift_id}</td>
+              <td>EX- {detail.exchangeGiftRecords_id}</td>
               <td>{detail.username}</td>
               <td>
                 {detail.street} {detail.number}號 {detail.floor}樓 {detail.unit}

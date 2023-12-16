@@ -43,6 +43,7 @@ export class RecordService {
   };
 
   exchangeGiftRecord = async (
+    id: string,
     userId: string,
     giftId: string,
     exchangePoint: number,
@@ -51,6 +52,7 @@ export class RecordService {
   ) => {
     try {
       await this.knex("exchangeGiftRecords").insert({
+        exchangeGiftRecords_id: id,
         user_id: userId,
         gift_id: giftId,
         project_id: projectId,
@@ -91,7 +93,6 @@ export class RecordService {
         .select("exchangeGiftRecords.*", "gifts.*")
         .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
         .where("exchangeGiftRecords.user_id", userId);
-
       return records;
     } catch (err) {
       throw new Error((err as Error).message);
@@ -211,6 +212,30 @@ export class RecordService {
           );
         return records;
       }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  getGiftExchangeRecordByGiftId = async (id: string) => {
+    try {
+      const records = await this.knex("exchangeGiftRecords")
+        .select("exchangeGiftRecords.*", "users.*")
+        .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
+        .where("exchangeGiftRecords.exchangeGiftRecords_id", id);
+      return records;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  setGiftIsExchanged = async (id: string) => {
+    try {
+      const result = await this.knex("exchangeGiftRecords")
+        .where("exchangeGiftRecords_id", id)
+        .update({ isExchanged: true });
+
+      return true;
     } catch (err) {
       throw new Error((err as Error).message);
     }

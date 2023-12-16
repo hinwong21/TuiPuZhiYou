@@ -68,6 +68,7 @@ export async function up(knex: Knex): Promise<void> {
 
   if (!(await knex.schema.hasTable("exchangeGiftRecords"))) {
     await knex.schema.createTable("exchangeGiftRecords", (table) => {
+      table.string("exchangeGiftRecords_id").notNullable().unique();
       table.string("user_id").references("users.user_id");
       table.string("gift_id").references("gifts.gift_id");
       table.boolean("isExchanged").defaultTo(false);
