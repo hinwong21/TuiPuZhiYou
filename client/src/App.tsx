@@ -10,6 +10,7 @@ import { UserEvent } from "./Page/User/Event/UserEvent";
 import { SearchUser } from "./Page/Admin/SearchUser/SearchUser";
 import { ProjectDetails } from "./Page/Admin/ProjectDetails/ProjectDetails";
 import { ProjectSetting } from "./Page/Admin/ProjectSetting/ProjectSetting";
+import { GiftRegistration } from "./Page/Admin/GiftRegistration/GiftRegistration";
 
 function App() {
   const [status, setStatus] = useState("login");
@@ -62,6 +63,7 @@ function App() {
 
         {/* Only for Admin */}
         {status === "searchUser" && <SearchUser />}
+        {status === "giftRegistration" && <GiftRegistration />}
         {status === "projectDetails" && <ProjectDetails />}
         {status === "projectSetting" && <ProjectSetting />}
       </div>
