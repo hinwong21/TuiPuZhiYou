@@ -111,7 +111,7 @@ export class RecordService {
 
   getAllUser = async (project: string, start: Date, end: Date) => {
     try {
-      if (project === "" || project === "全部") {
+      if (project === "全部") {
         const records = await this.knex("users")
           .select(
             "users.*",
