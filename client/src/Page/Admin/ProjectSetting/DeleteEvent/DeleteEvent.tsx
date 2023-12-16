@@ -39,6 +39,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
     eventId: string,
     CheckIsConfirmYes?: string
   ) => {
+    //await setShowAlert("");
     setGetEventID(eventId);
 
     if (CheckIsConfirmYes === "") {

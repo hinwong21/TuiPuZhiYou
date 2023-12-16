@@ -36,6 +36,8 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   );
 
   const handleLoginBtnClick = async () => {
+    await setShowAlert("");
+
     const res = await fetch(`${api_origin}/account/login`, {
       method: "POST",
       headers: {

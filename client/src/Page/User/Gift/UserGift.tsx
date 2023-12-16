@@ -46,6 +46,8 @@ export const UserGift = () => {
   };
 
   const handleExchangeGift = async (point: string, giftId: string) => {
+    await setShowAlert("");
+
     const exchangePoint = parseInt(point);
     if (totalPoint < exchangePoint) {
       setShowAlert("積分不足以換領禮物!");

@@ -46,6 +46,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   };
 
   const handleInsertEvent = async () => {
+    await setShowAlert("");
     try {
       if (image) {
         const base64Image = await convertFileToBase64(image);

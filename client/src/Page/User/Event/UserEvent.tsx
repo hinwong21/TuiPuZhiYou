@@ -46,6 +46,8 @@ export const UserEvent = () => {
   };
 
   const handleJoinEvent = async (eventId: string, userId: string | null) => {
+    await setShowAlert("");
+
     const result = await handleCheckEventFullOrNot(eventId, userId);
     console.log(result);
 

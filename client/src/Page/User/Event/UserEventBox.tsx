@@ -27,6 +27,7 @@ export const Events: React.FC<EventProps> = ({
       setIsDetailEmpty(false);
     }
   }, [details]);
+
   return (
     <div className="eventContainer" id={eventID}>
       <div className="eventBox">

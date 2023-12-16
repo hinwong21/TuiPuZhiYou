@@ -44,6 +44,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   const handleInsertGift = async () => {
+    await setShowAlert("");
     try {
       if (image) {
         const base64Image = await convertFileToBase64(image);

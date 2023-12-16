@@ -81,6 +81,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   };
 
   const handleRegisterBtnClick = async () => {
+    await setShowAlert("");
     if (username === "") {
       setShowAlert("請填寫用戶名稱！");
       return;

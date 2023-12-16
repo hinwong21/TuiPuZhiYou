@@ -19,6 +19,7 @@ export const GiftRegistration = () => {
   };
 
   const handleClickGetGiftExchangeRecord = async () => {
+    await setShowAlert("");
     const res = await fetch(`${api_origin}/record/admin/giftId`, {
       method: "POST",
       headers: {
@@ -36,6 +37,7 @@ export const GiftRegistration = () => {
   };
 
   const handleTookGift = async () => {
+    await setShowAlert("");
     const res = await fetch(`${api_origin}/record/admin/tookGift`, {
       method: "POST",
       headers: {

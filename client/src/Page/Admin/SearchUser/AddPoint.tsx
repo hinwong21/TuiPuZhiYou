@@ -36,6 +36,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
   };
 
   const handleConfirmBtn = async () => {
+    await setShowAlert("");
     if (wasteWeight === "" || point === "") {
       setShowAlert("未輸入積分或廚餘!");
       return;
