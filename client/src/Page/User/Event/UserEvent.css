@@ -45,7 +45,6 @@
   width: 60vw;
   background-color: #ada9a9;
   margin-bottom: 10px;
-  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -59,15 +58,8 @@
 
 @media (max-width: 630px) {
   .eventImageBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 65vh;
-    background-color: #ada9a9;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 20px;
     cursor: pointer;
   }
 
