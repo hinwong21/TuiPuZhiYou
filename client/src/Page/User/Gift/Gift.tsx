@@ -26,6 +26,8 @@ export const Gift: React.FC<GiftProps> = ({
   const handleChangeImageStyle = () => {
     if (imageStyle === "styleOne") {
       setImageStyle("styleTwo");
+    } else if (imageStyle === "styleTwo") {
+      setImageStyle("styleThree");
     } else {
       setImageStyle("styleOne");
     }
@@ -43,7 +45,9 @@ export const Gift: React.FC<GiftProps> = ({
           className={
             imageStyle === "styleOne"
               ? "giftBoardGiftImageStyleOne"
-              : "giftBoardGiftImageStyleTwo"
+              : imageStyle === "styleTwo"
+              ? "giftBoardGiftImageStyleTwo"
+              : "giftBoardGiftImageStyleThree"
           }
         />
       </div>

@@ -71,12 +71,18 @@
 .giftBoardGiftImageStyleOne {
   height: 170px;
   width: 170px;
-  overflow: hidden;
   object-fit: cover;
 }
 
 .giftBoardGiftImageStyleTwo {
-  width: 100%;
+  height: auto;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.giftBoardGiftImageStyleThree {
+  width: auto;
+  height: 170px;
   overflow: hidden;
   object-fit: cover;
 }
