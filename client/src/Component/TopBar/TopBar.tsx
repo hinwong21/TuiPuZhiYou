@@ -23,12 +23,18 @@ export const TopBar = (props: TopBarProps) => {
   const handleStatus = (newStatus: string) => {
     setShowBar(!showBar);
     props.onStatusChange(newStatus);
+    localStorage.setItem("ef2023_pageState", newStatus);
+    const expirationTime = new Date().getTime() + 30 * 60 * 1000;
+    const expirationTimeStr = expirationTime.toString();
+    localStorage.setItem("expirationTime", expirationTimeStr);
     window.scrollTo(0, 0);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("ef2023_user_id");
     localStorage.removeItem("ef2023_isAdmin");
+    localStorage.removeItem("ef2023_pageState");
+    localStorage.removeItem("expirationTime");
     window.location.href = "/";
   };
 

@@ -21,6 +21,19 @@ function App() {
     setStatus(newStatus);
   };
 
+  const handleRedirect = () => {
+    const expirationTimeStr = localStorage.getItem("expirationTime");
+    const pageState = localStorage.getItem("ef2023_pageState");
+    const expirationTime = new Date(expirationTimeStr!).getTime();
+    const currentTime = new Date().getTime();
+    if (currentTime > expirationTime) {
+      localStorage.removeItem("ef2023_pageState");
+      localStorage.removeItem("expirationTime");
+    } else {
+      setStatus(pageState!);
+    }
+  };
+
   // call api to pass the username to TopBar
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -43,6 +56,7 @@ function App() {
 
   useEffect(() => {
     handleGetUserDetails();
+    handleRedirect();
   }, []);
 
   return (
