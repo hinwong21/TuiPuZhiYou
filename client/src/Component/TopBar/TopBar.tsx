@@ -24,9 +24,9 @@ export const TopBar = (props: TopBarProps) => {
     setShowBar(!showBar);
     props.onStatusChange(newStatus);
     localStorage.setItem("ef2023_pageState", newStatus);
-    const expirationTime = new Date().getTime() + 5 * 60 * 1000;
-    const expirationTimeStr = expirationTime.toString();
-    localStorage.setItem("expirationTime", expirationTimeStr);
+    const pageStateExpirationTime = new Date().getTime() + 5 * 60 * 1000;
+    const pageStateExpirationTimeStr = pageStateExpirationTime.toString();
+    localStorage.setItem("pageStateExpirationTime", pageStateExpirationTimeStr);
     window.scrollTo(0, 0);
   };
 
@@ -34,7 +34,7 @@ export const TopBar = (props: TopBarProps) => {
     localStorage.removeItem("ef2023_user_id");
     localStorage.removeItem("ef2023_isAdmin");
     localStorage.removeItem("ef2023_pageState");
-    localStorage.removeItem("expirationTime");
+    localStorage.removeItem("pageStateExpirationTime");
     window.location.href = "/";
   };
 

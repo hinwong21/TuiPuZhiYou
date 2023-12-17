@@ -22,15 +22,19 @@ function App() {
   };
 
   const handleRedirect = () => {
-    const expirationTimeStr: any = localStorage.getItem("expirationTime");
+    const pageStateExpirationTimeStr: any = localStorage.getItem(
+      "pageStateExpirationTime"
+    );
     const pageState: any = localStorage.getItem("ef2023_pageState");
-    const expirationTime = new Date(parseInt(expirationTimeStr)).getTime();
+    const pageStateExpirationTime = new Date(
+      parseInt(pageStateExpirationTimeStr)
+    ).getTime();
     const currentTime = new Date().getTime();
 
-    if (expirationTimeStr === null) {
-    } else if (currentTime > expirationTime) {
+    if (pageStateExpirationTimeStr === null) {
+    } else if (currentTime > pageStateExpirationTime) {
       localStorage.removeItem("ef2023_pageState");
-      localStorage.removeItem("expirationTime");
+      localStorage.removeItem("pageStateExpirationTime");
     } else {
       setStatus(pageState);
     }
