@@ -33,7 +33,7 @@ export const Events: React.FC<EventProps> = ({
       <div className="eventBox">
         <div className="eventName">{name}</div>
         <div className="eventImageBox">
-          <img src={image} alt="" className="eventImage" />
+          <img src={image} alt="eventPoster" className="eventImage" />
         </div>
 
         {isDetailEmpty ? (
