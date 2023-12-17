@@ -21,6 +21,15 @@ export const Events: React.FC<EventProps> = ({
   onClick,
 }) => {
   const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
+  const [imageStyle, setImageStyle] = useState("styleOne");
+
+  const handleChangeImageStyle = () => {
+    if (imageStyle === "styleOne") {
+      setImageStyle("styleTwo");
+    } else {
+      setImageStyle("styleOne");
+    }
+  };
 
   useEffect(() => {
     if (details !== "") {
@@ -32,8 +41,16 @@ export const Events: React.FC<EventProps> = ({
     <div className="eventContainer" id={eventID}>
       <div className="eventBox">
         <div className="eventName">{name}</div>
-        <div className="eventImageBox">
-          <img src={image} alt="eventPoster" className="eventImage" />
+        <div className="eventImageBox" onClick={handleChangeImageStyle}>
+          <img
+            src={image}
+            alt="eventPoster"
+            className={
+              imageStyle === "styleOne"
+                ? "eventImageStyleOne"
+                : "eventImageStyleTwo"
+            }
+          />
         </div>
 
         {isDetailEmpty ? (
