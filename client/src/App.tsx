@@ -22,15 +22,17 @@ function App() {
   };
 
   const handleRedirect = () => {
-    const expirationTimeStr = localStorage.getItem("expirationTime");
-    const pageState = localStorage.getItem("ef2023_pageState");
-    const expirationTime = new Date(expirationTimeStr!).getTime();
+    const expirationTimeStr: any = localStorage.getItem("expirationTime");
+    const pageState: any = localStorage.getItem("ef2023_pageState");
+    const expirationTime = new Date(parseInt(expirationTimeStr)).getTime();
     const currentTime = new Date().getTime();
-    if (currentTime > expirationTime) {
+
+    if (expirationTimeStr === null) {
+    } else if (currentTime > expirationTime) {
       localStorage.removeItem("ef2023_pageState");
       localStorage.removeItem("expirationTime");
     } else {
-      setStatus(pageState!);
+      setStatus(pageState);
     }
   };
 
@@ -55,8 +57,8 @@ function App() {
   };
 
   useEffect(() => {
-    handleGetUserDetails();
     handleRedirect();
+    handleGetUserDetails();
   }, []);
 
   return (
