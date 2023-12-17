@@ -70,11 +70,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       const isAdmin = json.result.isAdmin.toString();
       localStorage.setItem("ef2023_isAdmin", isAdmin);
 
-      if (json.result.isAdmin === true) {
-        handleStatus("searchUser");
-      } else {
-        handleStatus("userInfo");
-      }
+      window.location.href = "/";
     }
   };
 
