@@ -30,6 +30,10 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
     setImage(selectedImage);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   // click the div to trigger the file input

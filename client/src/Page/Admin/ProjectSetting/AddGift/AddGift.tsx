@@ -16,12 +16,15 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const [exchangePoint, setExchangePoint] = useState("");
   const [giftDetail, setGiftDetail] = useState("");
   const [showAlert, setShowAlert] = useState("");
-
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
     setImage(selectedImage);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleExchangePointChange = (
@@ -133,7 +136,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
       {showAlert === "添加禮物成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
-      {showAlert === "未能禮物活動!" && (
+      {showAlert === "未能添加禮物!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未上傳禮物圖片!" && (
