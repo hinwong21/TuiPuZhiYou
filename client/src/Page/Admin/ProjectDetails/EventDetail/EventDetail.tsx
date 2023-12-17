@@ -53,7 +53,9 @@ export const EventDetail: React.FC<EventDetailProps> = ({ goBack }) => {
           <tr>
             <th className="adminEventDetailTableName">活動名稱</th>
             <th className="adminEventDetailTableParticipant">可報名人數</th>
-            <th className="adminEventDetailTableJoinedParticipant">已報名人數</th>
+            <th className="adminEventDetailTableJoinedParticipant">
+              已報名人數
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +63,11 @@ export const EventDetail: React.FC<EventDetailProps> = ({ goBack }) => {
             <tr key={index}>
               <td>{detail.event_name}</td>
               <td>{detail.participant}</td>
-              <td>{detail.participantJoined}</td>
+              {detail.participantJoined === null ? (
+                <td>0</td>
+              ) : (
+                <td>{detail.participantJoined}</td>
+              )}
             </tr>
           ))}
         </tbody>

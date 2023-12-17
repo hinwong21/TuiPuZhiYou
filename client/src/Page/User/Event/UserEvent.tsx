@@ -106,7 +106,15 @@ export const UserEvent = () => {
       )}
       {showAlert === "報名成功!" && (
         <AlertConBox
-          header={`報名活動成功! 詳情可在“我的資料-活動報名詳情查看。”`}
+          header={
+            <div>
+              報名活動成功!
+              <br />
+              詳情可在
+              <br />
+              我的資料-活動報名詳情查看
+            </div>
+          }
           btnName={"確認"}
         />
       )}
