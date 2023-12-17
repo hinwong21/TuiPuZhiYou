@@ -92,6 +92,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         <SubPageHeader title="添加活動" goBack={goBack} />
 
         <Input
+          notNullable
           title="活動名稱"
           type="text"
           value={name}
@@ -99,7 +100,9 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         />
 
         <div className="inputCompoContainer">
-          <div className="inputCompoTitle">活動圖片</div>
+          <div className="inputCompoTitle">
+            <span style={{ color: "red" }}>*</span>活動圖片
+          </div>
           <input
             type="file"
             accept="image/*"
@@ -122,6 +125,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         </div>
 
         <Input
+          notNullable
           title="活動人數"
           type="text"
           value={participant}

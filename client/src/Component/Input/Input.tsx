@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import "./Input.css";
 
 type InputProps = {
+  notNullable?: boolean;
   title: string;
   type: string;
   value: string;
@@ -11,6 +12,7 @@ type InputProps = {
 };
 
 export const Input: React.FC<InputProps> = ({
+  notNullable,
   title,
   type,
   value,
@@ -21,7 +23,10 @@ export const Input: React.FC<InputProps> = ({
   return (
     <>
       <div className="inputCompoContainer">
-        <div className="inputCompoTitle">{title}</div>
+        <div className="inputCompoTitle">
+          {notNullable && <span style={{ color: "red" }}>*</span>}
+          {title}
+        </div>
         <input
           type={type}
           className="inputCompo"
