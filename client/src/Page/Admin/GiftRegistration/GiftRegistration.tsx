@@ -19,7 +19,6 @@ export const GiftRegistration = () => {
   };
 
   const handleClickGetGiftExchangeRecord = async () => {
-    await setShowAlert("");
     const res = await fetch(`${api_origin}/record/admin/giftId`, {
       method: "POST",
       headers: {
@@ -33,7 +32,7 @@ export const GiftRegistration = () => {
     setDetails(json.result);
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");
-    }
+    } 
   };
 
   const handleTookGift = async () => {
