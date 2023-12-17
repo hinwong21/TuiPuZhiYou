@@ -50,7 +50,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
               <td>EX- {record.exchangeGiftRecords_id}</td>
               <td className="giftDetailTableDetail">{record.gift_detail}</td>
               <td>{record.exchangePoint}</td>
-              <td>{record.is_exchanged ? "已換領" : "未換領"}</td>
+              <td>{record.isExchanged ? "已換領" : "未換領"}</td>
             </tr>
           ))}
         </tbody>

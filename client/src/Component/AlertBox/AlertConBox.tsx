@@ -3,13 +3,12 @@ import { ConfirmButton } from "../ConfirmButton/ConfirmButton";
 import "./AlertBox.css";
 
 interface Alert {
-  header: string;
+  header: string | any;
   btnName: string;
-  onClick?: any;
 }
 
 export const AlertConBox = (props: Alert) => {
-  const { header, btnName, onClick } = props;
+  const { header, btnName } = props;
 
   const [show, setShow] = useState(true);
   // [{title:1, onClick:handleShow}, title:2, onClick:onClick}]

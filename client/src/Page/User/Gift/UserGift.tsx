@@ -3,7 +3,6 @@ import "./UserGift.css";
 import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
-import { log } from "console";
 
 interface GiftItem {
   giftID: string;
@@ -73,13 +72,9 @@ export const UserGift = () => {
 
     if (json.success) {
       const updatedTotalPoint = parseInt(json.result.point);
-      console.log(json, "ccc");
-
       setGetEXGiftID(json.result.exGiftID);
       setTotalPoint(updatedTotalPoint);
-
       setShowAlert("換領禮物成功!");
-      //setGetEXGiftID(json.result.);
     } else {
       setShowAlert("未能換領禮物，請稍後再嘗試!");
     }
@@ -118,7 +113,15 @@ export const UserGift = () => {
       )}
       {showAlert === "換領禮物成功!" && (
         <AlertConBox
-          header={`換領禮物成功! 禮物換領號：EX-${getEXGiftID}，詳情可在“我的資料-換領禮物詳情查看。”`}
+          header={
+            <div>
+              換領禮物成功! <br />
+              禮物換領號: EX- {getEXGiftID} <br />
+              詳情可在
+              <br />
+              我的資料-換領禮物詳情查看
+            </div>
+          }
           btnName={"確認"}
         />
       )}
