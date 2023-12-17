@@ -50,12 +50,10 @@
 }
 
 .eventImageStyleOne {
-  height: fit-content;
   width: 60vw;
 }
 
 .eventImageStyleTwo {
-  height: fit-content;
   width: 60vw;
 }
 
@@ -80,8 +78,9 @@
   }
 
   .eventImageStyleTwo {
-    width: fit-content;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-height: 65vh;
     object-fit: cover;
   }
 }
