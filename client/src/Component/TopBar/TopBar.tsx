@@ -24,7 +24,7 @@ export const TopBar = (props: TopBarProps) => {
     setShowBar(!showBar);
     props.onStatusChange(newStatus);
     localStorage.setItem("ef2023_pageState", newStatus);
-    const expirationTime = new Date().getTime() + 30 * 60 * 1000;
+    const expirationTime = new Date().getTime() + 5 * 60 * 1000;
     const expirationTimeStr = expirationTime.toString();
     localStorage.setItem("expirationTime", expirationTimeStr);
     window.scrollTo(0, 0);
