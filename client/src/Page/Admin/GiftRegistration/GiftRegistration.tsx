@@ -32,7 +32,7 @@ export const GiftRegistration = () => {
     setDetails(json.result);
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");
-    } 
+    }
   };
 
   const handleTookGift = async () => {
@@ -81,7 +81,7 @@ export const GiftRegistration = () => {
               <thead>
                 <tr>
                   <th className="adminGiftDetailTableId">換領號碼</th>
-                  <th className="adminGiftDetailTableUsername">用戶名稱</th>
+                  <th className="adminGiftDetailTableGift">換領禮物</th>
                   <th className="adminGiftDetailTableAddress">地址</th>
                   <th className="adminGiftDetailIsExchanged">已換領</th>
                 </tr>

@@ -15,6 +15,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const [image, setImage] = useState<File | null | undefined>(null);
   const [exchangePoint, setExchangePoint] = useState("");
   const [giftDetail, setGiftDetail] = useState("");
+  const [giftName, setGiftName] = useState("");
   const [showAlert, setShowAlert] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,6 +35,12 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   const handleGiftDetailChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setGiftDetail(event.target.value);
+  };
+
+  const handleGiftNameChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setGiftDetail(event.target.value);
@@ -61,6 +68,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
             image: base64Image,
             exchangePoint: exchangePoint,
             giftDetail: giftDetail,
+            giftName: giftName,
           }),
         });
 
@@ -70,6 +78,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
           setImage(null);
           setExchangePoint("");
           setGiftDetail("");
+          setGiftName("");
         } else {
           setShowAlert("未能添加禮物!");
         }
@@ -117,6 +126,13 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         />
 
         <div className="inputCompoContainer">
+          <div className="inputCompoTitle">禮物名稱</div>
+          <textarea
+            className="editGiftGiftName"
+            placeholder="禮物名稱"
+            value={giftName}
+            onChange={handleGiftNameChange}
+          ></textarea>
           <div className="inputCompoTitle">禮物詳情</div>
           <textarea
             className="editGiftGiftDetail"
