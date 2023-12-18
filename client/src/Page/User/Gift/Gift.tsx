@@ -6,6 +6,7 @@ import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
 interface GiftProps {
   giftID: string;
   image: string;
+  name: string;
   details: string;
   point: number;
   btnName: string;
@@ -15,6 +16,7 @@ interface GiftProps {
 export const Gift: React.FC<GiftProps> = ({
   giftID,
   image,
+  name,
   details,
   point,
   btnName,
@@ -52,6 +54,7 @@ export const Gift: React.FC<GiftProps> = ({
         />
       </div>
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${exchangePoint} 分`}</div>
+      <div>{`禮物名稱: ${name}`}</div>
       <div className="giftDropdownContainer">
         <Dropdown details={`禮物內容: ${details}`} />
       </div>

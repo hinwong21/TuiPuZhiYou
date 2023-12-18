@@ -30,6 +30,8 @@ export const GiftRegistration = () => {
     });
     const json = await res.json();
     setDetails(json.result);
+    console.log(details, "de");
+
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");
     }

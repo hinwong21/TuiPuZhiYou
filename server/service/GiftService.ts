@@ -5,6 +5,7 @@ export class GiftService {
 
   addGift = async (
     id: string,
+    giftName: string,
     detail: string,
     image: string,
     point: string,
@@ -14,6 +15,7 @@ export class GiftService {
     try {
       await this.knex("gifts").insert({
         gift_id: id,
+        gift_name: giftName,
         gift_detail: detail,
         gift_image: image,
         exchange_point: point,

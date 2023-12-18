@@ -43,7 +43,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const handleGiftNameChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setGiftDetail(event.target.value);
+    setGiftName(event.target.value);
   };
 
   // click the div to trigger the file input
@@ -133,10 +133,10 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
             value={giftName}
             onChange={handleGiftNameChange}
           ></textarea>
-          <div className="inputCompoTitle">禮物詳情</div>
+          <div className="inputCompoTitle">換領詳情</div>
           <textarea
             className="editGiftGiftDetail"
-            placeholder="禮物詳情"
+            placeholder="換領詳情"
             value={giftDetail}
             onChange={handleGiftDetailChange}
           ></textarea>

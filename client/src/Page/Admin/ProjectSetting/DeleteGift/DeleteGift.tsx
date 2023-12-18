@@ -7,6 +7,7 @@ import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
 
 interface GiftItem {
   giftID: string;
+  name: string;
   details: string;
   point: number;
   btnCall: string;
@@ -84,6 +85,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
                   key={gift.gift_id}
                   giftID={gift.gift_id}
                   image={gift.gift_image}
+                  name={gift.gift_name}
                   details={gift.gift_detail}
                   point={gift.exchange_point}
                   onClick={() => handleDeleteGift(gift.gift_id, "")}

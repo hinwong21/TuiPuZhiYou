@@ -17,6 +17,7 @@ export class GiftController {
     try {
       const id = getRandomSixDigitNumber();
       const detail = req.body.giftDetail;
+      const giftName = req.body.giftName;
       const image = req.body.image;
       const point = req.body.exchangePoint;
       const projectId = "P001";
@@ -25,6 +26,7 @@ export class GiftController {
       const result = await this.giftService.addGift(
         id,
         detail,
+        giftName,
         image,
         point,
         projectId,

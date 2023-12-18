@@ -48,7 +48,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
           {records.map((record: any, index: number) => (
             <tr key={index}>
               <td>EX- {record.exchangeGiftRecords_id}</td>
-              <td className="giftDetailTableDetail">{record.gift_detail}</td>
+              <td className="giftDetailTableDetail">{record.gift_name}</td>
               <td>{record.exchangePoint}</td>
               <td>{record.isExchanged ? "已換領" : "未換領"}</td>
             </tr>

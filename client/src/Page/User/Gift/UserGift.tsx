@@ -3,9 +3,11 @@ import "./UserGift.css";
 import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import { AlertYesNoBox } from "../../../Component/AlertBox/AlertYesNoBox";
 
 interface GiftItem {
   giftID: string;
+  name: string;
   details: string;
   point: number;
   image: string;
@@ -16,6 +18,8 @@ export const UserGift = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
   const [getEXGiftID, setGetEXGiftID] = useState("");
+  const [getEXGiftPoint, setGetEXGiftPoint] = useState("");
+  const [getGiftName, setGetGiftName] = useState("");
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
@@ -46,8 +50,24 @@ export const UserGift = () => {
     setGifts(filteredGifts);
   };
 
-  const handleExchangeGift = async (point: string, giftId: string) => {
+  const handleExchangeGift = async (
+    point: string,
+    giftId: string,
+    CheckIsConfirmYes?: string
+  ) => {
     await setShowAlert("");
+    setGetEXGiftPoint(point);
+    setGetEXGiftID(giftId);
+
+    if (CheckIsConfirmYes === "") {
+      setShowAlert("是否確認換領？");
+      return;
+    }
+
+    if (CheckIsConfirmYes === "false") {
+      setShowAlert("");
+      return;
+    }
 
     const exchangePoint = parseInt(point);
     if (totalPoint < exchangePoint) {
@@ -97,10 +117,11 @@ export const UserGift = () => {
               key={gift.gift_id}
               giftID={gift.gift_id}
               image={gift.gift_image}
+              name={gift.gift_name}
               details={gift.gift_detail}
               point={gift.exchange_point}
               onClick={() =>
-                handleExchangeGift(gift.exchange_point, gift.gift_id)
+                handleExchangeGift(gift.exchange_point, gift.gift_id, "")
               }
               btnName="換領"
             />
@@ -108,6 +129,20 @@ export const UserGift = () => {
         </div>
       </div>
 
+      {showAlert === "是否確認換領？" && (
+        <AlertYesNoBox
+          header={showAlert}
+          btnNameOne={{
+            btnName: "是",
+            onClick: () => handleExchangeGift(getEXGiftPoint, getEXGiftID),
+          }}
+          btnNameTwo={{
+            btnName: "否",
+            onClick: () =>
+              handleExchangeGift(getEXGiftPoint, getEXGiftID, "false"),
+          }}
+        />
+      )}
       {showAlert === "積分不足以換領禮物!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
