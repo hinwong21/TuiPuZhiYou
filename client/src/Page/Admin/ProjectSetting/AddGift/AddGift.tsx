@@ -119,8 +119,9 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         </div>
 
         <Input
+          notNullable
           title="兌換分數"
-          type={"text"}
+          type={"number"}
           value={exchangePoint}
           onChange={handleExchangePointChange}
         />
