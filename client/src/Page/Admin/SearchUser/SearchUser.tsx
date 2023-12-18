@@ -31,24 +31,34 @@ export const SearchUser = () => {
 
   const handleStreetChange = (selectedOption: string) => {
     setStreet(selectedOption);
+    setAddressSearch(true);
+    setEmailOrPhoneNumSearch(false);
   };
 
   const handleNumberChange = (selectedOption: string) => {
     setNumber(selectedOption);
+    setAddressSearch(true);
+    setEmailOrPhoneNumSearch(false);
   };
 
   const handleFloorChange = (selectedOption: string) => {
     setFloor(selectedOption);
+    setAddressSearch(true);
+    setEmailOrPhoneNumSearch(false);
   };
 
   const handleUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUnit(event.target.value);
+    setAddressSearch(true);
+    setEmailOrPhoneNumSearch(false);
   };
 
   const handlePhoneNumOrEmailChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setEmailOrPhoneNum(event.target.value);
+    setAddressSearch(false);
+    setEmailOrPhoneNumSearch(true);
   };
 
   // set only can search by address or EmailOrPhoneNum
