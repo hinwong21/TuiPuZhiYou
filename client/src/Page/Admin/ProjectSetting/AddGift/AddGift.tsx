@@ -40,9 +40,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
     setGiftDetail(event.target.value);
   };
 
-  const handleGiftNameChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleGiftNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGiftName(event.target.value);
   };
 
@@ -56,6 +54,11 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const handleInsertGift = async () => {
     await setShowAlert("");
     try {
+      if (giftName === "") {
+        setShowAlert("未填寫禮物名稱!");
+        return;
+      }
+
       if (image) {
         const base64Image = await convertFileToBase64(image);
 
@@ -120,6 +123,14 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
 
         <Input
           notNullable
+          title="禮物名稱"
+          type={"text"}
+          value={giftName}
+          onChange={handleGiftNameChange}
+        />
+
+        <Input
+          notNullable
           title="兌換分數"
           type={"number"}
           value={exchangePoint}
@@ -127,13 +138,6 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         />
 
         <div className="inputCompoContainer">
-          <div className="inputCompoTitle">禮物名稱</div>
-          <textarea
-            className="editGiftGiftName"
-            placeholder="禮物名稱"
-            value={giftName}
-            onChange={handleGiftNameChange}
-          ></textarea>
           <div className="inputCompoTitle">換領詳情</div>
           <textarea
             className="editGiftGiftDetail"
@@ -157,6 +161,9 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未上傳禮物圖片!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫禮物名稱!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

@@ -52,6 +52,11 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   const handleInsertEvent = async () => {
     await setShowAlert("");
     try {
+      if (name === "") {
+        setShowAlert("未填寫活動名稱!");
+        return;
+      }
+
       if (image) {
         const base64Image = await convertFileToBase64(image);
 
@@ -91,14 +96,6 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
       <div className="editGiftContainer">
         <SubPageHeader title="添加活動" goBack={goBack} />
 
-        <Input
-          notNullable
-          title="活動名稱"
-          type="text"
-          value={name}
-          onChange={handleNameChange}
-        />
-
         <div className="inputCompoContainer">
           <div className="inputCompoTitle">
             <span style={{ color: "red" }}>*</span>活動圖片
@@ -126,8 +123,16 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
 
         <Input
           notNullable
-          title="活動人數"
+          title="活動名稱"
           type="text"
+          value={name}
+          onChange={handleNameChange}
+        />
+
+        <Input
+          notNullable
+          title="活動人數"
+          type="number"
           value={participant}
           onChange={handleParticipantChange}
         />
@@ -156,6 +161,9 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未上傳活動圖片!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫活動名稱!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

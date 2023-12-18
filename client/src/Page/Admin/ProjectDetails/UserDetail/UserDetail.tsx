@@ -31,6 +31,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
     lastDayOfMonth
   );
   const [details, setDetails] = useState([]);
+  const isManager = localStorage.getItem("ef2023_isManager");
 
   const handleProjectChange = (selectedOption: string) => {
     setProject(selectedOption);
@@ -70,12 +71,15 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
     <div className="adminDetailContainer">
       <SubPageHeader title="用戶詳情" goBack={goBack} />
       <div className="adminDetailGap"></div>
-      <Select
-        title="計劃"
-        options={projectOptions}
-        selectedOption={project}
-        onSelectOption={handleProjectChange}
-      />
+
+      {isManager && (
+        <Select
+          title="計劃"
+          options={projectOptions}
+          selectedOption={project}
+          onSelectOption={handleProjectChange}
+        />
+      )}
 
       <DatePickerRange onDateChange={handleDateChange} />
 
