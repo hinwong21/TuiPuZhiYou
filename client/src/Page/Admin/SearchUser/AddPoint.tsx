@@ -89,13 +89,13 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
         <Input
           title="廚餘重量"
-          type="text"
+          type="number"
           value={wasteWeight}
           onChange={handleWasteWeightChange}
         />
         <Input
           title="添加積分"
-          type="text"
+          type="number"
           value={point}
           onChange={handlePointChange}
         />
