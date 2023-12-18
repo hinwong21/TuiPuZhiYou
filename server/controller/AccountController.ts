@@ -1,14 +1,8 @@
 import express from "express";
 import { errorHandler } from "../error";
 import { AccountService } from "../service/AccountService";
-import e from "cors";
-
-function getRandomSixDigitNumber() {
-  const dateNow = new Date();
-  const timestamp = dateNow.getTime().toString();
-  const randomSixDigits = timestamp.substr(timestamp.length - 6).toString();
-  return randomSixDigits;
-}
+import { getRandomSixDigitNumber } from "../useFetch/getRandomNumber";
+import { transformLowerToUpper } from "../useFetch/transformLowerToUpper";
 
 export class AccountController {
   constructor(private accountService: AccountService) {}
@@ -23,7 +17,7 @@ export class AccountController {
       const street: string = req.body.street;
       const number: string = req.body.number;
       const floor: string = req.body.floor;
-      const unit: string = req.body.unit;
+      let unit: string = transformLowerToUpper(req.body.unit);
       const projectId = "P001";
       const dateAdd = today;
 
