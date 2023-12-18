@@ -13,8 +13,8 @@ interface TopBarProps {
 
 export const TopBar = (props: TopBarProps) => {
   const [showBar, setShowBar] = useState(false);
-
   const isVolunteer = localStorage.getItem("ef2023_isVolunteer");
+  const isAdmin = localStorage.getItem("ef2023_isAdmin");
 
   const handleShowBar = () => {
     setShowBar(!showBar);
@@ -94,14 +94,19 @@ export const TopBar = (props: TopBarProps) => {
             title="禮物登記"
             handleStatus={() => handleStatus("giftRegistration")}
           />
-          <SideBarSession
-            title="計劃設置"
-            handleStatus={() => handleStatus("projectSetting")}
-          />
-          <SideBarSession
-            title="計劃詳情"
-            handleStatus={() => handleStatus("projectDetails")}
-          />
+          {isAdmin === "true" && (
+            <>
+              <SideBarSession
+                title="計劃設置"
+                handleStatus={() => handleStatus("projectSetting")}
+              />
+              <SideBarSession
+                title="計劃詳情"
+                handleStatus={() => handleStatus("projectDetails")}
+              />
+            </>
+          )}
+
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
             登出
           </div>
