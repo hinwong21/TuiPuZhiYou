@@ -76,7 +76,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
               {detail.exchange_date ? (
                 <td>{detail.exchange_date}</td>
               ) : (
-                <td></td>
+                <td>尚未換領禮物</td>
               )}
             </tr>
           ))}

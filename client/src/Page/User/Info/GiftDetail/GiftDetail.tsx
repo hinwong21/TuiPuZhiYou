@@ -61,11 +61,10 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
               <td className="giftDetailTableDetail">{record.gift_name}</td>
               <td>{record.exchangePoint}</td>
               <td>{record.isExchanged ? "已換領" : "未換領"}</td>
-              {/* <td>{record.exchange_date ? record.exchange_date : ""}</td> */}
               {record.exchange_date ? (
                 <td>{record.exchange_date}</td>
               ) : (
-                <td></td>
+                <td>尚未換領禮物</td>
               )}
             </tr>
           ))}

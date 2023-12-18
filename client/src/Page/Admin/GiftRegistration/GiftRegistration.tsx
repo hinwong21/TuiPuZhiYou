@@ -116,7 +116,7 @@ export const GiftRegistration = () => {
                   {detail.exchange_date ? (
                     <td>{detail.exchange_date}</td>
                   ) : (
-                    <td></td>
+                    <td>尚未換領禮物</td>
                   )}
                 </tr>
               </tbody>

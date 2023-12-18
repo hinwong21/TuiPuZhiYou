@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchUser.css";
 import { Input } from "../../../Component/Input/Input";
 import { Select } from "../../../Interaction/Select/Select";

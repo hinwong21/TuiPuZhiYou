@@ -3,6 +3,7 @@ import "./UserEvent.css";
 import { Events } from "./UserEventBox";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import { AlertYesNoBox } from "../../../Component/AlertBox/AlertYesNoBox";
 
 interface EventItem {
   eventId: string;
@@ -15,6 +16,7 @@ export const UserEvent = () => {
   const [showAlert, setShowAlert] = useState("");
   const [events, setEvents] = useState<EventItem[] | null>(null);
   const userId = localStorage.getItem("ef2023_user_id");
+  const [getEventsID, setGetEventsID] = useState("");
 
   const handleGetAllEvents = async () => {
     const res = await fetch(`${api_origin}/event/`, {
@@ -45,8 +47,23 @@ export const UserEvent = () => {
     return json.result;
   };
 
-  const handleJoinEvent = async (eventId: string, userId: string | null) => {
+  const handleJoinEvent = async (
+    eventId: string,
+    userId: string | null,
+    CheckIsConfirmYes?: string
+  ) => {
     await setShowAlert("");
+    setGetEventsID(eventId);
+
+    if (CheckIsConfirmYes === "") {
+      setShowAlert("是否確認報名該活動？");
+      return;
+    }
+
+    if (CheckIsConfirmYes === "false") {
+      setShowAlert("");
+      return;
+    }
 
     const result = await handleCheckEventFullOrNot(eventId, userId);
     console.log(result);
@@ -96,10 +113,24 @@ export const UserEvent = () => {
             image={event.event_image}
             details={event.event_detail}
             btnCall="參加"
-            onClick={() => handleJoinEvent(event.event_id, userId)}
+            onClick={() => handleJoinEvent(event.event_id, userId, "")}
           />
         ))}
       </div>
+
+      {showAlert === "是否確認報名該活動？" && (
+        <AlertYesNoBox
+          header={showAlert}
+          btnNameOne={{
+            btnName: "是",
+            onClick: () => handleJoinEvent(getEventsID, userId),
+          }}
+          btnNameTwo={{
+            btnName: "否",
+            onClick: () => handleJoinEvent(getEventsID, userId, "false"),
+          }}
+        />
+      )}
 
       {showAlert === "已報名活動!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
