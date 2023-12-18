@@ -18,7 +18,11 @@
   margin-bottom: 5px;
 }
 
-.inputCompo::-webkit-inner-spin-button, 
-.inputCompo::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
+.inputCompo::-webkit-inner-spin-button,
+.inputCompo::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.transformToUpperCase {
+  text-transform: uppercase;
 }

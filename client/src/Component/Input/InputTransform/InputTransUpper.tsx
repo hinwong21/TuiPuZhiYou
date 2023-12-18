@@ -1,17 +1,7 @@
-import React, { ChangeEvent } from "react";
-import "./Input.css";
+import React from "react";
+import { InputProps } from "../Input";
 
-export type InputProps = {
-  notNullable?: boolean;
-  title: string;
-  type: string;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  component?: any;
-  onKeyDown?: any;
-};
-
-export const Input: React.FC<InputProps> = ({
+export const InputTransUpper: React.FC<InputProps> = ({
   notNullable,
   title,
   type,
@@ -29,7 +19,7 @@ export const Input: React.FC<InputProps> = ({
         </div>
         <input
           type={type}
-          className="inputCompo"
+          className="inputCompo transformToUpperCase"
           placeholder={title}
           value={value}
           onChange={onChange}

@@ -11,6 +11,7 @@ import {
   tpzyFloorOptions,
 } from "../../service/projectOption";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
+import { InputTransUpper } from "../../Component/Input/InputTransform/InputTransUpper";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -213,7 +214,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
           selectedOption={floor}
           onSelectOption={handleFloorChange}
         />
-        <Input
+        <InputTransUpper
           title="單位"
           type="text"
           value={unit}

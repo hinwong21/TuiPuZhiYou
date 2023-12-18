@@ -12,6 +12,7 @@ import {
   tpzyFloorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import { InputTransUpper } from "../../../Component/Input/InputTransform/InputTransUpper";
 
 export const SearchUser = () => {
   const [directToEarnPointRecord, setDirectToEarnPointRecord] =
@@ -155,7 +156,7 @@ export const SearchUser = () => {
                 selectedOption={floor}
                 onSelectOption={handleFloorChange}
               />
-              <Input
+              <InputTransUpper
                 title="單位"
                 type="text"
                 value={unit}
