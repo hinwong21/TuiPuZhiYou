@@ -57,6 +57,7 @@ export async function up(knex: Knex): Promise<void> {
   if (!(await knex.schema.hasTable("gifts"))) {
     await knex.schema.createTable("gifts", (table) => {
       table.string("gift_id", 255).notNullable().unique();
+      table.text("gift_name").notNullable();
       table.text("gift_detail").notNullable();
       table.text("gift_image");
       table.decimal("exchange_point").notNullable();
@@ -74,6 +75,7 @@ export async function up(knex: Knex): Promise<void> {
       table.boolean("isExchanged").defaultTo(false);
       table.string("project_id").references("projects.project_id");
       table.date("apply_date").notNullable();
+      table.date("exchange_date");
     });
   }
 
