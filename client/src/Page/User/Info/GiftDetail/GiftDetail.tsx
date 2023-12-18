@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./GiftDetail.css";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { api_origin } from "../../../../service/api";
+import moment from "moment";
 
 interface GiftDetailProps {
   goBack: () => void;
@@ -21,10 +22,18 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
+
+    json.result.forEach((item: any) => {
+      if (item.exchange_date) {
+        item.exchange_date = moment(item.exchange_date).format("YYYY-MM-DD");
+      }
+    });
+
     const updatedRecords = json.result.map((record: any) => ({
       ...record,
       exchangePoint: Math.round(record.exchange_point),
     }));
+
     setRecords(updatedRecords);
   };
 
@@ -42,15 +51,22 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
             <th>換領禮物</th>
             <th className="giftDetailTableExchangePoint">換領分數</th>
             <th className="giftDetailTableIsExchanged">已換領</th>
+            <th className="giftDetailTableIsExchanged">換領日期</th>
           </tr>
         </thead>
         <tbody>
           {records.map((record: any, index: number) => (
             <tr key={index}>
-              <td>EX- {record.exchangeGiftRecords_id}</td>
+              <td>EX-{record.exchangeGiftRecords_id}</td>
               <td className="giftDetailTableDetail">{record.gift_name}</td>
               <td>{record.exchangePoint}</td>
               <td>{record.isExchanged ? "已換領" : "未換領"}</td>
+              {/* <td>{record.exchange_date ? record.exchange_date : ""}</td> */}
+              {record.exchange_date ? (
+                <td>{record.exchange_date}</td>
+              ) : (
+                <td></td>
+              )}
             </tr>
           ))}
         </tbody>

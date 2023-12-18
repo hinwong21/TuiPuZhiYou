@@ -3,11 +3,13 @@ import { Input } from "../../../Component/Input/Input";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
+import moment from "moment";
 
 export const GiftRegistration = () => {
   const [giftExchangeId, setGiftExchangeId] = useState("");
   const [details, setDetails] = useState<any>([]);
   const [showAlert, setShowAlert] = useState("");
+  const [getExDate, setGetExDate] = useState("");
 
   const handleGiftExchangeIdChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -19,6 +21,7 @@ export const GiftRegistration = () => {
   };
 
   const handleClickGetGiftExchangeRecord = async () => {
+    setDetails([]);
     const res = await fetch(`${api_origin}/record/admin/giftId`, {
       method: "POST",
       headers: {
@@ -29,8 +32,14 @@ export const GiftRegistration = () => {
       }),
     });
     const json = await res.json();
+
+    json.result.forEach((item: any) => {
+      if (item.exchange_date) {
+        item.exchange_date = moment(item.exchange_date).format("YYYY-MM-DD");
+      }
+    });
+
     setDetails(json.result);
-    console.log(details, "de");
 
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");
@@ -49,10 +58,12 @@ export const GiftRegistration = () => {
       }),
     });
     const json = await res.json();
+
     if (json.success) {
       setShowAlert("成功領取!");
       handleClickGetGiftExchangeRecord();
       setGiftExchangeId("");
+      setGetExDate(json.result.exchange_date);
     } else {
       setShowAlert("未成功領取!");
     }
@@ -86,12 +97,13 @@ export const GiftRegistration = () => {
                   <th className="adminGiftDetailTableGift">換領禮物</th>
                   <th className="adminGiftDetailTableAddress">地址</th>
                   <th className="adminGiftDetailIsExchanged">已換領</th>
+                  <th className="adminGiftDetailIsExchanged">換領日期</th>
                 </tr>
               </thead>
               <tbody>
                 <tr key={index}>
                   <td>EX- {detail.exchangeGiftRecords_id}</td>
-                  <td>{detail.username}</td>
+                  <td>{detail.gift_name}</td>
                   <td>
                     {detail.street} {detail.number}號 {detail.floor}樓{" "}
                     {detail.unit}
@@ -100,6 +112,11 @@ export const GiftRegistration = () => {
                     <td>未換領</td>
                   ) : (
                     <td>已換領</td>
+                  )}
+                  {detail.exchange_date ? (
+                    <td>{detail.exchange_date}</td>
+                  ) : (
+                    <td></td>
                   )}
                 </tr>
               </tbody>

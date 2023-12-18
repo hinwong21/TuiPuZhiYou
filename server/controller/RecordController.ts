@@ -145,6 +145,7 @@ export class RecordController {
       const result = await this.recordService.getAllProjectExchangeGiftDetails(
         project
       );
+
       return res.json({ result: result });
     } catch (err) {
       errorHandler(err, req, res);
@@ -184,7 +185,7 @@ export class RecordController {
       const id = req.body.id;
       const result = await this.recordService.setGiftIsExchanged(id);
       if (result) {
-        return res.json({ success: true });
+        return res.json({ success: true, result });
       } else {
         return res.json({ success: false });
       }

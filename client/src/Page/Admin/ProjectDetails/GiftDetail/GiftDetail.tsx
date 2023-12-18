@@ -4,6 +4,7 @@ import { Select } from "../../../../Interaction/Select/Select";
 import { projectOptions } from "../../../../service/projectOption";
 import { api_origin } from "../../../../service/api";
 import "./GiftDetail.css";
+import moment from "moment";
 
 interface GiftDetailProps {
   goBack: () => void;
@@ -27,6 +28,13 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
+
+    json.result.forEach((item: any) => {
+      if (item.exchange_date) {
+        item.exchange_date = moment(item.exchange_date).format("YYYY-MM-DD");
+      }
+    });
+
     setDetails(json.result);
   }, [project]);
 
@@ -50,20 +58,26 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
         <thead>
           <tr>
             <th className="adminGiftDetailTableId">換領號碼</th>
-            <th className="adminGiftDetailTableUsername">用戶名稱</th>
+            <th className="adminGiftDetailTableUsername">換領禮物</th>
             <th className="adminGiftDetailTableAddress">地址</th>
             <th className="adminGiftDetailIsExchanged">已換領</th>
+            <th className="adminGiftDetailIsExchanged">換領日期</th>
           </tr>
         </thead>
         <tbody>
           {details.map((detail: any, index: number) => (
             <tr key={index}>
               <td>EX- {detail.exchangeGiftRecords_id}</td>
-              <td>{detail.username}</td>
+              <td>{detail.gift_name}</td>
               <td>
                 {detail.street} {detail.number}號 {detail.floor}樓 {detail.unit}
               </td>
               {detail.isExchanged === false ? <td>未換領</td> : <td>已換領</td>}
+              {detail.exchange_date ? (
+                <td>{detail.exchange_date}</td>
+              ) : (
+                <td></td>
+              )}
             </tr>
           ))}
         </tbody>

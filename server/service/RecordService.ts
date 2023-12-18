@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import moment from "moment";
 
 export class RecordService {
   constructor(private knex: Knex) {}
@@ -180,6 +181,7 @@ export class RecordService {
           .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
           .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
           .where("exchangeGiftRecords.project_id", project);
+
         return records;
       }
     } catch (err) {
@@ -235,12 +237,17 @@ export class RecordService {
   };
 
   setGiftIsExchanged = async (id: string) => {
+    const today = new Date();
     try {
       const result = await this.knex("exchangeGiftRecords")
         .where("exchangeGiftRecords_id", id)
-        .update({ isExchanged: true });
+        .update({ exchange_date: today })
+        .update({ isExchanged: true })
+        .returning("exchange_date");
 
-      return true;
+      const formattedDate = moment(result[0]).format("YYYY-MM-DD");
+
+      return formattedDate;
     } catch (err) {
       throw new Error((err as Error).message);
     }
