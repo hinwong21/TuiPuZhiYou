@@ -42,7 +42,7 @@ export class AccountService {
   login = async (emailOrPhoneNum: string, password: string) => {
     try {
       const [adminResult] = await this.knex("admins")
-        .select("user_id", "username")
+        .select("*")
         .where("username", emailOrPhoneNum)
         .andWhere("password", password);
 
@@ -55,10 +55,10 @@ export class AccountService {
         if (userResult === undefined) {
           return { success: false };
         } else {
-          return { success: true, result: userResult, isAdmin: false };
+          return { success: true, result: userResult};
         }
       } else {
-        return { success: true, result: adminResult, isAdmin: true };
+        return { success: true, result: adminResult };
       }
     } catch (err) {
       throw new Error((err as Error).message);

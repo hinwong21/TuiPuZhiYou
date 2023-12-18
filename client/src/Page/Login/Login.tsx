@@ -67,8 +67,19 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
     } else {
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
 
-      const isAdmin = json.result.isAdmin.toString();
-      localStorage.setItem("ef2023_isAdmin", isAdmin);
+      if (json.result.result.isVolunteer === true) {
+        localStorage.setItem("ef2023_isVolunteer", "true");
+      } else {
+        localStorage.setItem("ef2023_isVolunteer", "false");
+      }
+
+      if (json.result.result.isAdmin === true) {
+        localStorage.setItem("ef2023_isAdmin", "true");
+      }
+
+      if (json.result.result.isManager === true) {
+        localStorage.setItem("ef2023_isManager", "true");
+      }
 
       window.location.href = "/";
     }
@@ -93,10 +104,10 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
 
   useEffect(() => {
     // if logged in, direct to info
-    const isAdmin = localStorage.getItem("ef2023_isAdmin");
+    const isVolunteer = localStorage.getItem("ef2023_isVolunteer");
 
     if (username !== "") {
-      if (isAdmin === "false") {
+      if (isVolunteer === "false") {
         handleStatus("userInfo");
       } else {
         handleStatus("searchUser");

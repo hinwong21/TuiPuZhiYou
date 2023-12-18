@@ -14,7 +14,7 @@ interface TopBarProps {
 export const TopBar = (props: TopBarProps) => {
   const [showBar, setShowBar] = useState(false);
 
-  const isAdmin = localStorage.getItem("ef2023_isAdmin");
+  const isVolunteer = localStorage.getItem("ef2023_isVolunteer");
 
   const handleShowBar = () => {
     setShowBar(!showBar);
@@ -32,7 +32,9 @@ export const TopBar = (props: TopBarProps) => {
 
   const handleLogout = () => {
     localStorage.removeItem("ef2023_user_id");
+    localStorage.removeItem("ef2023_isVolunteer");
     localStorage.removeItem("ef2023_isAdmin");
+    localStorage.removeItem("ef2023_isManager");
     localStorage.removeItem("ef2023_pageState");
     localStorage.removeItem("pageStateExpirationTime");
     window.location.href = "/";
@@ -56,7 +58,7 @@ export const TopBar = (props: TopBarProps) => {
         </div>
       </section>
 
-      {showBar && isAdmin === "false" ? (
+      {showBar && isVolunteer === "false" ? (
         // user version
         <div className="topBarSideBarContainer">
           <div className="topBarSideBarIcon" onClick={handleShowBar}>
@@ -79,7 +81,7 @@ export const TopBar = (props: TopBarProps) => {
           </div>
         </div>
       ) : // admin version
-      showBar && isAdmin === "true" ? (
+      showBar && isVolunteer === "true" ? (
         <div className="topBarSideBarContainer">
           <div className="topBarSideBarIcon" onClick={handleShowBar}>
             <FontAwesomeIcon icon={faBars} style={{ fontSize: "28px" }} />
