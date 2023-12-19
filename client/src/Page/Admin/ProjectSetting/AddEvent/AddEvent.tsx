@@ -11,7 +11,7 @@ interface AddEventProps {
 }
 export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   const [name, setName] = useState("");
-  const [participant, setParticipant] = useState("");
+  const [participant, setParticipant] = useState("1");
   const [image, setImage] = useState<File | null | undefined>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [detail, setDetail] = useState("");
@@ -83,7 +83,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
           setShowAlert("添加活動成功!");
           setName("");
           setImage(null);
-          setParticipant("");
+          setParticipant("1");
           setDetail("");
         } else {
           setShowAlert("未能添加活動!");
