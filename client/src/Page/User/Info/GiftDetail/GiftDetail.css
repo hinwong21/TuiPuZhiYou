@@ -14,12 +14,11 @@ th {
 }
 
 .giftDetailTableExchangeId {
-  width: 15vw;
+  width: 25vw;
 }
 
-.giftDetailTableDetail {
-  text-align: start;
-  width: calc(95vw - 25vw - 25vw - 20vw - 4px);
+.giftDetailTableGiftName {
+  width: calc(95vw - 25vw - 10vw - 7vw - 8vw - 4px);
 }
 
 .giftDetailTableExchangePoint {
@@ -27,5 +26,9 @@ th {
 }
 
 .giftDetailTableIsExchanged {
-  width: 15vw;
+  width: 7vw;
+}
+
+.giftDetailTableIsExchangedDate {
+  width: 8vw;
 }

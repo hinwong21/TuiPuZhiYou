@@ -37,6 +37,7 @@ export const Gift: React.FC<GiftProps> = ({
 
   return (
     <div className="giftBoardGiftContainer" id={giftID}>
+      <div className="giftBoardGiftName">{name}</div>
       <div
         className="giftBoardGiftImageContainer"
         onClick={handleChangeImageStyle}
@@ -54,7 +55,6 @@ export const Gift: React.FC<GiftProps> = ({
         />
       </div>
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${exchangePoint} 分`}</div>
-      <div>{`禮物名稱: ${name}`}</div>
       <div className="giftDropdownContainer">
         <Dropdown details={`禮物內容: ${details}`} />
       </div>
