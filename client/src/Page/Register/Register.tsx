@@ -137,7 +137,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     // redirect to userInfo page
     if (json.success === true) {
       localStorage.setItem("ef2023_user_id", json.user_id);
-      localStorage.setItem("ef2023_isAdmin", "false");
+      localStorage.setItem("ef2023_isVolunteer", "false");
       window.location.href = "/";
     } else {
       setShowAlert("未能注册成功!");
