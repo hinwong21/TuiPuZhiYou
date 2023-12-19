@@ -3,13 +3,13 @@ import { Input } from "../../../Component/Input/Input";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
-import moment from "moment";
+import { dateFormat } from "../../../service/dateFormat";
 
 export const GiftRegistration = () => {
   const [giftExchangeId, setGiftExchangeId] = useState("");
   const [details, setDetails] = useState<any>([]);
   const [showAlert, setShowAlert] = useState("");
-  const [getExDate, setGetExDate] = useState("");
+  const [, setGetExDate] = useState("");
 
   const handleGiftExchangeIdChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,11 +35,12 @@ export const GiftRegistration = () => {
 
     json.result.forEach((item: any) => {
       if (item.exchange_date) {
-        item.exchange_date = moment(item.exchange_date).format("YYYY-MM-DD");
+        item.exchange_date = dateFormat(item.exchange_date);
       }
     });
 
     setDetails(json.result);
+    console.log(json.result);
 
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");

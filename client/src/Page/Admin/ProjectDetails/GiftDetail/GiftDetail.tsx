@@ -4,7 +4,7 @@ import { Select } from "../../../../Interaction/Select/Select";
 import { projectOptions } from "../../../../service/projectOption";
 import { api_origin } from "../../../../service/api";
 import "./GiftDetail.css";
-import moment from "moment";
+import { dateFormat } from "../../../../service/dateFormat";
 
 interface GiftDetailProps {
   goBack: () => void;
@@ -31,7 +31,7 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
 
     json.result.forEach((item: any) => {
       if (item.exchange_date) {
-        item.exchange_date = moment(item.exchange_date).format("YYYY-MM-DD");
+        item.exchange_date = dateFormat(item.exchange_date);
       }
     });
 
