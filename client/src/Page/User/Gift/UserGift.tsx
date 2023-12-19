@@ -19,7 +19,6 @@ export const UserGift = () => {
   const [gifts, setGifts] = useState<GiftItem[] | null>(null);
   const [getEXGiftID, setGetEXGiftID] = useState("");
   const [getEXGiftPoint, setGetEXGiftPoint] = useState("");
-  const [getGiftName, setGetGiftName] = useState("");
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
