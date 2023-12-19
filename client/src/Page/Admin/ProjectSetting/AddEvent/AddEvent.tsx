@@ -57,6 +57,11 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         return;
       }
 
+      if (participant === "") {
+        setShowAlert("未填寫活動人數!");
+        return;
+      }
+
       if (image) {
         const base64Image = await convertFileToBase64(image);
 
@@ -164,6 +169,9 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未填寫活動名稱!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫活動人數!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

@@ -1,13 +1,7 @@
 import express from "express";
 import { errorHandler } from "../error";
 import { EventService } from "../service/EventService";
-
-function getRandomSixDigitNumber() {
-  const dateNow = new Date();
-  const timestamp = dateNow.getTime().toString();
-  const randomSixDigits = timestamp.substr(timestamp.length - 6).toString();
-  return randomSixDigits;
-}
+import { getRandomSixDigitNumber } from "../useFetch/getRandomNumber";
 
 export class EventController {
   constructor(private eventService: EventService) {}
@@ -27,8 +21,8 @@ export class EventController {
         id,
         name,
         image,
-        participant,
         detail,
+        participant,
         projectId,
         dateAdd
       );
