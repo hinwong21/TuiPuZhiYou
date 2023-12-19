@@ -25,8 +25,8 @@ export class GiftController {
 
       const result = await this.giftService.addGift(
         id,
-        detail,
         giftName,
+        detail,
         image,
         point,
         projectId,
