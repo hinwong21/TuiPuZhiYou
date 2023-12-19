@@ -1,5 +1,4 @@
 import { Knex } from "knex";
-import moment from "moment";
 
 export class RecordService {
   constructor(private knex: Knex) {}
@@ -245,9 +244,7 @@ export class RecordService {
         .update({ isExchanged: true })
         .returning("exchange_date");
 
-      const formattedDate = moment(result[0]).format("YYYY-MM-DD");
-
-      return formattedDate;
+      return result;
     } catch (err) {
       throw new Error((err as Error).message);
     }
