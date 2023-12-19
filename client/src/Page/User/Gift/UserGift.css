@@ -60,6 +60,7 @@
 .giftBoardGiftName {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   width: 170px;
   height: 60px;
   font-weight: bold;
@@ -96,12 +97,6 @@
   height: 170px;
   overflow: hidden;
   object-fit: cover;
-}
-
-.giftBoardGiftTitle {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 5px;
 }
 
 .giftBoardGiftExchangePoints {
