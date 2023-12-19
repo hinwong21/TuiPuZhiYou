@@ -7,17 +7,17 @@ export class EventService {
     id: string,
     name: string,
     image: string,
-    participant: number | string,
     detail: string,
+    participant: number | string,
     projectId: string,
     dateAdd: Date
   ) => {
     try {
       await this.knex("events").insert({
         event_id: id,
-        event_name:name,
-        event_detail: detail,
+        event_name: name,
         event_image: image,
+        event_detail: detail,
         participant: participant,
         project_id: projectId,
         date_add: dateAdd,
