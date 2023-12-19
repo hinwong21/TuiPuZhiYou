@@ -14,7 +14,7 @@ interface TopBarProps {
 export const TopBar = (props: TopBarProps) => {
   const [showBar, setShowBar] = useState(false);
   const isVolunteer = localStorage.getItem("ef2023_isVolunteer");
-  const isAdmin = localStorage.getItem("ef2023_isAdmin");
+  const isAdmin = Boolean(localStorage.getItem("ef2023_isAdmin"));
 
   const handleShowBar = () => {
     setShowBar(!showBar);
@@ -66,15 +66,15 @@ export const TopBar = (props: TopBarProps) => {
           </div>
           <SideBarSession
             title="我的資料"
-            handleStatus={() => handleStatus("userInfo")}
+            onClick={() => handleStatus("userInfo")}
           />
           <SideBarSession
             title="換領禮物"
-            handleStatus={() => handleStatus("userGift")}
+            onClick={() => handleStatus("userGift")}
           />
           <SideBarSession
             title="活動報名"
-            handleStatus={() => handleStatus("userEvent")}
+            onClick={() => handleStatus("userEvent")}
           />
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
             登出
@@ -88,24 +88,24 @@ export const TopBar = (props: TopBarProps) => {
           </div>
           <SideBarSession
             title="搜尋用戶"
-            handleStatus={() => handleStatus("searchUser")}
+            onClick={() => handleStatus("searchUser")}
           />
           <SideBarSession
             title="禮物登記"
-            handleStatus={() => handleStatus("giftRegistration")}
+            onClick={() => handleStatus("giftRegistration")}
           />
-          {isAdmin === "true" && (
-            <>
-              <SideBarSession
-                title="計劃設置"
-                handleStatus={() => handleStatus("projectSetting")}
-              />
-              <SideBarSession
-                title="計劃詳情"
-                handleStatus={() => handleStatus("projectDetails")}
-              />
-            </>
-          )}
+          <SideBarSession
+            locked
+            hasPermission={isAdmin}
+            title="計劃設置"
+            onClick={() => handleStatus("projectSetting")}
+          />
+          <SideBarSession
+            locked
+            hasPermission={isAdmin}
+            title="計劃詳情"
+            onClick={() => handleStatus("projectDetails")}
+          />
 
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
             登出

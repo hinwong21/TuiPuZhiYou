@@ -96,6 +96,18 @@
   font-size: 18px;
 }
 
+.topBarSideBarSessionLocked {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  border-bottom: 2px white solid;
+  font-weight: bold;
+  color: #5c5c5c;
+}
+
 .topBarSideBarSessionLogout {
   display: flex;
   justify-content: center;
