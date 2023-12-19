@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Events } from "../../../User/Event/UserEventBox";
 import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
+import { Events } from "./AdminEventBox";
 
 interface EventItem {
   eventId: string;

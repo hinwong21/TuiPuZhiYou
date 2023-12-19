@@ -66,7 +66,6 @@ export const UserEvent = () => {
     }
 
     const result = await handleCheckEventFullOrNot(eventId, userId);
-    console.log(result);
 
     if (result.joined === true) {
       setShowAlert("已報名活動!");
@@ -91,8 +90,6 @@ export const UserEvent = () => {
       } else {
         setShowAlert("未能報名，請稍後再嘗試!");
       }
-    } else {
-      setShowAlert("活動人數已滿!");
     }
   };
 
@@ -112,6 +109,8 @@ export const UserEvent = () => {
             name={event.event_name}
             image={event.event_image}
             details={event.event_detail}
+            participant={event.participant}
+            participantCount={event.participantCount}
             btnCall="參加"
             onClick={() => handleJoinEvent(event.event_id, userId, "")}
           />
@@ -150,9 +149,6 @@ export const UserEvent = () => {
         />
       )}
       {showAlert === "未能報名，請稍後再嘗試!" && (
-        <AlertConBox header={showAlert} btnName={"確認"} />
-      )}
-      {showAlert === "活動人數已滿!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

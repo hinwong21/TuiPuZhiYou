@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./UserEvent.css";
-import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
-import { Dropdown } from "../../../Interaction/Dropdown/Dropdown";
+import "../../../User/Event/UserEvent.css";
+import { Dropdown } from "../../../../Interaction/Dropdown/Dropdown";
+import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton";
 
 interface EventProps {
   eventID: string;
   name: string;
   details: string;
-  participant: number;
-  participantCount: string;
   image: string;
   btnCall: string;
   onClick?: any;
@@ -18,8 +16,6 @@ export const Events: React.FC<EventProps> = ({
   eventID,
   name,
   details,
-  participant,
-  participantCount,
   image,
   btnCall,
   onClick,
@@ -65,13 +61,9 @@ export const Events: React.FC<EventProps> = ({
           </div>
         )}
       </div>
-      {parseInt(participantCount) === participant ? (
-        <div className="btnBoxEventFulled">活動人數已滿</div>
-      ) : (
-        <div className="btnBox">
-          <ConfirmButton type="button" btnName={btnCall} onClick={onClick} />
-        </div>
-      )}
+      <div className="btnBox">
+        <ConfirmButton type="button" btnName={btnCall} onClick={onClick} />
+      </div>
     </div>
   );
 };
