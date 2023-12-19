@@ -58,10 +58,10 @@ export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
         <thead>
           <tr>
             <th className="adminGiftDetailTableId">換領號碼</th>
-            <th className="adminGiftDetailTableUsername">換領禮物</th>
+            <th className="adminGiftDetailTableGiftName">禮物名稱</th>
             <th className="adminGiftDetailTableAddress">地址</th>
-            <th className="adminGiftDetailIsExchanged">已換領</th>
-            <th className="adminGiftDetailIsExchanged">換領日期</th>
+            <th className="adminGiftDetailIsExchanged">換領否</th>
+            <th className="adminGiftDetailIsExchangedDate">換領日期</th>
           </tr>
         </thead>
         <tbody>

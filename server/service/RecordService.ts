@@ -226,8 +226,9 @@ export class RecordService {
   getGiftExchangeRecordByGiftId = async (id: string) => {
     try {
       const records = await this.knex("exchangeGiftRecords")
-        .select("exchangeGiftRecords.*", "users.*")
+        .select("exchangeGiftRecords.*", "users.*", "gifts.*")
         .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
+        .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
         .where("exchangeGiftRecords.exchangeGiftRecords_id", id);
       return records;
     } catch (err) {
