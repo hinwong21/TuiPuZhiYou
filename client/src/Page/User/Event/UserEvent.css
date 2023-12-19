@@ -110,6 +110,9 @@
 }
 
 .btnBoxEventFulled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: black;
   border-radius: 5px;
   font-size: 20px;

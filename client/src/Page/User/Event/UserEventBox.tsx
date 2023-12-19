@@ -66,7 +66,9 @@ export const Events: React.FC<EventProps> = ({
         )}
       </div>
       {parseInt(participantCount) === participant ? (
-        <div className="btnBoxEventFulled">活動人數已滿</div>
+        <div className="btnBox">
+          <div className="btnBoxEventFulled">活動人數已滿</div>
+        </div>
       ) : (
         <div className="btnBox">
           <ConfirmButton type="button" btnName={btnCall} onClick={onClick} />

@@ -87,6 +87,7 @@ export const UserEvent = () => {
       const json = await res.json();
       if (json.success) {
         setShowAlert("報名成功!");
+        handleGetAllEvents();
       } else {
         setShowAlert("未能報名，請稍後再嘗試!");
       }
