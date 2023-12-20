@@ -31,7 +31,9 @@ export class GiftService {
 
   getAllGifts = async () => {
     try {
-      const result = await this.knex("gifts").select("*");
+      const result = await this.knex("gifts")
+        .select("*")
+        .orderBy("date_add", "desc");;
       return result;
     } catch (err) {
       throw new Error((err as Error).message);

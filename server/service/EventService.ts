@@ -30,12 +30,14 @@ export class EventService {
 
   getAllEvents = async () => {
     try {
-      const events = await this.knex("events").select("*");
+      const events = await this.knex("events")
+        .select("*")
+        .orderBy("date_add", "desc");
       const participantCounts = await this.knex("joinedEventRecords")
         .select("event_id")
         .groupBy("event_id")
         .count("user_id as count");
-        
+
       const result = events.map((event) => {
         const participantCount = participantCounts.find(
           (count) => count.event_id === event.event_id

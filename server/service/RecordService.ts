@@ -97,7 +97,8 @@ export class RecordService {
       const records = await this.knex("exchangeGiftRecords")
         .select("exchangeGiftRecords.*", "gifts.*")
         .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
-        .where("exchangeGiftRecords.user_id", userId);
+        .where("exchangeGiftRecords.user_id", userId)
+        .orderBy("apply_date", "desc");
       return records;
     } catch (err) {
       throw new Error((err as Error).message);
@@ -110,7 +111,8 @@ export class RecordService {
       const records = await this.knex("joinedEventRecords")
         .select("joinedEventRecords.*", "events.*")
         .join("events", "joinedEventRecords.event_id", "=", "events.event_id")
-        .where("joinedEventRecords.user_id", userId);
+        .where("joinedEventRecords.user_id", userId)
+        .orderBy("apply_date", "desc");
       return records;
     } catch (err) {
       throw new Error((err as Error).message);
@@ -127,6 +129,7 @@ export class RecordService {
             "userRecords.total_weight",
             "thisSelectedDateRangeWeight.selectedWeight"
           )
+          .orderBy("date_add", "desc")
           .leftJoin("userRecords", "users.user_id", "userRecords.user_id")
           .leftJoin(
             this.knex("earnPointRecords")
@@ -147,6 +150,7 @@ export class RecordService {
             "userRecords.total_weight",
             "thisSelectedDateRangeWeight.selectedWeight"
           )
+          .orderBy("date_add", "desc")
           .leftJoin("userRecords", "users.user_id", "userRecords.user_id")
           .leftJoin(
             this.knex("earnPointRecords")
@@ -171,12 +175,14 @@ export class RecordService {
       if (project === "全部") {
         const records = await this.knex("exchangeGiftRecords")
           .select("exchangeGiftRecords.*", "gifts.*", "users.*")
+          .orderBy("apply_date", "desc")
           .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
           .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id");
         return records;
       } else {
         const records = await this.knex("exchangeGiftRecords")
           .select("exchangeGiftRecords.*", "gifts.*", "users.*")
+          .orderBy("apply_date", "desc")
           .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
           .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
           .where("exchangeGiftRecords.project_id", project);
@@ -193,6 +199,7 @@ export class RecordService {
       if (project === "全部") {
         const records = await this.knex("events")
           .select("events.*", "joinedEventRecords.participantJoined")
+          .orderBy("date_add", "desc")
           .leftJoin(
             this.knex("joinedEventRecords")
               .select("event_id")
@@ -206,6 +213,7 @@ export class RecordService {
       } else {
         const records = await this.knex("events")
           .select("events.*", "joinedEventRecords.participantJoined")
+          .orderBy("date_add", "desc")
           .where("events.project_id", project)
           .leftJoin(
             this.knex("joinedEventRecords")
