@@ -23,7 +23,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
     0
   );
 
-  const [project, setProject] = useState<string>("P001");
+  const [project, setProject] = useState<string>("推普之友");
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(
     firstDayOfMonth
   );

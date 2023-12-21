@@ -10,7 +10,7 @@ interface GiftDetailProps {
   goBack: () => void;
 }
 export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
-  const [project, setProject] = useState<string>("P001");
+  const [project, setProject] = useState<string>("推普之友");
   const [details, setDetails] = useState([]);
 
   const handleProjectChange = (selectedOption: string) => {

@@ -1,13 +1,7 @@
 import express from "express";
 import { errorHandler } from "../error";
 import { RecordService } from "../service/RecordService";
-
-function getRandomSixDigitNumber() {
-  const dateNow = new Date();
-  const timestamp = dateNow.getTime().toString();
-  const randomSixDigits = timestamp.substr(timestamp.length - 6).toString();
-  return randomSixDigits;
-}
+import { getRandomSixDigitNumber } from "../useFetch/getRandomNumber";
 
 export class RecordController {
   constructor(private recordService: RecordService) {}
@@ -18,7 +12,7 @@ export class RecordController {
       const userId = req.body.id;
       const point = req.body.point;
       const weight = req.body.weight;
-      const projectId = "P001";
+      const projectId = req.body.project;
       const dateAdd = today;
 
       const result = await this.recordService.addPointRecord(
@@ -50,12 +44,13 @@ export class RecordController {
 
   exchangeGiftRecord = async (req: express.Request, res: express.Response) => {
     try {
-      const id = getRandomSixDigitNumber();
       const today = new Date();
+
+      const id = getRandomSixDigitNumber();
       const userId = req.body.userId;
       const giftId = req.body.giftId;
       const exchangePoint = req.body.exchangePoint;
-      const projectId = "P001";
+      const projectId = req.body.project;
       const dateAdd = today;
 
       const result = await this.recordService.exchangeGiftRecord(
@@ -74,10 +69,11 @@ export class RecordController {
 
   joinEventRecord = async (req: express.Request, res: express.Response) => {
     try {
+      const today = new Date();
+
       const userId = req.body.userId;
       const eventId = req.body.eventId;
-      const projectId = "P001";
-      const today = new Date();
+      const projectId = req.body.project;
       const dateAdd = today;
       await this.recordService.joinEventRecord(
         userId,

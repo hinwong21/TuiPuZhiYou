@@ -9,14 +9,14 @@ export async function seed(knex: Knex): Promise<void> {
   // Inserts seed entries
   const [tpzy, ndvg, hksun, sumyee] = await knex("projects")
     .insert([
-      { project_id: "P001", project_name: "Tui Pu Zhi You", date_add: today },
-      { project_id: "P002", project_name: "NDVG", date_add: today },
+      { project_id: "推普之友", project_name: "Tui Pu Zhi You", date_add: today },
+      { project_id: "新界北義工團", project_name: "NDVG", date_add: today },
       {
-        project_id: "P003",
+        project_id: "香港青年陽光力量",
         project_name: "HK Sun Power of Teens",
         date_add: today,
       },
-      { project_id: "P004", project_name: "Sum Yee", date_add: today },
+      { project_id: "心意習", project_name: "Sum Yee", date_add: today },
     ])
     .returning("project_id");
 

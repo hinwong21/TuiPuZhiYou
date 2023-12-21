@@ -110,10 +110,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       return;
     }
 
-    // const projectId = window.location.hostname;
-
-    // not deploy yet, hard code first
-    const projectId = "P001";
+    const project = "推普之友";
 
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
@@ -128,7 +125,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
         number: number,
         floor: floor,
         unit: unit,
-        project_id: projectId,
+        project_id: project,
       }),
     });
 

@@ -44,6 +44,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
     }
 
     if (parseFloat(point) && parseFloat(wasteWeight)) {
+      const project = "推普之友";
       const res = await fetch(`${api_origin}/record/point`, {
         method: "POST",
         headers: {
@@ -53,17 +54,15 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
           id: userDetail.user_id,
           point: parseFloat(point),
           weight: parseFloat(wasteWeight),
+          project: project,
         }),
       });
       const json = await res.json();
       if (json.success) {
         setShowAlert("添加成功!");
-        //goBack();
       } else {
         setShowAlert("未能添加!");
       }
-
-      //goBack();
     }
   };
 

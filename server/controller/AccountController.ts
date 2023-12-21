@@ -18,7 +18,7 @@ export class AccountController {
       const number: string = req.body.number;
       const floor: string = req.body.floor;
       let unit: string = transformLowerToUpper(req.body.unit);
-      const projectId = "P001";
+      const projectId = req.body.project_id;
       const dateAdd = today;
 
       const result = await this.accountService.registerNewAccount(

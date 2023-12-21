@@ -61,6 +61,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
 
       if (image) {
         const base64Image = await convertFileToBase64(image);
+        const project = "推普之友";
 
         const res = await fetch(`${api_origin}/gift`, {
           method: "POST",
@@ -72,6 +73,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
             exchangePoint: exchangePoint,
             giftDetail: giftDetail,
             giftName: giftName,
+            project: project,
           }),
         });
 

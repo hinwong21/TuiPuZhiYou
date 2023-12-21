@@ -14,7 +14,7 @@ export class EventController {
       const image = req.body.image;
       const participant = req.body.participant;
       const detail = req.body.detail;
-      const projectId = "P001";
+      const projectId = req.body.project;
       const dateAdd = today;
 
       const result = await this.eventService.addEvent(

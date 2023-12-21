@@ -74,6 +74,8 @@ export const UserEvent = () => {
 
     if (result.full === false) {
       const userId = localStorage.getItem("ef2023_user_id");
+      const project = "推普之友";
+
       const res = await fetch(`${api_origin}/record/event`, {
         method: "POST",
         headers: {
@@ -82,6 +84,7 @@ export const UserEvent = () => {
         body: JSON.stringify({
           userId: userId,
           eventId: eventId,
+          project: project,
         }),
       });
       const json = await res.json();

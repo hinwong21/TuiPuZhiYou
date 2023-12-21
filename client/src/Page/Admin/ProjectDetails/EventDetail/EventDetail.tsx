@@ -10,7 +10,7 @@ interface EventDetailProps {
 }
 
 export const EventDetail: React.FC<EventDetailProps> = ({ goBack }) => {
-  const [project, setProject] = useState<string>("P001");
+  const [project, setProject] = useState<string>("推普之友");
   const [details, setDetails] = useState([]);
 
   const handleProjectChange = (selectedOption: string) => {

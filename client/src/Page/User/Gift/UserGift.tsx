@@ -75,7 +75,7 @@ export const UserGift = () => {
     }
 
     const userId = localStorage.getItem("ef2023_user_id");
-
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/record/gift`, {
       method: "POST",
       headers: {
@@ -85,6 +85,7 @@ export const UserGift = () => {
         exchangePoint: exchangePoint,
         giftId: giftId,
         userId: userId,
+        project: project,
       }),
     });
     const json = await res.json();

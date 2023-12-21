@@ -20,7 +20,7 @@ export class GiftController {
       const giftName = req.body.giftName;
       const image = req.body.image;
       const point = req.body.exchangePoint;
-      const projectId = "P001";
+      const projectId = req.body.project;
       const dateAdd = today;
 
       const result = await this.giftService.addGift(

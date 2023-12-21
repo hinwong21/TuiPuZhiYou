@@ -1,9 +1,9 @@
 export const projectOptions: string[] = [
   "全部",
-  "P001",
-  "P002",
-  "P003",
-  "P004",
+  "推普之友",
+  "新界北義工團",
+  "香港青年陽光力量",
+  "心意習",
 ];
 
 export const adminOptions: string[] = [
