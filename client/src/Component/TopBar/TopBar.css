@@ -68,6 +68,7 @@
   background-color: var(--secondary-color);
   color: white;
   border-left: white solid 3px;
+  z-index: 9999;
 }
 
 .topBarSideBarIcon {

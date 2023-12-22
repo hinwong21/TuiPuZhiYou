@@ -5,5 +5,5 @@ if (window.location.origin === "http://localhost:3000") {
 } else if (window.location.origin.includes("192.168")) {
   api_origin = window.location.origin.replace("3000", "8080");
 } else {
-  api_origin = "https://api.karaoke-gcat.me";
+  api_origin = "https://api.ef2023.com";
 }
