@@ -48,6 +48,7 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
             onChange={handleStartDateChange}
             startDate={startDate}
             endDate={endDate}
+            dateFormat="dd/MM/yyyy"
           />
         </div>
 
@@ -61,6 +62,7 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
             endDate={endDate}
             startDate={startDate}
             minDate={startDate}
+            dateFormat="dd/MM/yyyy"
           />
         </div>
       </div>
