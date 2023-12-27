@@ -258,4 +258,64 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  uploadJoinEventRecord = async (
+    user_id: string,
+    event_name: string,
+    apply_date: Date,
+    project: string
+  ) => {
+    try {
+      const result = await this.knex("events")
+        .select("event_id")
+        .where("event_name", event_name)
+        .first();
+
+      await this.knex("joinedEventRecords").insert({
+        user_id: user_id,
+        event_id: result.event_id,
+        apply_date: apply_date,
+        project_id: project,
+      });
+      return true;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  uploadExchangeGiftRecord = async (
+    id: string,
+    userId: string,
+    giftName: string,
+    isExchanged: boolean,
+    projectId: string,
+    apply_date: Date,
+    exchange_date: Date | undefined
+  ) => {
+    try {
+      const result = await this.knex("gifts")
+        .select("gift_id", "exchange_point")
+        .where("gift_name", giftName)
+        .first();
+
+      await this.knex("exchangeGiftRecords").insert({
+        exchangeGiftRecords_id: id,
+        user_id: userId,
+        gift_id: result.gift_id,
+        isExchanged: isExchanged,
+        project_id: projectId,
+        apply_date: apply_date,
+        exchange_date: exchange_date,
+      });
+
+      await this.knex("userRecords")
+        .where("user_id", userId)
+        .update({
+          total_point: this.knex.raw(`total_point - ${result.exchange_point}`),
+        });
+      return true;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }

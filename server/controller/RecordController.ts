@@ -188,4 +188,61 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  uploadJoinEventRecord = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const user_id = req.body.user_id;
+      const event_name = req.body.event_name;
+      const apply_date = req.body.apply_date;
+      const project = req.body.project;
+      const result = await this.recordService.uploadJoinEventRecord(
+        user_id,
+        event_name,
+        apply_date,
+        project
+      );
+      if (result) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  uploadExchangeGiftRecord = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    try {
+      const id = getRandomSixDigitNumber();
+      const userId = req.body.user_id;
+      const giftName = req.body.gift_name;
+      const isExchanged = req.body.isExchanged;
+      const projectId = req.body.project;
+      const apply_date = req.body.apply_date;
+      const exchange_date = req.body.exchanged_date;
+
+      const result = await this.recordService.uploadExchangeGiftRecord(
+        id,
+        userId,
+        giftName,
+        isExchanged,
+        projectId,
+        apply_date,
+        exchange_date
+      );
+      if (result) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

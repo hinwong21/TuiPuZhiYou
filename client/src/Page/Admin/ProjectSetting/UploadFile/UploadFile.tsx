@@ -104,6 +104,75 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
           setShowAlert("未能上傳!");
         }
       });
+    } else if (tableName === "joinedEventRecords") {
+      results.forEach(async (item: any) => {
+        if (item.length > 0) {
+          uploadCount += 1;
+          const res = await fetch(`${api_origin}/record/event/upload`, {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: item[0],
+              event_name: item[1],
+              apply_date: new Date(item[2]),
+              project: item[3],
+            }),
+          });
+          const json = await res.json();
+          if (json.success === true) {
+            uploadSuccess += 1;
+          }
+        }
+        if (uploadSuccess === uploadCount) {
+          setShowAlert("成功上傳!");
+        } else {
+          setShowAlert("未能上傳!");
+        }
+      });
+    } else if (tableName === "exchangeGiftRecords") {
+      results.forEach(async (item: any) => {
+        let isExchanged = false;
+        let exchangedDate: any = new Date(item[5]);
+
+        // set string to type boolean
+        if (item[2] === "true") {
+          isExchanged = true;
+        }
+
+        // if no date, set to undefined
+        if (item[5] === "-") {
+          exchangedDate = undefined;
+        }
+
+        if (item.length > 0) {
+          uploadCount += 1;
+          const res = await fetch(`${api_origin}/record/gift/upload`, {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: item[0],
+              gift_name: item[1],
+              isExchanged: isExchanged,
+              project: item[3],
+              apply_date: new Date(item[4]),
+              exchanged_date: exchangedDate,
+            }),
+          });
+          const json = await res.json();
+          if (json.success === true) {
+            uploadSuccess += 1;
+          }
+        }
+        if (uploadSuccess === uploadCount) {
+          setShowAlert("成功上傳!");
+        } else {
+          setShowAlert("未能上傳!");
+        }
+      });
     }
   };
   return (
