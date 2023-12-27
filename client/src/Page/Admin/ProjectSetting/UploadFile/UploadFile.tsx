@@ -38,10 +38,15 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
 
   const handleUploadFileToDB = () => {
     setShowAlert("");
+    // count res json.success
     let uploadSuccess = 0;
+
+    // count upload row
+    let uploadCount = 0;
     if (tableName === "users") {
       results.forEach(async (item: any) => {
         if (item.length > 0) {
+          uploadCount += 1;
           const res = await fetch(`${api_origin}/account/upload`, {
             method: "POST",
             headers: {
@@ -65,7 +70,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
             uploadSuccess += 1;
           }
         }
-        if (uploadSuccess >= results.length - 1) {
+        if (uploadSuccess === uploadCount) {
           setShowAlert("成功上傳!");
         } else {
           setShowAlert("未能上傳!");
@@ -74,6 +79,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
     } else if (tableName === "earnPointRecords") {
       results.forEach(async (item: any) => {
         if (item.length > 0) {
+          uploadCount += 1;
           const res = await fetch(`${api_origin}/record/point`, {
             method: "POST",
             headers: {
@@ -92,7 +98,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
             uploadSuccess += 1;
           }
         }
-        if (uploadSuccess >= results.length - 1) {
+        if (uploadSuccess === uploadCount) {
           setShowAlert("成功上傳!");
         } else {
           setShowAlert("未能上傳!");
@@ -100,7 +106,6 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       });
     }
   };
-
   return (
     <>
       <div className="changePasswordContainer">
