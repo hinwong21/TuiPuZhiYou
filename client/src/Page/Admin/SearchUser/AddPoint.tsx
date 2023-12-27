@@ -24,6 +24,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
   const [wasteWeight, setWasteWeight] = useState<string>("");
   const [point, setPoint] = useState<string>("");
   const [showAlert, setShowAlert] = useState("");
+  const today = new Date();
 
   const handleWasteWeightChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -55,6 +56,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
           point: parseFloat(point),
           weight: parseFloat(wasteWeight),
           project: project,
+          date_add: today,
         }),
       });
       const json = await res.json();

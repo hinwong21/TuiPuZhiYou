@@ -7,13 +7,12 @@ export class RecordController {
   constructor(private recordService: RecordService) {}
 
   addPointRecord = async (req: express.Request, res: express.Response) => {
-    const today = new Date();
     try {
       const userId = req.body.id;
       const point = req.body.point;
       const weight = req.body.weight;
       const projectId = req.body.project;
-      const dateAdd = today;
+      const dateAdd = req.body.date_add;
 
       const result = await this.recordService.addPointRecord(
         userId,

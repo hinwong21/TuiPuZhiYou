@@ -1,0 +1,20 @@
+.uploadFileInputContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.uploadFileInput {
+  font-size: 16px;
+}
+
+.uploadFileName {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin: 20px;
+}
+
+.uploadFileTable {
+  border: 2px solid;
+  border-collapse: collapse;
+}

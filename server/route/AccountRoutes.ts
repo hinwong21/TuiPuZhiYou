@@ -17,3 +17,4 @@ accountRoutes.post(
   accountController.searchUserByEmailOrPhoneNum
 );
 accountRoutes.post("/admin", accountController.changePassword);
+accountRoutes.post("/upload", accountController.uploadNewAccount);

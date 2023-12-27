@@ -116,4 +116,40 @@ export class AccountController {
       errorHandler(err, req, res);
     }
   };
+
+  uploadNewAccount = async (req: express.Request, res: express.Response) => {
+    try {
+      const userId = req.body.user_id;
+      const username: string = req.body.username;
+      const emailOrPhoneNum: string = req.body.emailOrPhoneNum;
+      const password: string = req.body.password;
+      const street: string = req.body.street;
+      const number: string = req.body.number;
+      const floor: string = req.body.floor;
+      let unit: string = transformLowerToUpper(req.body.unit);
+      const projectId = req.body.project_id;
+      const dateAdd = req.body.date_add;
+
+      const result = await this.accountService.registerNewAccount(
+        userId,
+        username,
+        emailOrPhoneNum,
+        password,
+        street,
+        number,
+        floor,
+        unit,
+        projectId,
+        dateAdd
+      );
+
+      if (result) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }
