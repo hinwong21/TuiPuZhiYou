@@ -191,9 +191,12 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
 
         <div className="adminDetailGap"></div>
 
-        {tableName !== "" && (
+        {tableName === "users" ||
+        tableName === "earnPointRecords" ||
+        tableName === "joinedEventRecords" ||
+        tableName === "exchangeGiftRecords" ? (
           <ConfirmButton btnName={"上傳文件"} onClick={handleUploadFileToDB} />
-        )}
+        ) : null}
 
         <div className="uploadFileName">{tableName}</div>
         <table className="uploadFileTable">
