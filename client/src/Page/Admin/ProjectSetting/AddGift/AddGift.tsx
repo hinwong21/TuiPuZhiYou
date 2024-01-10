@@ -6,6 +6,7 @@ import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface AddGiftProps {
   goBack: () => void;
@@ -52,7 +53,8 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   const handleInsertGift = async () => {
-    await setShowAlert("");
+    setShowAlert("");
+    setShowAlert("loading");
     try {
       if (giftName === "") {
         setShowAlert("未填寫禮物名稱!");
@@ -155,6 +157,8 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
           onClick={handleInsertGift}
         />
       </div>
+
+      {showAlert === "loading" && <AlertLoadingBox />}
 
       {showAlert === "添加禮物成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
