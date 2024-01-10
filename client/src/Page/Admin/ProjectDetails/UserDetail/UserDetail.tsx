@@ -5,6 +5,7 @@ import { projectOptions } from "../../../../service/projectOption";
 import { Select } from "../../../../Interaction/Select/Select";
 import { DatePickerRange } from "../../../../Component/DatePickerRange/DatePickerRange";
 import { api_origin } from "../../../../service/api";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface UserDetailProps {
   goBack: () => void;
@@ -31,6 +32,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
     lastDayOfMonth
   );
   const [details, setDetails] = useState([]);
+  const [showAlert, setShowAlert] = useState("");
   const isManager = localStorage.getItem("ef2023_isManager");
 
   const handleProjectChange = (selectedOption: string) => {
@@ -43,6 +45,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
   };
 
   const handleGetAllUser = useCallback(async () => {
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/record/user`, {
       method: "POST",
       headers: {
@@ -61,6 +64,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
       selectedWeight: record.selectedWeight || 0,
     }));
     setDetails(updatedRecords);
+    setShowAlert("");
   }, [project, selectedStartDate, selectedEndDate]);
 
   useEffect(() => {
@@ -68,47 +72,52 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
   }, [handleGetAllUser]);
 
   return (
-    <div className="adminDetailContainer">
-      <SubPageHeader title="用戶詳情" goBack={goBack} />
-      <div className="adminDetailGap"></div>
+    <>
+      <div className="adminDetailContainer">
+        <SubPageHeader title="用戶詳情" goBack={goBack} />
+        <div className="adminDetailGap"></div>
 
-      {isManager && (
-        <Select
-          title="計劃"
-          options={projectOptions}
-          selectedOption={project}
-          onSelectOption={handleProjectChange}
-        />
-      )}
+        {isManager && (
+          <Select
+            title="計劃"
+            options={projectOptions}
+            selectedOption={project}
+            onSelectOption={handleProjectChange}
+          />
+        )}
 
-      <DatePickerRange onDateChange={handleDateChange} />
+        <DatePickerRange onDateChange={handleDateChange} />
 
-      <table className="adminUserDetailTableContainer">
-        <thead>
-          <tr>
-            <th className="adminUserDetailTableUsername">用戶名稱</th>
-            <th className="adminUserDetailTableAddress">地址</th>
-            <th className="adminUserDetailTableTotalPoint">積分</th>
-            <th className="adminUserDetailTableTotalWeight">總廚餘重量</th>
-            <th className="adminUserDetailTableSelectedWeight">
-              日期範圍內的廚餘重量
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {details.map((detail: any, index: number) => (
-            <tr key={index}>
-              <td>{detail.username}</td>
-              <td>
-                {detail.street} {detail.number}號 {detail.floor}樓 {detail.unit}
-              </td>
-              <td>{detail.total_point}</td>
-              <td>{detail.total_weight}</td>
-              <td>{detail.selectedWeight}</td>
+        <table className="adminUserDetailTableContainer">
+          <thead>
+            <tr>
+              <th className="adminUserDetailTableUsername">用戶名稱</th>
+              <th className="adminUserDetailTableAddress">地址</th>
+              <th className="adminUserDetailTableTotalPoint">積分</th>
+              <th className="adminUserDetailTableTotalWeight">總廚餘重量</th>
+              <th className="adminUserDetailTableSelectedWeight">
+                日期範圍內的廚餘重量
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {details.map((detail: any, index: number) => (
+              <tr key={index}>
+                <td>{detail.username}</td>
+                <td>
+                  {detail.street} {detail.number}號 {detail.floor}樓{" "}
+                  {detail.unit}
+                </td>
+                <td>{detail.total_point}</td>
+                <td>{detail.total_weight}</td>
+                <td>{detail.selectedWeight}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {showAlert === "loading" && <AlertLoadingBox />}
+    </>
   );
 };

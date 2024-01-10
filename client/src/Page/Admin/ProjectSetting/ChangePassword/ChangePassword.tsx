@@ -7,6 +7,7 @@ import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 import { adminOptions } from "../../../../service/projectOption";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface ChangePasswordProps {
   goBack: () => void;
@@ -34,7 +35,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   };
 
   const handleChangePasswordBtnClick = async () => {
-    await setShowAlert("");
+    setShowAlert("loading");
     if (newPassword === confirmNewPassword) {
       const res = await fetch(`${api_origin}/account/admin`, {
         method: "POST",
@@ -91,6 +92,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
         </div>
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "成功更改密碼!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

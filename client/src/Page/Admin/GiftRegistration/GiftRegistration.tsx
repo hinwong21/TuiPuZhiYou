@@ -4,6 +4,7 @@ import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { dateFormat } from "../../../service/dateFormat";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 export const GiftRegistration = () => {
   const [giftExchangeId, setGiftExchangeId] = useState("");
@@ -22,6 +23,7 @@ export const GiftRegistration = () => {
 
   const handleClickGetGiftExchangeRecord = async () => {
     setDetails([]);
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/record/admin/giftId`, {
       method: "POST",
       headers: {
@@ -38,9 +40,8 @@ export const GiftRegistration = () => {
         item.exchange_date = dateFormat(item.exchange_date);
       }
     });
-
     setDetails(json.result);
-    console.log(json.result);
+    setShowAlert("");
 
     if (json.result.length === 0) {
       setShowAlert("沒有此換領號碼!");
@@ -48,7 +49,7 @@ export const GiftRegistration = () => {
   };
 
   const handleTookGift = async () => {
-    await setShowAlert("");
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/record/admin/tookGift`, {
       method: "POST",
       headers: {
@@ -61,10 +62,10 @@ export const GiftRegistration = () => {
     const json = await res.json();
 
     if (json.success) {
-      setShowAlert("成功領取!");
       handleClickGetGiftExchangeRecord();
       setGiftExchangeId("");
       setGetExDate(json.result.exchange_date);
+      setShowAlert("成功領取!");
     } else {
       setShowAlert("未成功領取!");
     }
@@ -127,6 +128,7 @@ export const GiftRegistration = () => {
         ))}
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "沒有此換領號碼!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

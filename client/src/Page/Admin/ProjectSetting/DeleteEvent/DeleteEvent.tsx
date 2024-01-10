@@ -4,6 +4,7 @@ import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
 import { Events } from "./AdminEventBox";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface EventItem {
   eventId: string;
@@ -18,11 +19,12 @@ interface DeleteEventProps {
 
 export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   const [events, setEvents] = useState<EventItem[] | null>(null);
-
   const [getEventID, setGetEventID] = useState("");
+  const [showAlert, setShowAlert] = useState("");
 
   //Get all events
   const handleGetAllEvents = async () => {
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/event/`, {
       method: "GET",
     });
@@ -31,15 +33,13 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
       (event: any) => event.isDeleted === false
     );
     setEvents(filteredEvents);
+    setShowAlert("");
   };
-
-  const [showAlert, setShowAlert] = useState("");
 
   const handleDeleteEvent = async (
     eventId: string,
     CheckIsConfirmYes?: string
   ) => {
-    //await setShowAlert("");
     setGetEventID(eventId);
 
     if (CheckIsConfirmYes === "") {
@@ -52,6 +52,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
       return;
     }
 
+    setShowAlert("loading");
     //Get DB data
     const res = await fetch(`${api_origin}/event/delete`, {
       method: "POST",
@@ -64,8 +65,8 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
     });
     const json = await res.json();
     if (json.success) {
+      await handleGetAllEvents();
       setShowAlert("成功刪除!");
-      handleGetAllEvents();
     } else {
       setShowAlert("未能刪除，請稍後再嘗試!");
     }
@@ -109,6 +110,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
         />
       )}
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "成功刪除!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

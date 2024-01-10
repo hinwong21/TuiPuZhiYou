@@ -13,6 +13,7 @@ import {
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { InputTransUpper } from "../../../Component/Input/InputTransform/InputTransUpper";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 export const SearchUser = () => {
   const [directToEarnPointRecord, setDirectToEarnPointRecord] =
@@ -73,7 +74,6 @@ export const SearchUser = () => {
   };
 
   const handleSearchBtnClick = async () => {
-    setShowAlert("");
     // use address search
     if (addressSearch) {
       if (street === "" || number === "" || floor === "" || unit === "") {
@@ -81,6 +81,7 @@ export const SearchUser = () => {
         return;
       }
 
+      setShowAlert("loading");
       const res = await fetch(`${api_origin}/account/search/address`, {
         method: "POST",
         headers: {
@@ -95,6 +96,7 @@ export const SearchUser = () => {
       });
       const json = await res.json();
       setSearchedUsers(json.result);
+      setShowAlert("");
     }
 
     // use emailOrPhoneNum search
@@ -103,6 +105,8 @@ export const SearchUser = () => {
         setShowAlert("未輸入電話號碼或電郵地址!");
         return;
       }
+
+      setShowAlert("loading");
       const res = await fetch(`${api_origin}/account/search/emailOrPhoneNum`, {
         method: "POST",
         headers: {
@@ -114,6 +118,7 @@ export const SearchUser = () => {
       });
       const json = await res.json();
       setSearchedUsers(json.result);
+      setShowAlert("");
     }
     setShowSearchedUsers(true);
 
@@ -232,6 +237,7 @@ export const SearchUser = () => {
         )}
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "未輸入完整地址!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

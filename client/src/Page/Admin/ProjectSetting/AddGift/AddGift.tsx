@@ -53,47 +53,42 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   const handleInsertGift = async () => {
-    setShowAlert("");
-    setShowAlert("loading");
-    try {
-      if (giftName === "") {
-        setShowAlert("未填寫禮物名稱!");
-        return;
-      }
+    if (giftName === "") {
+      setShowAlert("未填寫禮物名稱!");
+      return;
+    }
 
-      if (image) {
-        const base64Image = await convertFileToBase64(image);
-        const project = "推普之友";
+    if (image) {
+      setShowAlert("loading");
+      const base64Image = await convertFileToBase64(image);
+      const project = "推普之友";
 
-        const res = await fetch(`${api_origin}/gift`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            image: base64Image,
-            exchangePoint: exchangePoint,
-            giftDetail: giftDetail,
-            giftName: giftName,
-            project: project,
-          }),
-        });
+      const res = await fetch(`${api_origin}/gift`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          image: base64Image,
+          exchangePoint: exchangePoint,
+          giftDetail: giftDetail,
+          giftName: giftName,
+          project: project,
+        }),
+      });
 
-        const json = await res.json();
-        if (json.success) {
-          setShowAlert("添加禮物成功!");
-          setImage(null);
-          setExchangePoint("");
-          setGiftDetail("");
-          setGiftName("");
-        } else {
-          setShowAlert("未能添加禮物!");
-        }
+      const json = await res.json();
+      if (json.success) {
+        setShowAlert("添加禮物成功!");
+        setImage(null);
+        setExchangePoint("");
+        setGiftDetail("");
+        setGiftName("");
       } else {
-        setShowAlert("未上傳禮物圖片!");
+        setShowAlert("未能添加禮物!");
       }
-    } catch (error) {
-      console.error("Error handling gift insertion:", error);
+    } else {
+      setShowAlert("未上傳禮物圖片!");
     }
   };
 
@@ -159,7 +154,6 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
       </div>
 
       {showAlert === "loading" && <AlertLoadingBox />}
-
       {showAlert === "添加禮物成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

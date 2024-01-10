@@ -5,6 +5,7 @@ import { ConfirmButton } from "../../../../Component/ConfirmButton/ConfirmButton
 import "./UploadFile.css";
 import { api_origin } from "../../../../service/api";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface UploadFileProps {
   goBack: () => void;
@@ -37,7 +38,6 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
   };
 
   const handleUploadFileToDB = () => {
-    setShowAlert("");
     // count res json.success
     let uploadSuccess = 0;
 
@@ -47,6 +47,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       results.forEach(async (item: any) => {
         if (item.length > 0) {
           uploadCount += 1;
+          setShowAlert("loading");
           const res = await fetch(`${api_origin}/account/upload`, {
             method: "POST",
             headers: {
@@ -80,6 +81,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       results.forEach(async (item: any) => {
         if (item.length > 0) {
           uploadCount += 1;
+          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/point`, {
             method: "POST",
             headers: {
@@ -108,6 +110,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       results.forEach(async (item: any) => {
         if (item.length > 0) {
           uploadCount += 1;
+          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/event/upload`, {
             method: "POST",
             headers: {
@@ -148,6 +151,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
 
         if (item.length > 0) {
           uploadCount += 1;
+          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/gift/upload`, {
             method: "POST",
             headers: {
@@ -219,6 +223,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
         </table>
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "成功上傳!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

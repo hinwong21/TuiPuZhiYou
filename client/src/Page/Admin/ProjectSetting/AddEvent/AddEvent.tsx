@@ -5,6 +5,7 @@ import { api_origin } from "../../../../service/api";
 import { convertFileToBase64 } from "../../../../service/imgToBase64";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface AddEventProps {
   goBack: () => void;
@@ -50,51 +51,47 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   };
 
   const handleInsertEvent = async () => {
-    await setShowAlert("");
-    try {
-      if (name === "") {
-        setShowAlert("未填寫活動名稱!");
-        return;
-      }
+    if (name === "") {
+      setShowAlert("未填寫活動名稱!");
+      return;
+    }
 
-      if (participant === "") {
-        setShowAlert("未填寫活動人數!");
-        return;
-      }
+    if (participant === "") {
+      setShowAlert("未填寫活動人數!");
+      return;
+    }
 
-      if (image) {
-        const base64Image = await convertFileToBase64(image);
-        const project = "推普之友";
+    if (image) {
+      setShowAlert("loading");
+      const base64Image = await convertFileToBase64(image);
+      const project = "推普之友";
 
-        const res = await fetch(`${api_origin}/event`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            participant: participant,
-            detail: detail,
-            image: base64Image,
-            project: project,
-          }),
-        });
+      const res = await fetch(`${api_origin}/event`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          participant: participant,
+          detail: detail,
+          image: base64Image,
+          project: project,
+        }),
+      });
 
-        const json = await res.json();
-        if (json.success) {
-          setShowAlert("添加活動成功!");
-          setName("");
-          setImage(null);
-          setParticipant("1");
-          setDetail("");
-        } else {
-          setShowAlert("未能添加活動!");
-        }
+      const json = await res.json();
+      if (json.success) {
+        setShowAlert("添加活動成功!");
+        setName("");
+        setImage(null);
+        setParticipant("1");
+        setDetail("");
       } else {
-        setShowAlert("未上傳活動圖片!");
+        setShowAlert("未能添加活動!");
       }
-    } catch (error) {
-      console.error("Error handling gift insertion:", error);
+    } else {
+      setShowAlert("未上傳活動圖片!");
     }
   };
 
@@ -161,6 +158,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         />
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "添加活動成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

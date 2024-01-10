@@ -5,6 +5,7 @@ import "./Login.css";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
+import { AlertLoadingBox } from "../../Component/AlertBox/AlertLoadingBox";
 
 interface LoginProps {
   onStatusChange: (newStatus: string) => void;
@@ -36,7 +37,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
   );
 
   const handleLoginBtnClick = async () => {
-    await setShowAlert("");
+    setShowAlert("loading");
 
     const res = await fetch(`${api_origin}/account/login`, {
       method: "POST",
@@ -66,7 +67,6 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       setShowAlert("電話號碼或電郵或密碼錯誤！");
     } else {
       localStorage.setItem("ef2023_user_id", json.result.result.user_id);
-
       if (json.result.result.isVolunteer === true) {
         localStorage.setItem("ef2023_isVolunteer", "true");
       } else {
@@ -178,6 +178,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
         </div>
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "電話號碼或電郵或密碼錯誤！" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

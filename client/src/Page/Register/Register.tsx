@@ -82,7 +82,6 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   };
 
   const handleRegisterBtnClick = async () => {
-    await setShowAlert("");
     if (username === "") {
       setShowAlert("請填寫用戶名稱！");
       return;
@@ -111,7 +110,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     }
 
     const project = "推普之友";
-
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
       headers: {
@@ -130,7 +129,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     });
 
     const json = await res.json();
-
+    
     // redirect to userInfo page
     if (json.success === true) {
       localStorage.setItem("ef2023_user_id", json.user_id);

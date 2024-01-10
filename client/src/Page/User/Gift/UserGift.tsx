@@ -4,6 +4,7 @@ import { Gift } from "./Gift";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { AlertYesNoBox } from "../../../Component/AlertBox/AlertYesNoBox";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 interface GiftItem {
   giftID: string;
@@ -22,6 +23,7 @@ export const UserGift = () => {
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/`, {
       method: "POST",
       headers: {
@@ -32,6 +34,7 @@ export const UserGift = () => {
       }),
     });
     const json = await res.json();
+    setShowAlert("");
 
     if (json.result && json.result.length > 0) {
       const point = parseInt(json.result[0].total_point);
@@ -41,12 +44,14 @@ export const UserGift = () => {
 
   //Get all gifts
   const handleGetAllGifts = async () => {
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/gift/`, {
       method: "GET",
     });
     const json = await res.json();
     const filteredGifts = json.filter((gift: any) => gift.isDeleted === false);
     setGifts(filteredGifts);
+    setShowAlert("");
   };
 
   const handleExchangeGift = async (
@@ -54,7 +59,6 @@ export const UserGift = () => {
     giftId: string,
     CheckIsConfirmYes?: string
   ) => {
-    await setShowAlert("");
     setGetEXGiftPoint(point);
     setGetEXGiftID(giftId);
 
@@ -74,6 +78,8 @@ export const UserGift = () => {
       return;
     }
 
+    setShowAlert("loading");
+    
     const userId = localStorage.getItem("ef2023_user_id");
     const project = "推普之友";
     const res = await fetch(`${api_origin}/record/gift`, {
@@ -129,6 +135,7 @@ export const UserGift = () => {
         </div>
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "是否確認換領？" && (
         <AlertYesNoBox
           header={showAlert}

@@ -4,14 +4,17 @@ import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { GiftDetail } from "./GiftDetail/GiftDetail";
 import { EventDetail } from "./EventDetail/EventDetail";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 export const UserInfo = () => {
   const [totalPoint, setTotalPoint] = useState(0);
   const [totalWaste, setTotalWaste] = useState(0);
   const [thisMonthWaste, setThisMonthWaste] = useState(0);
   const [status, setStatus] = useState("");
+  const [showAlert, setShowAlert] = useState("");
 
   const handleGetUserDetails = async () => {
+    setShowAlert("loading");
     const userId = localStorage.getItem("ef2023_user_id");
     const res = await fetch(`${api_origin}/account/`, {
       method: "POST",
@@ -23,6 +26,7 @@ export const UserInfo = () => {
       }),
     });
     const json = await res.json();
+    setShowAlert("");
 
     if (json.result && json.result.length > 0) {
       const point = parseInt(json.result[0].total_point);
@@ -32,6 +36,7 @@ export const UserInfo = () => {
   };
 
   const handleGetUserThisMonthWasteRecord = async () => {
+    setShowAlert("loading");
     const userId = localStorage.getItem("ef2023_user_id");
     const res = await fetch(`${api_origin}/record/waste`, {
       method: "POST",
@@ -43,6 +48,7 @@ export const UserInfo = () => {
       }),
     });
     const json = await res.json();
+    setShowAlert("");
     if (json.result && json.result.length > 0) {
       const currentMonth = new Date().getMonth() + 1;
       const thisMonthRecords = json.result.filter((record: any) => {
@@ -101,7 +107,6 @@ export const UserInfo = () => {
               handleUpdateStatus("eventDetail");
             }}
           />
-         
         </div>
       )}
 
@@ -111,6 +116,8 @@ export const UserInfo = () => {
       {status === "eventDetail" && (
         <EventDetail goBack={() => handleUpdateStatus("")} />
       )}
+
+      {showAlert === "loading" && <AlertLoadingBox />}
     </>
   );
 };

@@ -5,6 +5,7 @@ import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { SubPageHeader } from "../../../Component/SubPageHeader/SubPageHeader";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 interface UserDetail {
   user_id: number;
@@ -37,8 +38,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
   };
 
   const handleConfirmBtn = async () => {
-    await setShowAlert("");
-
+    setShowAlert("");
     if (wasteWeight === "" || point === "") {
       setShowAlert("未輸入積分或廚餘!");
       return;
@@ -46,6 +46,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
     if (parseFloat(point) && parseFloat(wasteWeight)) {
       const project = "推普之友";
+      setShowAlert("loading");
       const res = await fetch(`${api_origin}/record/point`, {
         method: "POST",
         headers: {
@@ -108,6 +109,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
         />
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "未輸入積分或廚餘!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

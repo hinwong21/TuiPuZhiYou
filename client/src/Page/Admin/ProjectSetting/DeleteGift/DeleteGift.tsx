@@ -4,6 +4,7 @@ import { api_origin } from "../../../../service/api";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 import { AlertYesNoBox } from "../../../../Component/AlertBox/AlertYesNoBox";
+import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
 
 interface GiftItem {
   giftID: string;
@@ -26,12 +27,14 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
 
   //Get all gifts
   const handleGetAllGifts = async () => {
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/gift/`, {
       method: "GET",
     });
     const json = await res.json();
     const filteredGifts = json.filter((gift: any) => gift.isDeleted === false);
     setGifts(filteredGifts);
+    setShowAlert("");
   };
 
   const handleDeleteGift = async (
@@ -50,6 +53,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
       return;
     }
 
+    setShowAlert("loading");
     //Get DB data
     const res = await fetch(`${api_origin}/gift/delete`, {
       method: "POST",
@@ -62,8 +66,8 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
     });
     const json = await res.json();
     if (json.success) {
+      await handleGetAllGifts();
       setShowAlert("成功刪除禮物!");
-      handleGetAllGifts();
     } else {
       setShowAlert("未能刪除禮物!");
     }
@@ -97,6 +101,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
         </div>
       </div>
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "是否確認刪除？" && (
         <AlertYesNoBox
           header={showAlert}

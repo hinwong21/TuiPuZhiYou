@@ -11,10 +11,12 @@ import { SearchUser } from "./Page/Admin/SearchUser/SearchUser";
 import { ProjectDetails } from "./Page/Admin/ProjectDetails/ProjectDetails";
 import { ProjectSetting } from "./Page/Admin/ProjectSetting/ProjectSetting";
 import { GiftRegistration } from "./Page/Admin/GiftRegistration/GiftRegistration";
+import { AlertLoadingBox } from "./Component/AlertBox/AlertLoadingBox";
 
 function App() {
   const [status, setStatus] = useState("login");
   const [userName, setUsername] = useState("");
+  const [showAlert, setShowAlert] = useState("");
 
   // change page function
   const handleStatusChange = (newStatus: string) => {
@@ -42,6 +44,7 @@ function App() {
 
   // call api to pass the username to TopBar
   const handleGetUserDetails = async () => {
+    setShowAlert("loading");
     const userId = localStorage.getItem("ef2023_user_id");
     const res = await fetch(`${api_origin}/account/`, {
       method: "POST",
@@ -53,6 +56,7 @@ function App() {
       }),
     });
     const json = await res.json();
+    setShowAlert("");
 
     if (json.result && json.result.length > 0) {
       const username = json.result[0].username;
@@ -66,28 +70,32 @@ function App() {
   }, []);
 
   return (
-    <div className="wrapper">
-      <TopBar userName={userName} onStatusChange={handleStatusChange} />
-      <div className="pageContainer">
-        {status === "login" && (
-          <Login username={userName} onStatusChange={handleStatusChange} />
-        )}
-        {status === "register" && (
-          <Register onStatusChange={handleStatusChange} />
-        )}
+    <>
+      <div className="wrapper">
+        <TopBar userName={userName} onStatusChange={handleStatusChange} />
+        <div className="pageContainer">
+          {status === "login" && (
+            <Login username={userName} onStatusChange={handleStatusChange} />
+          )}
+          {status === "register" && (
+            <Register onStatusChange={handleStatusChange} />
+          )}
 
-        {/* Only for User */}
-        {status === "userInfo" && <UserInfo />}
-        {status === "userGift" && <UserGift />}
-        {status === "userEvent" && <UserEvent />}
+          {/* Only for User */}
+          {status === "userInfo" && <UserInfo />}
+          {status === "userGift" && <UserGift />}
+          {status === "userEvent" && <UserEvent />}
 
-        {/* Only for Admin */}
-        {status === "searchUser" && <SearchUser />}
-        {status === "giftRegistration" && <GiftRegistration />}
-        {status === "projectDetails" && <ProjectDetails />}
-        {status === "projectSetting" && <ProjectSetting />}
+          {/* Only for Admin */}
+          {status === "searchUser" && <SearchUser />}
+          {status === "giftRegistration" && <GiftRegistration />}
+          {status === "projectDetails" && <ProjectDetails />}
+          {status === "projectSetting" && <ProjectSetting />}
+        </div>
       </div>
-    </div>
+
+      {showAlert === "loading" && <AlertLoadingBox />}
+    </>
   );
 }
 

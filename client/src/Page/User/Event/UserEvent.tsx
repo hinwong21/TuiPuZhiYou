@@ -4,6 +4,7 @@ import { Events } from "./UserEventBox";
 import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { AlertYesNoBox } from "../../../Component/AlertBox/AlertYesNoBox";
+import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 interface EventItem {
   eventId: string;
@@ -19,6 +20,7 @@ export const UserEvent = () => {
   const [getEventsID, setGetEventsID] = useState("");
 
   const handleGetAllEvents = async () => {
+    setShowAlert("loading");
     const res = await fetch(`${api_origin}/event/`, {
       method: "GET",
     });
@@ -27,6 +29,7 @@ export const UserEvent = () => {
       (event: any) => event.isDeleted === false
     );
     setEvents(filteredEvents);
+    setShowAlert("");
   };
 
   const handleCheckEventFullOrNot = async (
@@ -52,7 +55,6 @@ export const UserEvent = () => {
     userId: string | null,
     CheckIsConfirmYes?: string
   ) => {
-    await setShowAlert("");
     setGetEventsID(eventId);
 
     if (CheckIsConfirmYes === "") {
@@ -65,6 +67,7 @@ export const UserEvent = () => {
       return;
     }
 
+    setShowAlert("loading");
     const result = await handleCheckEventFullOrNot(eventId, userId);
 
     if (result.joined === true) {
@@ -89,8 +92,8 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
-        setShowAlert("報名成功!");
         handleGetAllEvents();
+        setShowAlert("報名成功!");
       } else {
         setShowAlert("未能報名，請稍後再嘗試!");
       }
@@ -135,6 +138,7 @@ export const UserEvent = () => {
         />
       )}
 
+      {showAlert === "loading" && <AlertLoadingBox />}
       {showAlert === "已報名活動!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
