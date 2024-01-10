@@ -55,7 +55,7 @@ export class AccountService {
         if (userResult === undefined) {
           return { success: false };
         } else {
-          return { success: true, result: userResult};
+          return { success: true, result: userResult };
         }
       } else {
         return { success: true, result: adminResult };
@@ -112,7 +112,9 @@ export class AccountService {
     try {
       const result = await this.knex("users")
         .select("*")
-        .where("emailOrPhoneNum", emailOrPhoneNum);
+        .where(function () {
+          this.where("emailOrPhoneNum", "like", `%${emailOrPhoneNum}%`);
+        });
       return result;
     } catch (err) {
       throw new Error((err as Error).message);
