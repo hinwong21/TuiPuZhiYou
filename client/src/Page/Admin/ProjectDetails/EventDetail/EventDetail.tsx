@@ -14,6 +14,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ goBack }) => {
   const [project, setProject] = useState<string>("推普之友");
   const [details, setDetails] = useState([]);
   const [showAlert, setShowAlert] = useState("");
+  const isManager = localStorage.getItem("ef2023_isManager");
 
   const handleProjectChange = (selectedOption: string) => {
     setProject(selectedOption);
@@ -45,12 +46,14 @@ export const EventDetail: React.FC<EventDetailProps> = ({ goBack }) => {
         <SubPageHeader title="活動報名詳情" goBack={goBack} />
         <div className="adminDetailGap"></div>
 
-        <Select
-          title="計劃"
-          options={projectOptions}
-          selectedOption={project}
-          onSelectOption={handleProjectChange}
-        />
+        {isManager && (
+          <Select
+            title="計劃"
+            options={projectOptions}
+            selectedOption={project}
+            onSelectOption={handleProjectChange}
+          />
+        )}
 
         <table className="adminUserDetailTableContainer">
           <thead>
