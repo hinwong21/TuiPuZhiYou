@@ -48,7 +48,12 @@ export class AccountController {
     try {
       const phoneNumOrEmail = req.body.phoneNumOrEmail;
       const password = req.body.password;
-      const result = await this.accountService.login(phoneNumOrEmail, password);
+      const project_id = req.body.projectId;
+      const result = await this.accountService.login(
+        phoneNumOrEmail,
+        password,
+        project_id
+      );
       return res.json({ result: result });
     } catch (err) {
       errorHandler(err, req, res);

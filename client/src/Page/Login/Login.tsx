@@ -38,6 +38,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
 
   const handleLoginBtnClick = async () => {
     setShowAlert("loading");
+    const projectId = "推普之友";
 
     const res = await fetch(`${api_origin}/account/login`, {
       method: "POST",
@@ -47,6 +48,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
       body: JSON.stringify({
         phoneNumOrEmail: phoneNumOrEmail,
         password: password,
+        projectId: projectId,
       }),
     });
     const json = await res.json();

@@ -39,18 +39,26 @@ export class AccountService {
     }
   };
 
-  login = async (emailOrPhoneNum: string, password: string) => {
+  login = async (
+    emailOrPhoneNum: string,
+    password: string,
+    project_id: string
+  ) => {
     try {
       const [adminResult] = await this.knex("admins")
         .select("*")
         .where("username", emailOrPhoneNum)
-        .andWhere("password", password);
+        .andWhere("password", password)
+        .andWhere(function () {
+          this.where("project_id", project_id).orWhereNull("project_id");
+        });
 
       if (adminResult == undefined) {
         const [userResult] = await this.knex("users")
           .select("user_id", "username")
           .where("emailOrPhoneNum", emailOrPhoneNum)
-          .andWhere("password", password);
+          .andWhere("password", password)
+          .andWhere("project_id", project_id);
 
         if (userResult === undefined) {
           return { success: false };
