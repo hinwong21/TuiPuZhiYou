@@ -10,5 +10,5 @@
 }
 
 .ConButton:active {
-  background-color: #117b41;
+  background-color: var(--confirmButton-color);
 }

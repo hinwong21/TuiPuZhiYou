@@ -95,16 +95,14 @@ export const TopBar = (props: TopBarProps) => {
             onClick={() => handleStatus("giftRegistration")}
           />
           <SideBarSession
-            locked
-            hasPermission={isAdmin}
-            title="計劃設置"
-            onClick={() => handleStatus("projectSetting")}
+            title="計劃詳情"
+            onClick={() => handleStatus("projectDetails")}
           />
           <SideBarSession
             locked
             hasPermission={isAdmin}
-            title="計劃詳情"
-            onClick={() => handleStatus("projectDetails")}
+            title="計劃設置"
+            onClick={() => handleStatus("projectSetting")}
           />
 
           <div className="topBarSideBarSessionLogout" onClick={handleLogout}>
