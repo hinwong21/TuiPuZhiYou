@@ -84,18 +84,16 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
         <div className="giftBoardContainer">
           <div className="giftBoard">
             {gifts?.map((gift: any) => (
-              <>
-                <Gift
-                  key={gift.gift_id}
-                  giftID={gift.gift_id}
-                  image={gift.gift_image}
-                  name={gift.gift_name}
-                  details={gift.gift_detail}
-                  point={gift.exchange_point}
-                  onClick={() => handleDeleteGift(gift.gift_id, "")}
-                  btnName="刪除"
-                />
-              </>
+              <Gift
+                key={gift.gift_id}
+                giftID={gift.gift_id}
+                image={gift.gift_image}
+                name={gift.gift_name}
+                details={gift.gift_detail}
+                point={gift.exchange_point}
+                onClick={() => handleDeleteGift(gift.gift_id, "")}
+                btnName="刪除"
+              />
             ))}
           </div>
         </div>
