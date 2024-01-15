@@ -53,6 +53,8 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   };
 
   const handleInsertGift = async () => {
+    await setShowAlert("");
+
     if (giftName === "") {
       setShowAlert("未填寫禮物名稱!");
       return;

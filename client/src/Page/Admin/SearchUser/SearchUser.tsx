@@ -74,6 +74,8 @@ export const SearchUser = () => {
   };
 
   const handleSearchBtnClick = async () => {
+    await setShowAlert("");
+
     // use address search
     if (addressSearch) {
       if (street === "" || number === "" || floor === "" || unit === "") {

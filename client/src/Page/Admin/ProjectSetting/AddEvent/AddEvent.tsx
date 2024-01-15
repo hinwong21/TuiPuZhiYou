@@ -51,6 +51,8 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   };
 
   const handleInsertEvent = async () => {
+    await setShowAlert("");
+
     if (name === "") {
       setShowAlert("未填寫活動名稱!");
       return;

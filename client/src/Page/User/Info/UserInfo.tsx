@@ -81,8 +81,8 @@ export const UserInfo = () => {
       {status === "" && (
         <div className="userInfoContainer">
           <div className="userInfoGap"></div>
-          <div className="projectHeader">三無大廈環保回收你我出力 </div>
-          <div className="projectSubHeader">（廚餘回收）</div>
+          <div className="projectHeader">三無大廈環保回收你我出力</div>
+          <div className="projectSubHeader">(廚餘回收)</div>
           <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
           <div className="userInfoWasteRecord">
             本月廚餘： {thisMonthWaste} 公斤

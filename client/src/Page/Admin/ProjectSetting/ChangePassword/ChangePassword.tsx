@@ -35,6 +35,18 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   };
 
   const handleChangePasswordBtnClick = async () => {
+    await setShowAlert("");
+
+     if (adminName === "") {
+       setShowAlert("未選擇用戶!");
+       return;
+     }
+
+    if (newPassword === "") {
+      setShowAlert("未填寫新密碼!");
+      return;
+    }
+
     setShowAlert("loading");
     if (newPassword === confirmNewPassword) {
       const res = await fetch(`${api_origin}/account/admin`, {
@@ -93,6 +105,12 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
       </div>
 
       {showAlert === "loading" && <AlertLoadingBox />}
+      {showAlert === "未選擇用戶!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫新密碼!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
       {showAlert === "成功更改密碼!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}

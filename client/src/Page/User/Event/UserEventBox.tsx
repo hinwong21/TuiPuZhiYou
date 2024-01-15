@@ -30,6 +30,8 @@ export const Events: React.FC<EventProps> = ({
   const handleChangeImageStyle = () => {
     if (imageStyle === "styleOne") {
       setImageStyle("styleTwo");
+    } else if (imageStyle === "styleTwo") {
+      setImageStyle("styleThree");
     } else {
       setImageStyle("styleOne");
     }
@@ -52,7 +54,9 @@ export const Events: React.FC<EventProps> = ({
             className={
               imageStyle === "styleOne"
                 ? "eventImageStyleOne"
-                : "eventImageStyleTwo"
+                : imageStyle === "styleTwo"
+                ? "eventImageStyleTwo"
+                : "eventImageStyleThree"
             }
           />
         </div>

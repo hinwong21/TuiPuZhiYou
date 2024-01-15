@@ -125,11 +125,10 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
     <>
       <div className="loginContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈環保回收你我出力 </div>
-        <div className="projectSubHeader">（廚餘回收）</div>
+        <div className="projectHeader">三無大廈環保回收你我出力</div>
+        <div className="projectSubHeader">(廚餘回收)</div>
 
         <h2>登入</h2>
-
         {/* Input fields for username and password */}
         <Input
           title="電話號碼或電郵"
@@ -169,7 +168,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
           <p>
             沒有帳戶？{" "}
             <span
-              style={{ color: "green", fontWeight: "bold", cursor: "pointer" }}
+              className="loginRegisterBtn"
               onClick={() => {
                 handleStatus("register");
               }}

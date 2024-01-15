@@ -82,6 +82,8 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
   };
 
   const handleRegisterBtnClick = async () => {
+    await setShowAlert("");
+
     if (username === "") {
       setShowAlert("請填寫用戶名稱！");
       return;
@@ -129,7 +131,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     });
 
     const json = await res.json();
-    
+
     // redirect to userInfo page
     if (json.success === true) {
       localStorage.setItem("ef2023_user_id", json.user_id);
@@ -148,8 +150,8 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     <>
       <div className="registerContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈環保回收你我出力 </div>
-        <div className="projectSubHeader">（廚餘回收）</div>
+        <div className="projectHeader">三無大廈環保回收你我出力</div>
+        <div className="projectSubHeader">(廚餘回收)</div>
 
         <h2>注册帳戶</h2>
         <Input

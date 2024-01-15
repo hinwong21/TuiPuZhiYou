@@ -20,8 +20,30 @@
   text-align: center;
 }
 
+@media (max-width: 630px) {
+  .projectHeader {
+  font-weight: bolder;
+  font-size: 30px;
+  margin: 10px;
+  text-align: center;
+}
+
+.projectSubHeader {
+  font-weight: bolder;
+  font-size: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+}
+
 .register-link {
   margin-top: 2%;
+}
+
+.loginRegisterBtn {
+  color: var(--secondary-color);
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .rememberMe {

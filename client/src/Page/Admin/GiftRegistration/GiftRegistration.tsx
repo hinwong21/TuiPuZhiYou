@@ -62,8 +62,9 @@ export const GiftRegistration = () => {
     const json = await res.json();
 
     if (json.success) {
-      handleClickGetGiftExchangeRecord();
+      await handleClickGetGiftExchangeRecord();
       setGiftExchangeId("");
+      setDetails([]);
       setGetExDate(json.result.exchange_date);
       setShowAlert("成功領取!");
     } else {
@@ -123,7 +124,9 @@ export const GiftRegistration = () => {
                 </tr>
               </tbody>
             </table>
-            <ConfirmButton btnName={"一鍵換領"} onClick={handleTookGift} />
+            {detail.isExchanged === false && (
+              <ConfirmButton btnName={"一鍵換領"} onClick={handleTookGift} />
+            )}
           </>
         ))}
       </div>

@@ -56,6 +56,10 @@
   width: 60vw;
 }
 
+.eventImageStyleThree {
+  width: 60vw;
+}
+
 @media (max-width: 630px) {
   .eventImageBox {
     width: 100vw;
@@ -70,10 +74,15 @@
   }
 
   .eventImageStyleTwo {
-    width: auto;
+    width: 100vw;
     height: auto;
     max-height: 65vh;
     object-fit: cover;
+  }
+
+  .eventImageStyleThree {
+    width: auto;
+    height: 65vh;
   }
 }
 
