@@ -245,4 +245,20 @@ export class RecordController {
       errorHandler(err, req, res);
     }
   };
+
+  getAllPointRecords = async (req: express.Request, res: express.Response) => {
+    try {
+      const project = req.body.project;
+      const start = req.body.start;
+      const end = req.body.end;
+      const result = await this.recordService.getAllPointRecords(
+        project,
+        start,
+        end
+      );
+      return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
 }

@@ -30,3 +30,4 @@ recordRoutes.post(
 recordRoutes.post("/admin/tookGift", recordController.setGiftIsExchanged);
 recordRoutes.post("/event/upload", recordController.uploadJoinEventRecord);
 recordRoutes.post("/gift/upload", recordController.uploadExchangeGiftRecord);
+recordRoutes.post("/user/point", recordController.getAllPointRecords);

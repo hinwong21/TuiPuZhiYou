@@ -318,4 +318,25 @@ export class RecordService {
       throw new Error((err as Error).message);
     }
   };
+
+  getAllPointRecords = async (project: string, start: Date, end: Date) => {
+    try {
+      if (project === "全部") {
+        const records = await this.knex("earnPointRecords")
+          .select("*")
+          .orderBy("earnPointRecords.date_add", "desc")
+          .join("users", "earnPointRecords.user_id", "=", "users.user_id");
+        return records;
+      } else {
+        const records = await this.knex("earnPointRecords")
+          .select("*")
+          .orderBy("earnPointRecords.date_add", "desc")
+          .join("users", "earnPointRecords.user_id", "=", "users.user_id")
+          .where("earnPointRecords.project_id", "=", project);
+        return records;
+      }
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
 }
