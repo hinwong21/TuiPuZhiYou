@@ -79,9 +79,9 @@ export const UserGift = () => {
     }
 
     setShowAlert("loading");
-    
+
     const userId = localStorage.getItem("ef2023_user_id");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     const res = await fetch(`${api_origin}/record/gift`, {
       method: "POST",
       headers: {

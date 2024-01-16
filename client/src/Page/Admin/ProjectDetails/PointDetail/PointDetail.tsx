@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./UserDetail.css";
+import "../UserDetail/UserDetail.css";
 import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader";
 import { projectOptions } from "../../../../service/projectOption";
 import { Select } from "../../../../Interaction/Select/Select";
 import { DatePickerRange } from "../../../../Component/DatePickerRange/DatePickerRange";
 import { api_origin } from "../../../../service/api";
 import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
+import { dateFormat } from "../../../../service/dateFormat";
 
-interface UserDetailProps {
+interface PointDetailProps {
   goBack: () => void;
 }
 
-export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
+export const PointDetail: React.FC<PointDetailProps> = ({ goBack }) => {
   const currentDate = new Date();
   const firstDayOfMonth = new Date(
     currentDate.getFullYear(),
@@ -46,7 +47,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
 
   const handleGetAllUser = useCallback(async () => {
     setShowAlert("loading");
-    const res = await fetch(`${api_origin}/record/user`, {
+    const res = await fetch(`${api_origin}/record/user/point`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -58,10 +59,12 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
+
     const updatedRecords = json.result.map((record: any) => ({
       ...record,
-      total_point: Math.round(record.total_point),
-      selectedWeight: record.selectedWeight || 0,
+      earn_point: Math.round(record.earn_point),
+      weight: record.weight || 0,
+      date_add: dateFormat(record.date_add),
     }));
     setDetails(updatedRecords);
     setShowAlert("");
@@ -74,7 +77,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
   return (
     <>
       <div className="adminDetailContainer">
-        <SubPageHeader title="用戶詳情" goBack={goBack} />
+        <SubPageHeader title="積分詳情" goBack={goBack} />
         <div className="adminDetailGap"></div>
 
         {isManager && (
@@ -94,10 +97,8 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
               <th className="adminUserDetailTableUsername">用戶名稱</th>
               <th className="adminUserDetailTableAddress">地址</th>
               <th className="adminUserDetailTableTotalPoint">積分</th>
-              <th className="adminUserDetailTableTotalWeight">總廚餘重量</th>
-              <th className="adminUserDetailTableSelectedWeight">
-                日期範圍內的廚餘重量
-              </th>
+              <th className="adminUserDetailTableTotalWeight">重量</th>
+              <th className="adminUserDetailTableSelectedWeight">添加日期</th>
             </tr>
           </thead>
           <tbody>
@@ -108,9 +109,9 @@ export const UserDetail: React.FC<UserDetailProps> = ({ goBack }) => {
                   {detail.street} {detail.number}號 {detail.floor}樓{" "}
                   {detail.unit}
                 </td>
-                <td>{detail.total_point}</td>
-                <td>{detail.total_weight}</td>
-                <td>{detail.selectedWeight}</td>
+                <td>{detail.earn_point}</td>
+                <td>{detail.weight}</td>
+                <td>{detail.date_add}</td>
               </tr>
             ))}
           </tbody>

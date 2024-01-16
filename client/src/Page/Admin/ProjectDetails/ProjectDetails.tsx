@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GiftDetail } from "./GiftDetail/GiftDetail";
 import { EventDetail } from "./EventDetail/EventDetail";
 import { UserDetail } from "./UserDetail/UserDetail";
+import { PointDetail } from "./PointDetail/PointDetail";
 
 export const ProjectDetails = () => {
   const [status, setStatus] = useState<string>("");
@@ -32,6 +33,12 @@ export const ProjectDetails = () => {
           >
             活動報名詳情
           </div>
+          <div
+            className="projectSettingSession"
+            onClick={() => handleSessionClick("pointDetail")}
+          >
+            積分詳情
+          </div>
         </>
       )}
       {status === "userDetail" && (
@@ -42,6 +49,9 @@ export const ProjectDetails = () => {
       )}
       {status === "eventDetail" && (
         <EventDetail goBack={() => handleSessionClick("")} />
+      )}
+      {status === "pointDetail" && (
+        <PointDetail goBack={() => handleSessionClick("")} />
       )}
     </div>
   );

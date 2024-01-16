@@ -181,46 +181,50 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
   };
   return (
     <>
-      <div className="changePasswordContainer">
+      <div className="editGiftContainer">
         <SubPageHeader title="上傳文件" goBack={goBack} />
 
-        <div className="adminDetailGap"></div>
-        <div className="uploadFileInputContainer">
-          <input
-            type="file"
-            onChange={handleFileUpload}
-            className="uploadFileInput"
-          />
-        </div>
+        <div className="changePasswordContainer">
+          <div className="uploadFileInputContainer">
+            <input
+              type="file"
+              onChange={handleFileUpload}
+              className="uploadFileInput"
+            />
+          </div>
 
-        <div className="adminDetailGap"></div>
+          <div className="adminDetailGap"></div>
 
-        {tableName === "users" ||
-        tableName === "earnPointRecords" ||
-        tableName === "joinedEventRecords" ||
-        tableName === "exchangeGiftRecords" ? (
-          <ConfirmButton btnName={"上傳文件"} onClick={handleUploadFileToDB} />
-        ) : null}
+          {tableName === "users" ||
+          tableName === "earnPointRecords" ||
+          tableName === "joinedEventRecords" ||
+          tableName === "exchangeGiftRecords" ? (
+            <ConfirmButton
+              btnName={"上傳文件"}
+              onClick={handleUploadFileToDB}
+            />
+          ) : null}
 
-        <div className="uploadFileName">{tableName}</div>
-        <table className="uploadFileTable">
-          <thead>
-            <tr>
-              {headers.map((header: any, index: number) => (
-                <th key={index}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((result: any, rowIndex: number) => (
-              <tr key={rowIndex}>
-                {result.map((cell: any, cellIndex: number) => (
-                  <td key={cellIndex}>{cell}</td>
+          <div className="uploadFileName">{tableName}</div>
+          <table className="uploadFileTable">
+            <thead>
+              <tr>
+                {headers.map((header: any, index: number) => (
+                  <th key={index}>{header}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {results.map((result: any, rowIndex: number) => (
+                <tr key={rowIndex}>
+                  {result.map((cell: any, cellIndex: number) => (
+                    <td key={cellIndex}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {showAlert === "loading" && <AlertLoadingBox />}

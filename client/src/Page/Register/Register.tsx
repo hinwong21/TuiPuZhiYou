@@ -111,7 +111,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       return;
     }
 
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
@@ -150,7 +150,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     <>
       <div className="registerContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈環保回收你我出力</div>
+        <div className="projectHeader">三無大廈回收大行動</div>
         <div className="projectSubHeader">(廚餘回收)</div>
 
         <h2>注册帳戶</h2>

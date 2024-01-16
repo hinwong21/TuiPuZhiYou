@@ -39,14 +39,14 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
 
   const handleConfirmBtn = async () => {
     await setShowAlert("");
-    
+
     if (wasteWeight === "" || point === "") {
       setShowAlert("未輸入積分或廚餘!");
       return;
     }
 
     if (parseFloat(point) && parseFloat(wasteWeight)) {
-      const project = "推普之友";
+      const project = "香港青年陽光力量";
       setShowAlert("loading");
       const res = await fetch(`${api_origin}/record/point`, {
         method: "POST",
