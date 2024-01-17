@@ -8,6 +8,7 @@ import { SubPageHeader } from "../../../../Component/SubPageHeader/SubPageHeader
 import { AlertConBox } from "../../../../Component/AlertBox/AlertConBox";
 import { adminOptions } from "../../../../service/projectOption";
 import { AlertLoadingBox } from "../../../../Component/AlertBox/AlertLoadingBox";
+import { handleKeyPress } from "../../../../service/useKeyPress";
 
 interface ChangePasswordProps {
   goBack: () => void;
@@ -37,10 +38,10 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
   const handleChangePasswordBtnClick = async () => {
     await setShowAlert("");
 
-     if (adminName === "") {
-       setShowAlert("未選擇用戶!");
-       return;
-     }
+    if (adminName === "") {
+      setShowAlert("未選擇用戶!");
+      return;
+    }
 
     if (newPassword === "") {
       setShowAlert("未填寫新密碼!");
@@ -95,6 +96,9 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ goBack }) => {
             type="text"
             value={confirmNewPassword}
             onChange={handleConfirmNewPasswordChange}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+              handleKeyPress(e, "Enter", handleChangePasswordBtnClick)
+            }
           />
 
           <ConfirmButton

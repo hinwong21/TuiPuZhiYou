@@ -6,6 +6,7 @@ import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { SubPageHeader } from "../../../Component/SubPageHeader/SubPageHeader";
 import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
+import { handleKeyPress } from "../../../service/useKeyPress";
 
 interface UserDetail {
   user_id: number;
@@ -101,6 +102,9 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
           type="number"
           value={point}
           onChange={handlePointChange}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyPress(e, "Enter", handleConfirmBtn)
+          }
         />
 
         <ConfirmButton

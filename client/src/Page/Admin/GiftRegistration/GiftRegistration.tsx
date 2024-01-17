@@ -5,6 +5,7 @@ import { api_origin } from "../../../service/api";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { dateFormat } from "../../../service/dateFormat";
 import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
+import { handleKeyPress } from "../../../service/useKeyPress";
 
 export const GiftRegistration = () => {
   const [giftExchangeId, setGiftExchangeId] = useState("");
@@ -84,6 +85,9 @@ export const GiftRegistration = () => {
           onChange={handleGiftExchangeIdChange}
           component={
             <div className="registerDefaultNotice">*請輸入EX- 後的六位數字</div>
+          }
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyPress(e, "Enter", handleClickGetGiftExchangeRecord)
           }
         />
 
