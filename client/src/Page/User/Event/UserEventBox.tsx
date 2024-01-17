@@ -26,13 +26,24 @@ export const Events: React.FC<EventProps> = ({
 }) => {
   const [isDetailEmpty, setIsDetailEmpty] = useState<Boolean>(true);
   const [imageStyle, setImageStyle] = useState("styleOne");
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  const handleImageLoad = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    const { naturalWidth: width, naturalHeight: height } = event.currentTarget;
+    setImageSize({ width, height });
+  };
 
   const handleChangeImageStyle = () => {
-    if (imageStyle === "styleOne") {
+    if (imageStyle === "styleOne" && imageSize.width > imageSize.height) {
       setImageStyle("styleTwo");
-    } else if (imageStyle === "styleTwo") {
+    } else if (
+      imageStyle === "styleOne" &&
+      imageSize.width <= imageSize.height
+    ) {
       setImageStyle("styleThree");
-    } else {
+    } else if (imageStyle !== "styleOne") {
       setImageStyle("styleOne");
     }
   };
@@ -58,6 +69,7 @@ export const Events: React.FC<EventProps> = ({
                 ? "eventImageStyleTwo"
                 : "eventImageStyleThree"
             }
+            onLoad={handleImageLoad}
           />
         </div>
 

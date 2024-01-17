@@ -25,12 +25,24 @@ export const Gift: React.FC<GiftProps> = ({
   const [imageStyle, setImageStyle] = useState("styleOne");
   const exchangePoint = typeof point === "string" ? parseInt(point) : point;
 
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  const handleImageLoad = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    const { naturalWidth: width, naturalHeight: height } = event.currentTarget;
+    setImageSize({ width, height });
+  };
+
   const handleChangeImageStyle = () => {
-    if (imageStyle === "styleOne") {
+    if (imageStyle === "styleOne" && imageSize.width > imageSize.height) {
       setImageStyle("styleTwo");
-    } else if (imageStyle === "styleTwo") {
+    } else if (
+      imageStyle === "styleOne" &&
+      imageSize.width <= imageSize.height
+    ) {
       setImageStyle("styleThree");
-    } else {
+    } else if (imageStyle !== "styleOne") {
       setImageStyle("styleOne");
     }
   };
@@ -52,6 +64,7 @@ export const Gift: React.FC<GiftProps> = ({
               ? "giftBoardGiftImageStyleTwo"
               : "giftBoardGiftImageStyleThree"
           }
+          onLoad={handleImageLoad}
         />
       </div>
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${exchangePoint} 分`}</div>
