@@ -18,13 +18,6 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
   const [detail, setDetail] = useState("");
   const [showAlert, setShowAlert] = useState("");
 
-   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-
-   const handleImageLoad = (event:any) => {
-     const { naturalWidth: width, naturalHeight: height } = event.target;
-     setImageSize({ width, height });
-   };
-
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -126,12 +119,9 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
                 src={URL.createObjectURL(image)}
                 alt="Uploaded Gift"
                 className="uploadedImage"
-                onLoad={handleImageLoad}
               />
             </div>
           )}
-          <p>Image width: {imageSize.width}</p>
-          <p>Image height: {imageSize.height}</p>
           <div className="uploadImageBtn" onClick={handleUploadImageBtnClick}>
             上傳圖片
           </div>

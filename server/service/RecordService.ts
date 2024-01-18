@@ -122,6 +122,13 @@ export class RecordService {
   getAllProjectUserDetail = async (project: string, start: Date, end: Date) => {
     try {
       if (project === "全部") {
+        const startDate = new Date(start);
+        startDate.setDate(startDate.getDate() + 1);
+        const startDayStr = startDate.toISOString();
+        const endDate = new Date(end);
+        endDate.setDate(endDate.getDate() + 1);
+        const endDayStr = endDate.toISOString();
+
         const records = await this.knex("users")
           .select(
             "users.*",
@@ -135,7 +142,7 @@ export class RecordService {
             this.knex("earnPointRecords")
               .select("user_id")
               .sum("weight as selectedWeight")
-              .whereBetween("date_add", [start, end])
+              .whereBetween("date_add", [startDayStr, endDayStr])
               .groupBy("user_id")
               .as("thisSelectedDateRangeWeight"),
             "users.user_id",
@@ -143,6 +150,13 @@ export class RecordService {
           );
         return records;
       } else {
+        const startDate = new Date(start);
+        startDate.setDate(startDate.getDate() + 1);
+        const startDayStr = startDate.toISOString();
+        const endDate = new Date(end);
+        endDate.setDate(endDate.getDate() + 1);
+        const endDayStr = endDate.toISOString();
+
         const records = await this.knex("users")
           .select(
             "users.*",
@@ -156,7 +170,7 @@ export class RecordService {
             this.knex("earnPointRecords")
               .select("user_id")
               .sum("weight as selectedWeight")
-              .whereBetween("date_add", [start, end])
+              .whereBetween("date_add", [startDayStr, endDayStr])
               .groupBy("user_id")
               .as("thisSelectedDateRangeWeight"),
             "users.user_id",
@@ -322,14 +336,29 @@ export class RecordService {
   getAllPointRecords = async (project: string, start: Date, end: Date) => {
     try {
       if (project === "全部") {
+        const startDate = new Date(start);
+        startDate.setDate(startDate.getDate() + 1);
+        const startDayStr = startDate.toISOString();
+        const endDate = new Date(end);
+        endDate.setDate(endDate.getDate() + 1);
+        const endDayStr = endDate.toISOString();
+
         const records = await this.knex("earnPointRecords")
           .select("*")
+          .whereBetween("earnPointRecords.date_add", [startDayStr, endDayStr])
           .orderBy("earnPointRecords.date_add", "desc")
           .join("users", "earnPointRecords.user_id", "=", "users.user_id");
         return records;
       } else {
+        const startDate = new Date(start);
+        startDate.setDate(startDate.getDate() + 1);
+        const startDayStr = startDate.toISOString();
+        const endDate = new Date(end);
+        endDate.setDate(endDate.getDate() + 1);
+        const endDayStr = endDate.toISOString();
         const records = await this.knex("earnPointRecords")
           .select("*")
+          .whereBetween("earnPointRecords.date_add", [startDayStr, endDayStr])
           .orderBy("earnPointRecords.date_add", "desc")
           .join("users", "earnPointRecords.user_id", "=", "users.user_id")
           .where("earnPointRecords.project_id", "=", project);
