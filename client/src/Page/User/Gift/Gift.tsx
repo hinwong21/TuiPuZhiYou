@@ -22,10 +22,18 @@ export const Gift: React.FC<GiftProps> = ({
   btnName,
   onClick,
 }) => {
+  const [nameStyle, setNameStyle] = useState("styleOne");
   const [imageStyle, setImageStyle] = useState("styleOne");
   const exchangePoint = typeof point === "string" ? parseInt(point) : point;
-
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  const handleChangeNameStyle = () => {
+    if (nameStyle === "styleOne") {
+      setNameStyle("styleTwo");
+    } else {
+      setNameStyle("styleOne");
+    }
+  };
 
   const handleImageLoad = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
@@ -49,7 +57,17 @@ export const Gift: React.FC<GiftProps> = ({
 
   return (
     <div className="giftBoardGiftContainer" id={giftID}>
-      <div className="giftBoardGiftName">{name}</div>
+      <div
+        // className="giftBoardGiftName"
+        onClick={handleChangeNameStyle}
+        className={
+          nameStyle === "styleOne"
+            ? "giftBoardGiftNameStyleOne"
+            : "giftBoardGiftNameStyleTwo"
+        }
+      >
+        {name}
+      </div>
       <div
         className="giftBoardGiftImageContainer"
         onClick={handleChangeImageStyle}

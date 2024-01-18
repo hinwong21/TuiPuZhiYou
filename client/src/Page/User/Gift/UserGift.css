@@ -57,7 +57,18 @@
   cursor: pointer;
 }
 
-.giftBoardGiftName {
+.giftBoardGiftNameStyleOne {
+  width: 170px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.giftBoardGiftNameStyleTwo {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -65,6 +76,7 @@
   font-weight: bold;
   margin-bottom: 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .giftBoardGiftImageContainer {
