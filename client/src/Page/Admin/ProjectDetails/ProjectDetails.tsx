@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GiftDetail } from "./GiftDetail/GiftDetail";
-import { EventDetail } from "./EventDetail/EventDetail";
+// import { EventDetail } from "./EventDetail/EventDetail";
 import { UserDetail } from "./UserDetail/UserDetail";
 import { PointDetail } from "./PointDetail/PointDetail";
 
@@ -27,17 +27,17 @@ export const ProjectDetails = () => {
           >
             換領禮物詳情
           </div>
-          <div
+          {/* <div
             className="projectSettingSession"
             onClick={() => handleSessionClick("eventDetail")}
           >
             活動報名詳情
-          </div>
+          </div> */}
           <div
             className="projectSettingSession"
             onClick={() => handleSessionClick("pointDetail")}
           >
-            積分詳情
+            添加積分詳情
           </div>
         </>
       )}
@@ -47,9 +47,9 @@ export const ProjectDetails = () => {
       {status === "giftDetail" && (
         <GiftDetail goBack={() => handleSessionClick("")} />
       )}
-      {status === "eventDetail" && (
+      {/* {status === "eventDetail" && (
         <EventDetail goBack={() => handleSessionClick("")} />
-      )}
+      )} */}
       {status === "pointDetail" && (
         <PointDetail goBack={() => handleSessionClick("")} />
       )}

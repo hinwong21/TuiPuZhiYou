@@ -77,7 +77,7 @@ export const PointDetail: React.FC<PointDetailProps> = ({ goBack }) => {
   return (
     <>
       <div className="adminDetailContainer">
-        <SubPageHeader title="積分詳情" goBack={goBack} />
+        <SubPageHeader title="添加積分詳情" goBack={goBack} />
         <div className="adminDetailGap"></div>
 
         {isManager && (

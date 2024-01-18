@@ -18,7 +18,7 @@ th {
 }
 
 .giftDetailTableGiftName {
-  width: calc(95vw - 25vw - 10vw - 7vw - 8vw - 4px);
+  width: calc(95vw - 25vw - 10vw - 10vw - 15vw - 4px);
 }
 
 .giftDetailTableExchangePoint {
@@ -26,9 +26,9 @@ th {
 }
 
 .giftDetailTableIsExchanged {
-  width: 7vw;
+  width: 10vw;
 }
 
 .giftDetailTableIsExchangedDate {
-  width: 8vw;
+  width: 15vw;
 }

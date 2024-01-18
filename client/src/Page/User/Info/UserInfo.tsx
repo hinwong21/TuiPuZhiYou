@@ -3,7 +3,7 @@ import "./UserInfo.css";
 import { ConfirmButton } from "../../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../../service/api";
 import { GiftDetail } from "./GiftDetail/GiftDetail";
-import { EventDetail } from "./EventDetail/EventDetail";
+// import { EventDetail } from "./EventDetail/EventDetail";
 import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 
 export const UserInfo = () => {
@@ -98,24 +98,22 @@ export const UserInfo = () => {
               handleUpdateStatus("giftDetail");
             }}
           />
-          <div className="userInfoGap"></div>
-          <div className="userInfoGap"></div>
-          <ConfirmButton
+          {/* <ConfirmButton
             btnName="活動報名詳情"
             type={"button"}
             onClick={() => {
               handleUpdateStatus("eventDetail");
             }}
-          />
+          /> */}
         </div>
       )}
 
       {status === "giftDetail" && (
         <GiftDetail goBack={() => handleUpdateStatus("")} />
       )}
-      {status === "eventDetail" && (
+      {/* {status === "eventDetail" && (
         <EventDetail goBack={() => handleUpdateStatus("")} />
-      )}
+      )} */}
 
       {showAlert === "loading" && <AlertLoadingBox />}
     </>
