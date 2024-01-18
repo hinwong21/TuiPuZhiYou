@@ -27,7 +27,7 @@ export const UserEvent = () => {
     const json = await res.json();
     const filteredEvents = json.filter(
       (event: any) => event.isDeleted === false
-    );
+    ).reverse();
     setEvents(filteredEvents);
     setShowAlert("");
   };

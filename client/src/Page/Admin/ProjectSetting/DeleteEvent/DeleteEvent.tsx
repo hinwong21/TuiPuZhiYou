@@ -31,7 +31,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
     const json = await res.json();
     const filteredEvents = json.filter(
       (event: any) => event.isDeleted === false
-    );
+    ).reverse();
     setEvents(filteredEvents);
     setShowAlert("");
   };

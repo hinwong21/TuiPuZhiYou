@@ -33,7 +33,7 @@ export class GiftService {
     try {
       const result = await this.knex("gifts")
         .select("*")
-        .orderBy("date_add", "desc");
+        .orderBy("date_add");
       return result;
     } catch (err) {
       throw new Error((err as Error).message);

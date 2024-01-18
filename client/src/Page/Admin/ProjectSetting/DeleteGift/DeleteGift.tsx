@@ -32,7 +32,9 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
       method: "GET",
     });
     const json = await res.json();
-    const filteredGifts = json.filter((gift: any) => gift.isDeleted === false);
+    const filteredGifts = json
+      .filter((gift: any) => gift.isDeleted === false)
+      .reverse();
     setGifts(filteredGifts);
     setShowAlert("");
   };

@@ -32,7 +32,7 @@ export class EventService {
     try {
       const events = await this.knex("events")
         .select("*")
-        .orderBy("date_add", "desc");
+        .orderBy("date_add");
       const participantCounts = await this.knex("joinedEventRecords")
         .select("event_id")
         .groupBy("event_id")
