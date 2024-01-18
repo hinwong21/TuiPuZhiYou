@@ -31,7 +31,7 @@
 
 .eventName {
   width: 60vw;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: bold;
   margin: 10px;
   text-align: center;
@@ -58,31 +58,6 @@
 
 .eventImageStyleThree {
   width: 60vw;
-}
-
-@media (max-width: 630px) {
-  .eventImageBox {
-    width: 100vw;
-    height: 65vh;
-    cursor: pointer;
-  }
-
-  .eventImageStyleOne {
-    width: 100vw;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .eventImageStyleTwo {
-    width: 100vw;
-    height: auto;
-    max-height: 65vh;
-  }
-
-  .eventImageStyleThree {
-    width: auto;
-    height: 65vh;
-  }
 }
 
 .eventDetailsBox {
@@ -128,4 +103,43 @@
   border: none;
   color: white;
   font-weight: bold;
+}
+
+@media (max-width: 630px) {
+  .eventName {
+    width: 90vw;
+    font-size: 21px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .eventImageBox {
+    width: 100vw;
+    height: 65vh;
+    cursor: pointer;
+  }
+
+  .eventImageStyleOne {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .eventImageStyleTwo {
+    width: 100vw;
+    height: auto;
+    max-height: 65vh;
+  }
+
+  .eventImageStyleThree {
+    width: auto;
+    height: 65vh;
+  }
+
+  .eventDropdownContainer {
+    width: 90vw;
+    font-size: 18px;
+  }
 }

@@ -64,7 +64,6 @@
   white-space: nowrap;
   text-align: center;
   overflow: hidden;
-  margin-bottom: 5px;
   cursor: pointer;
 }
 
@@ -74,7 +73,6 @@
   justify-content: center;
   width: 170px;
   font-weight: bold;
-  margin-bottom: 5px;
   overflow: hidden;
   cursor: pointer;
 }
