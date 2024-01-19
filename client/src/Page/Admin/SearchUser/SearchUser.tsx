@@ -18,8 +18,8 @@ import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
 export const SearchUser = () => {
   const [directToEarnPointRecord, setDirectToEarnPointRecord] =
     useState("searchUser");
-  const [addressSearch, setAddressSearch] = useState(true);
-  const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(false);
+  const [addressSearch, setAddressSearch] = useState(false);
+  const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(true);
   const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
@@ -153,6 +153,30 @@ export const SearchUser = () => {
         {directToEarnPointRecord === "searchUser" ? (
           <>
             <header className="searchUserHeader">搜尋用戶</header>
+
+            <div className="searchUserSession">
+              <div className="searchHeaderContainer">
+                <input
+                  type="checkbox"
+                  checked={emailOrPhoneNumSearch}
+                  onChange={() => handleCheckboxChange("email")}
+                  className="searchUserInput"
+                />
+                <div className="searchUserInputTitle">
+                  電話號碼 / 電郵地址搜尋
+                </div>
+              </div>
+              <Input
+                title="電話號碼或電郵地址"
+                type="text"
+                value={emailOrPhoneNum}
+                onChange={handlePhoneNumOrEmailChange}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                  handleKeyPress(e, "Enter", handleSearchBtnClick)
+                }
+              />
+            </div>
+
             <div className="searchUserSession">
               <div className="searchHeaderContainer">
                 <input
@@ -186,28 +210,6 @@ export const SearchUser = () => {
                 type="text"
                 value={unit}
                 onChange={handleUnitChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                  handleKeyPress(e, "Enter", handleSearchBtnClick)
-                }
-              />
-            </div>
-            <div className="searchUserSession">
-              <div className="searchHeaderContainer">
-                <input
-                  type="checkbox"
-                  checked={emailOrPhoneNumSearch}
-                  onChange={() => handleCheckboxChange("email")}
-                  className="searchUserInput"
-                />
-                <div className="searchUserInputTitle">
-                  電話號碼 / 電郵地址搜尋
-                </div>
-              </div>
-              <Input
-                title="電話號碼或電郵地址"
-                type="text"
-                value={emailOrPhoneNum}
-                onChange={handlePhoneNumOrEmailChange}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                   handleKeyPress(e, "Enter", handleSearchBtnClick)
                 }

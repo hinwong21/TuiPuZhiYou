@@ -8,5 +8,5 @@ npx knex migrate:down
 npx knex migrate:latest
 npx knex seed:run
 
-pm2 start index.js
-pm2 stop index.js
+forever start index.js
+forever stop 0
