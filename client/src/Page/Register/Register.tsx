@@ -6,9 +6,9 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import {
-  tpzyStreetOptions,
-  tpzyNumberOptions,
-  tpzyFloorOptions,
+  hksunStreetOptions,
+  hksunNumberOptions,
+  floorOptions,
 } from "../../service/projectOption";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
 import { InputTransUpper } from "../../Component/Input/InputTransform/InputTransUpper";
@@ -24,7 +24,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [street, setStreet] = useState<string>("");
+  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -105,6 +105,9 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       street === "---請選擇---" ||
       number === "---請選擇---" ||
       floor === "---請選擇---" ||
+      street === "" ||
+      number === "" ||
+      floor === "" ||
       unit === ""
     ) {
       setShowAlert("請填寫完整地址!");
@@ -196,19 +199,19 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <Select
           title="街"
-          options={tpzyStreetOptions}
+          options={hksunStreetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
         <Select
           title="號"
-          options={tpzyNumberOptions}
+          options={hksunNumberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />
         <Select
           title="樓層"
-          options={tpzyFloorOptions}
+          options={floorOptions}
           selectedOption={floor}
           onSelectOption={handleFloorChange}
         />

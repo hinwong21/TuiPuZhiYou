@@ -7,9 +7,9 @@ import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
 import {
-  tpzyStreetOptions,
-  tpzyNumberOptions,
-  tpzyFloorOptions,
+  hksunStreetOptions,
+  hksunNumberOptions,
+  floorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
 import { InputTransUpper } from "../../../Component/Input/InputTransform/InputTransUpper";
@@ -20,7 +20,7 @@ export const SearchUser = () => {
     useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(true);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(false);
-  const [street, setStreet] = useState<string>("");
+  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -78,7 +78,15 @@ export const SearchUser = () => {
 
     // use address search
     if (addressSearch) {
-      if (street === "" || number === "" || floor === "" || unit === "") {
+      if (
+        street === "---請選擇---" ||
+        number === "---請選擇---" ||
+        floor === "---請選擇---" ||
+        street === "" ||
+        number === "" ||
+        floor === "" ||
+        unit === ""
+      ) {
         setShowAlert("未輸入完整地址!");
         return;
       }
@@ -157,19 +165,19 @@ export const SearchUser = () => {
               </div>
               <Select
                 title="街"
-                options={tpzyStreetOptions}
+                options={hksunStreetOptions}
                 selectedOption={street}
                 onSelectOption={handleStreetChange}
               />
               <Select
                 title="號"
-                options={tpzyNumberOptions}
+                options={hksunNumberOptions}
                 selectedOption={number}
                 onSelectOption={handleNumberChange}
               />
               <Select
                 title="樓層"
-                options={tpzyFloorOptions}
+                options={floorOptions}
                 selectedOption={floor}
                 onSelectOption={handleFloorChange}
               />

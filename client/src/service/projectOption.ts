@@ -30,6 +30,12 @@ export const tpzyStreetOptions: string[] = [
   "同茂坊",
 ];
 
+export const ndvgStreetOptions: string[] = ["---請選擇---", "新康街", "新祥街"];
+
+export const hksunStreetOptions: string[] = ["新豐路"];
+
+export const sumyeeStreetOptions: string[] = ["新成路"];
+
 export const tpzyNumberOptions: string[] = [
   "---請選擇---",
   "1-3",
@@ -42,7 +48,88 @@ export const tpzyNumberOptions: string[] = [
   "14-16",
 ];
 
-export const tpzyFloorOptions: string[] = [
+export const ndvgNumberOptions: string[] = [
+  "---請選擇---",
+  "1-3",
+  "2-4",
+  "5-7",
+  "6-8",
+  "9-11",
+  "10-12",
+  "13-15",
+  "14-16",
+  "17-19",
+  "18-20",
+  "21-23",
+  "22-24",
+  "25-27",
+  "62-64",
+  "66-68",
+  "70-72",
+  "71-73",
+  "74-76",
+  "75",
+  "82-84",
+  "86-88",
+  "90",
+];
+
+export const hksunNumberOptions: string[] = [
+  "---請選擇---",
+  "2",
+  "14-16",
+  "17-19",
+  "21-23",
+  "25-27",
+  "28-30",
+  "29-31",
+  "32-34",
+  "43-45",
+  "82-84",
+  "94",
+  "101-103",
+  "105-107",
+  "109-111",
+  "113-119",
+];
+
+export const sumyeeNumberOptions: string[] = [
+  "---請選擇---",
+  "2-4",
+  "6-8",
+  "10-12",
+  "14-16",
+  "18-20",
+  "22-24",
+  "25-27",
+  "26-28",
+  "29-31",
+  "30",
+  "33-35",
+  "37-39",
+  "41-43",
+  "45-47",
+  "49-51",
+  "53-55",
+  "57-59",
+  "65-67",
+  "69",
+  "71-73",
+  "75-77",
+  "79-81",
+  "101-103",
+  "105-107",
+  "109-111",
+  "113-115",
+  "117-119",
+  "121-123",
+  "125-127",
+  "129-131",
+  "133-135",
+  "137-139",
+];
+
+export const floorOptions: string[] = [
   "---請選擇---",
   "1",
   "2",
