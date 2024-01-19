@@ -21,8 +21,15 @@ export const UserEvent = () => {
 
   const handleGetAllEvents = async () => {
     setShowAlert("loading");
-    const res = await fetch(`${api_origin}/event/`, {
-      method: "GET",
+    const project = "心意習";
+    const res = await fetch(`${api_origin}/event`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        project: project,
+      }),
     });
     const json = await res.json();
     const filteredEvents = json.filter(
@@ -77,7 +84,7 @@ export const UserEvent = () => {
 
     if (result.full === false) {
       const userId = localStorage.getItem("ef2023_user_id");
-      const project = "香港青年陽光力量";
+      const project = "心意習";
 
       const res = await fetch(`${api_origin}/record/event`, {
         method: "POST",

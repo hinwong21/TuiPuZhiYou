@@ -98,6 +98,7 @@ export class AccountService {
   };
 
   searchUserByAddress = async (
+    project: string,
     street: string,
     number: string,
     floor: string,
@@ -106,7 +107,8 @@ export class AccountService {
     try {
       const result = await this.knex("users")
         .select("*")
-        .where("street", street)
+        .where("project_id", project)
+        .andWhere("street", street)
         .andWhere("number", number)
         .andWhere("floor", floor)
         .andWhere("unit", unit);
@@ -116,11 +118,15 @@ export class AccountService {
     }
   };
 
-  searchUserByEmailOrPhoneNum = async (emailOrPhoneNum: string) => {
+  searchUserByEmailOrPhoneNum = async (
+    emailOrPhoneNum: string,
+    project: string
+  ) => {
     try {
       const result = await this.knex("users")
         .select("*")
-        .where(function () {
+        .where("project_id", project)
+        .andWhere(function () {
           this.where("emailOrPhoneNum", "like", `%${emailOrPhoneNum}%`);
         });
       return result;

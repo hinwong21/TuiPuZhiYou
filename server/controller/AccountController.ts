@@ -72,12 +72,14 @@ export class AccountController {
 
   searchUserByAddress = async (req: express.Request, res: express.Response) => {
     try {
+      const project = req.body.project;
       const street: string = req.body.street;
       const number: string = req.body.number;
       const floor: string = req.body.floor;
       const unit: string = transformLowerToUpper(req.body.unit);
 
       const result = await this.accountService.searchUserByAddress(
+        project,
         street,
         number,
         floor,
@@ -95,8 +97,10 @@ export class AccountController {
   ) => {
     try {
       const emailOrPhoneNum = req.body.emailOrPhoneNum;
+      const project = req.body.project;
       const result = await this.accountService.searchUserByEmailOrPhoneNum(
-        emailOrPhoneNum
+        emailOrPhoneNum,
+        project
       );
       return res.json({ result: result });
     } catch (err) {

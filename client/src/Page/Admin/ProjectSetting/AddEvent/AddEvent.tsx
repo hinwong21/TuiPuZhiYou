@@ -66,9 +66,9 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
     if (image) {
       setShowAlert("loading");
       const base64Image = await convertFileToBase64(image);
-      const project = "香港青年陽光力量";
+      const project = "心意習";
 
-      const res = await fetch(`${api_origin}/event`, {
+      const res = await fetch(`${api_origin}/event/add`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

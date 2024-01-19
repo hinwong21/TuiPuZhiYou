@@ -31,9 +31,12 @@ export class GiftService {
     }
   };
 
-  getAllGifts = async () => {
+  getAllGifts = async (project: string) => {
     try {
-      const gifts = await this.knex("gifts").select("*").orderBy("date_add");
+      const gifts = await this.knex("gifts")
+        .select("*")
+        .orderBy("date_add")
+        .where("project_id", project);
       const giftAmountCounts = await this.knex("exchangeGiftRecords")
         .select("gift_id")
         .groupBy("gift_id")

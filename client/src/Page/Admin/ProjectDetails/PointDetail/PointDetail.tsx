@@ -25,7 +25,7 @@ export const PointDetail: React.FC<PointDetailProps> = ({ goBack }) => {
     0
   );
 
-  const [project, setProject] = useState<string>("香港青年陽光力量");
+  const [project, setProject] = useState<string>("心意習");
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(
     firstDayOfMonth
   );

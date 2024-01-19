@@ -8,6 +8,6 @@ export let giftRoutes = express.Router();
 export let giftService = new GiftService(knex);
 let giftController = new GiftController(giftService);
 
-giftRoutes.post("/", giftController.addGift);
-giftRoutes.get("/", giftController.getAllGifts);
+giftRoutes.post("/add", giftController.addGift);
+giftRoutes.post("/", giftController.getAllGifts);
 giftRoutes.post("/delete", giftController.deleteGift);

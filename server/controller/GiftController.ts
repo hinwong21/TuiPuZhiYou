@@ -46,7 +46,8 @@ export class GiftController {
   };
 
   getAllGifts = async (req: express.Request, res: express.Response) => {
-    const result = await this.giftService.getAllGifts();
+    const project = req.body.project;
+    const result = await this.giftService.getAllGifts(project);
     res.status(200).json(result);
   };
 

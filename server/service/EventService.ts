@@ -28,11 +28,12 @@ export class EventService {
     }
   };
 
-  getAllEvents = async () => {
+  getAllEvents = async (project: string) => {
     try {
       const events = await this.knex("events")
         .select("*")
-        .orderBy("date_add");
+        .orderBy("date_add")
+        .where("project_id", project);
       const participantCounts = await this.knex("joinedEventRecords")
         .select("event_id")
         .groupBy("event_id")

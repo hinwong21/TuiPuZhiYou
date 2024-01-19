@@ -11,7 +11,7 @@ interface GiftDetailProps {
   goBack: () => void;
 }
 export const GiftDetail: React.FC<GiftDetailProps> = ({ goBack }) => {
-  const [project, setProject] = useState<string>("香港青年陽光力量");
+  const [project, setProject] = useState<string>("心意習");
   const [details, setDetails] = useState([]);
   const [showAlert, setShowAlert] = useState("");
   const isManager = localStorage.getItem("ef2023_isManager");

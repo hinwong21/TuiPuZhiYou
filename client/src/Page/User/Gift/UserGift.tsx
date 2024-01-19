@@ -45,19 +45,26 @@ export const UserGift = () => {
   //Get all gifts
   const handleGetAllGifts = async () => {
     setShowAlert("loading");
-    const res = await fetch(`${api_origin}/gift/`, {
-      method: "GET",
+    const project = "心意習";
+    const res = await fetch(`${api_origin}/gift`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        project: project,
+      }),
     });
     const json = await res.json();
-    console.log(json);
-
     const updatedGifts = json
       .filter((gift: any) => !gift.isDeleted)
       .reverse()
       .map((gift: any) => {
-        const giftAmountCount =
-          gift.amount - parseInt(gift.giftAmountCount.count) || 0;
-        return { ...gift, giftAmountCount };
+        const giftAmountCount = gift.giftAmountCount
+          ? parseInt(gift.giftAmountCount.count)
+          : 0;
+        const remainAmount = gift.amount - giftAmountCount;
+        return { ...gift, remainAmount };
       });
     setGifts(updatedGifts);
     setShowAlert("");
@@ -90,7 +97,7 @@ export const UserGift = () => {
     setShowAlert("loading");
 
     const userId = localStorage.getItem("ef2023_user_id");
-    const project = "香港青年陽光力量";
+    const project = "心意習";
     const res = await fetch(`${api_origin}/record/gift`, {
       method: "POST",
       headers: {
@@ -136,7 +143,7 @@ export const UserGift = () => {
               name={gift.gift_name}
               details={gift.gift_detail}
               point={gift.exchange_point}
-              amount={gift.giftAmountCount}
+              amount={gift.remainAmount}
               onClick={() =>
                 handleExchangeGift(gift.exchange_point, gift.gift_id, "")
               }

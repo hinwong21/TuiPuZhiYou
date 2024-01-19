@@ -37,7 +37,8 @@ export class EventController {
   };
 
   getAllEvents = async (req: express.Request, res: express.Response) => {
-    const result = await this.eventService.getAllEvents();
+    const project = req.body.project;
+    const result = await this.eventService.getAllEvents(project);
     res.status(200).json(result);
   };
 

@@ -7,8 +7,8 @@ import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
 import {
-  hksunStreetOptions,
-  hksunNumberOptions,
+  sumyeeStreetOptions,
+  sumyeeNumberOptions,
   floorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
@@ -20,7 +20,7 @@ export const SearchUser = () => {
     useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(false);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(true);
-  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
+  const [street, setStreet] = useState<string>(sumyeeStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -75,7 +75,7 @@ export const SearchUser = () => {
 
   const handleSearchBtnClick = async () => {
     await setShowAlert("");
-
+    const project = "心意習";
     // use address search
     if (addressSearch) {
       if (
@@ -98,6 +98,7 @@ export const SearchUser = () => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
+          project: project,
           street: street,
           number: number,
           floor: floor,
@@ -124,6 +125,7 @@ export const SearchUser = () => {
         },
         body: JSON.stringify({
           emailOrPhoneNum: emailOrPhoneNum,
+          project: project,
         }),
       });
       const json = await res.json();
@@ -189,13 +191,13 @@ export const SearchUser = () => {
               </div>
               <Select
                 title="街"
-                options={hksunStreetOptions}
+                options={sumyeeStreetOptions}
                 selectedOption={street}
                 onSelectOption={handleStreetChange}
               />
               <Select
                 title="號"
-                options={hksunNumberOptions}
+                options={sumyeeNumberOptions}
                 selectedOption={number}
                 onSelectOption={handleNumberChange}
               />

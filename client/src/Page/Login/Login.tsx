@@ -38,7 +38,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
 
   const handleLoginBtnClick = async () => {
     setShowAlert("loading");
-    const projectId = "香港青年陽光力量";
+    const projectId = "心意習";
 
     const res = await fetch(`${api_origin}/account/login`, {
       method: "POST",
@@ -125,8 +125,8 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
     <>
       <div className="loginContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈回收大行動</div>
-        <div className="projectSubHeader">(廚餘回收)</div>
+        <div className="projectHeader">減廢之友-三無大廈</div>
+        <div className="projectSubHeader">廚餘回收先導計劃(上水)</div>
 
         <h2>登入</h2>
         {/* Input fields for username and password */}

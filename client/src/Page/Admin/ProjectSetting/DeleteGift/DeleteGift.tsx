@@ -28,18 +28,27 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   //Get all gifts
   const handleGetAllGifts = async () => {
     setShowAlert("loading");
-    const res = await fetch(`${api_origin}/gift/`, {
-      method: "GET",
+    const project = "心意習";
+    const res = await fetch(`${api_origin}/gift`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        project: project,
+      }),
     });
     const json = await res.json();
-    const updatedGifts = json
-      .filter((gift: any) => !gift.isDeleted)
-      .reverse()
-      .map((gift: any) => {
-        const giftAmountCount =
-          gift.amount - parseInt(gift.giftAmountCount.count) || 0;
-        return { ...gift, giftAmountCount };
-      });
+     const updatedGifts = json
+       .filter((gift: any) => !gift.isDeleted)
+       .reverse()
+       .map((gift: any) => {
+         const giftAmountCount = gift.giftAmountCount
+           ? parseInt(gift.giftAmountCount.count)
+           : 0;
+         const remainAmount = gift.amount - giftAmountCount;
+         return { ...gift, remainAmount };
+       });
     setGifts(updatedGifts);
     setShowAlert("");
   };
@@ -98,7 +107,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
                 name={gift.gift_name}
                 details={gift.gift_detail}
                 point={gift.exchange_point}
-                amount={gift.amount}
+                amount={gift.remainAmount}
                 onClick={() => handleDeleteGift(gift.gift_id, "")}
                 btnName="刪除"
                 view="admin"
