@@ -65,6 +65,16 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
       return;
     }
 
+    if (exchangePoint === "") {
+      setShowAlert("未填寫兌換分數!");
+      return;
+    }
+
+     if (giftAmount === "") {
+       setShowAlert("未填寫禮物數量!");
+       return;
+     }
+
     if (image) {
       setShowAlert("loading");
       const base64Image = await convertFileToBase64(image);
@@ -180,6 +190,12 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未填寫禮物名稱!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫兌換分數!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "未填寫禮物數量!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>
