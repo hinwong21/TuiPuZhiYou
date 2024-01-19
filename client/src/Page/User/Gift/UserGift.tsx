@@ -49,10 +49,17 @@ export const UserGift = () => {
       method: "GET",
     });
     const json = await res.json();
-    const filteredGifts = json
-      .filter((gift: any) => gift.isDeleted === false)
-      .reverse();
-    setGifts(filteredGifts);
+    console.log(json);
+
+    const updatedGifts = json
+      .filter((gift: any) => !gift.isDeleted)
+      .reverse()
+      .map((gift: any) => {
+        const giftAmountCount =
+          gift.amount - parseInt(gift.giftAmountCount.count) || 0;
+        return { ...gift, giftAmountCount };
+      });
+    setGifts(updatedGifts);
     setShowAlert("");
   };
 
@@ -99,6 +106,7 @@ export const UserGift = () => {
     const json = await res.json();
 
     if (json.success) {
+      handleGetAllGifts();
       const updatedTotalPoint = parseInt(json.result.point);
       setGetEXGiftID(json.result.exGiftID);
       setTotalPoint(updatedTotalPoint);
@@ -128,10 +136,12 @@ export const UserGift = () => {
               name={gift.gift_name}
               details={gift.gift_detail}
               point={gift.exchange_point}
+              amount={gift.giftAmountCount}
               onClick={() =>
                 handleExchangeGift(gift.exchange_point, gift.gift_id, "")
               }
               btnName="換領"
+              view="user"
             />
           ))}
         </div>

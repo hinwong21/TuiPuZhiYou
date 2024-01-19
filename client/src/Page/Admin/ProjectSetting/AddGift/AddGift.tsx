@@ -17,6 +17,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
   const [exchangePoint, setExchangePoint] = useState("");
   const [giftDetail, setGiftDetail] = useState("");
   const [giftName, setGiftName] = useState("");
+  const [giftAmount, setGiftAmount] = useState("0");
   const [showAlert, setShowAlert] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -33,6 +34,10 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setExchangePoint(event.target.value);
+  };
+
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGiftAmount(event.target.value);
   };
 
   const handleGiftDetailChange = (
@@ -75,6 +80,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
           exchangePoint: exchangePoint,
           giftDetail: giftDetail,
           giftName: giftName,
+          giftAmount: giftAmount,
           project: project,
         }),
       });
@@ -86,6 +92,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         setExchangePoint("");
         setGiftDetail("");
         setGiftName("");
+        setGiftAmount("0");
       } else {
         setShowAlert("未能添加禮物!");
       }
@@ -138,6 +145,13 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
           onChange={handleExchangePointChange}
         />
 
+        <Input
+          notNullable
+          title="禮物數量"
+          type={"number"}
+          value={giftAmount}
+          onChange={handleAmountChange}
+        />
         <div className="inputCompoContainer">
           <div className="inputCompoTitle">換領詳情</div>
           <textarea

@@ -61,6 +61,7 @@ export async function up(knex: Knex): Promise<void> {
       table.text("gift_detail").notNullable();
       table.text("gift_image");
       table.decimal("exchange_point").notNullable();
+      table.integer("amount").notNullable();
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
       table.boolean("isDeleted").defaultTo(false);

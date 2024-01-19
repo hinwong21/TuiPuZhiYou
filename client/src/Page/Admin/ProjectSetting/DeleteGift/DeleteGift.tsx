@@ -32,10 +32,15 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
       method: "GET",
     });
     const json = await res.json();
-    const filteredGifts = json
-      .filter((gift: any) => gift.isDeleted === false)
-      .reverse();
-    setGifts(filteredGifts);
+    const updatedGifts = json
+      .filter((gift: any) => !gift.isDeleted)
+      .reverse()
+      .map((gift: any) => {
+        const giftAmountCount =
+          gift.amount - parseInt(gift.giftAmountCount.count) || 0;
+        return { ...gift, giftAmountCount };
+      });
+    setGifts(updatedGifts);
     setShowAlert("");
   };
 
@@ -93,8 +98,10 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
                 name={gift.gift_name}
                 details={gift.gift_detail}
                 point={gift.exchange_point}
+                amount={gift.amount}
                 onClick={() => handleDeleteGift(gift.gift_id, "")}
                 btnName="刪除"
+                view="admin"
               />
             ))}
           </div>

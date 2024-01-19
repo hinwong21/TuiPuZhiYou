@@ -9,6 +9,7 @@ export class GiftService {
     detail: string,
     image: string,
     point: string,
+    amount: string,
     projectId: string,
     dateAdd: Date
   ) => {
@@ -19,6 +20,7 @@ export class GiftService {
         gift_detail: detail,
         gift_image: image,
         exchange_point: point,
+        amount: amount,
         project_id: projectId,
         date_add: dateAdd,
       });
@@ -31,9 +33,20 @@ export class GiftService {
 
   getAllGifts = async () => {
     try {
-      const result = await this.knex("gifts")
-        .select("*")
-        .orderBy("date_add");
+      const gifts = await this.knex("gifts").select("*").orderBy("date_add");
+      const giftAmountCounts = await this.knex("exchangeGiftRecords")
+        .select("gift_id")
+        .groupBy("gift_id")
+        .count("user_id as count");
+
+      const result = gifts.map((gift) => {
+        const giftAmountCount =
+          giftAmountCounts.find((count) => count.gift_id === gift.gift_id) || 0;
+        return {
+          ...gift,
+          giftAmountCount: giftAmountCount,
+        };
+      });
       return result;
     } catch (err) {
       throw new Error((err as Error).message);

@@ -9,8 +9,10 @@ interface GiftProps {
   name: string;
   details: string;
   point: number;
+  amount: number;
   btnName: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  view?: string;
 }
 
 export const Gift: React.FC<GiftProps> = ({
@@ -19,8 +21,10 @@ export const Gift: React.FC<GiftProps> = ({
   name,
   details,
   point,
+  amount,
   btnName,
   onClick,
+  view,
 }) => {
   const [nameStyle, setNameStyle] = useState("styleOne");
   const [imageStyle, setImageStyle] = useState("styleOne");
@@ -58,7 +62,6 @@ export const Gift: React.FC<GiftProps> = ({
   return (
     <div className="giftBoardGiftContainer" id={giftID}>
       <div
-        // className="giftBoardGiftName"
         onClick={handleChangeNameStyle}
         className={
           nameStyle === "styleOne"
@@ -86,10 +89,18 @@ export const Gift: React.FC<GiftProps> = ({
         />
       </div>
       <div className="giftBoardGiftExchangePoints">{`需換領分數：${exchangePoint} 分`}</div>
+      <div className="giftBoardGiftExchangePoints">{`剩餘數量：${amount}`}</div>
       <div className="giftDropdownContainer">
         <Dropdown details={`禮物內容: ${details}`} />
       </div>
-      <ConfirmButton type="button" btnName={btnName} onClick={onClick} />
+
+      {amount === 0 && view === "user" ? (
+        <div className="giftCantExchangeBtn">
+          <div>換罄</div>
+        </div>
+      ) : (
+        <ConfirmButton type="button" btnName={btnName} onClick={onClick} />
+      )}
     </div>
   );
 };

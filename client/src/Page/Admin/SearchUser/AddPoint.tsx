@@ -65,6 +65,8 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
       const json = await res.json();
       if (json.success) {
         setShowAlert("添加成功!");
+        setPoint("");
+        setWasteWeight("");
       } else {
         setShowAlert("未能添加!");
       }

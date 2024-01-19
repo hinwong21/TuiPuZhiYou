@@ -20,6 +20,7 @@ export class GiftController {
       const giftName = req.body.giftName;
       const image = req.body.image;
       const point = req.body.exchangePoint;
+      const amount = req.body.giftAmount;
       const projectId = req.body.project;
       const dateAdd = today;
 
@@ -29,6 +30,7 @@ export class GiftController {
         detail,
         image,
         point,
+        amount,
         projectId,
         dateAdd
       );
