@@ -68,7 +68,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
         setPoint("");
         setWasteWeight("");
       } else {
-        setShowAlert("未能添加!");
+        setShowAlert("未能添加!(請檢查填寫資料)");
       }
     }
   };
@@ -120,7 +120,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
       {showAlert === "未輸入積分或廚餘!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
-      {showAlert === "未能添加!" && (
+      {showAlert === "未能添加!(請檢查填寫資料)" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "添加成功!" && (

@@ -70,10 +70,10 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
       return;
     }
 
-     if (giftAmount === "") {
-       setShowAlert("未填寫禮物數量!");
-       return;
-     }
+    if (giftAmount === "") {
+      setShowAlert("未填寫禮物數量!");
+      return;
+    }
 
     if (image) {
       setShowAlert("loading");
@@ -104,7 +104,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
         setGiftName("");
         setGiftAmount("0");
       } else {
-        setShowAlert("未能添加禮物!");
+        setShowAlert("未能添加禮物!(請檢查填寫資料)");
       }
     } else {
       setShowAlert("未上傳禮物圖片!");
@@ -183,7 +183,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
       {showAlert === "添加禮物成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
-      {showAlert === "未能添加禮物!" && (
+      {showAlert === "未能添加禮物!(請檢查填寫資料)" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未上傳禮物圖片!" && (

@@ -14,6 +14,11 @@ export class GiftService {
     dateAdd: Date
   ) => {
     try {
+      const toInt = parseInt(amount, 10);
+      if (toInt < 0) {
+        return false;
+      }
+
       await this.knex("gifts").insert({
         gift_id: id,
         gift_name: giftName,

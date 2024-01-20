@@ -13,6 +13,10 @@ export class RecordService {
     dateAdd: Date
   ) => {
     try {
+      if (point < 0 || weight < 0) {
+        return false;
+      }
+
       await this.knex("earnPointRecords").insert({
         user_id: userId,
         earn_point: point,

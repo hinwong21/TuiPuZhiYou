@@ -90,7 +90,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
         setParticipant("1");
         setDetail("");
       } else {
-        setShowAlert("未能添加活動!");
+        setShowAlert("未能添加活動!(請檢查填寫資料)");
       }
     } else {
       setShowAlert("未上傳活動圖片!");
@@ -164,7 +164,7 @@ export const AddEvent: React.FC<AddEventProps> = ({ goBack }) => {
       {showAlert === "添加活動成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
-      {showAlert === "未能添加活動!" && (
+      {showAlert === "未能添加活動!(請檢查填寫資料)" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未上傳活動圖片!" && (

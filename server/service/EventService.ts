@@ -8,11 +8,16 @@ export class EventService {
     name: string,
     image: string,
     detail: string,
-    participant: number | string,
+    participant: string,
     projectId: string,
     dateAdd: Date
   ) => {
     try {
+      const toInt = parseInt(participant, 10);
+      if (toInt < 0) {
+        return false;
+      }
+
       await this.knex("events").insert({
         event_id: id,
         event_name: name,
