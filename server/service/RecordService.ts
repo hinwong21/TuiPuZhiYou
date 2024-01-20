@@ -45,12 +45,13 @@ export class RecordService {
 
   updateGiftAmt = async (giftId: string) => {
     try {
+      const updateTime = new Date();
       //Updated gift amount
       const updateGift = await this.knex("gifts")
         .where("gift_id", giftId)
         .update({
           amount: this.knex.raw(`amount - ${1}`),
-          // date_add: this.knex.raw(`date_add`),
+          date_update: this.knex.raw(`updateTime`),
         });
 
       return true;

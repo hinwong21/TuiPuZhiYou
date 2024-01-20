@@ -58,22 +58,23 @@ export const UserEvent = () => {
     return json.result;
   };
 
-  const handleCheckParticipant = async (eventId: string) => {
-    //Check the participant of event is full or not
-    const participantAmt = await fetch(`${api_origin}/checkParticipant`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        eventId: eventId,
-      }),
-    });
-    const participantRes = await participantAmt.json();
-    console.log(participantRes, "participantRes");
+  //TODO
+  // const handleCheckParticipant = async (eventId: string) => {
+  //   //Check the participant of event is full or not
+  //   const participantAmt = await fetch(`${api_origin}/checkParticipant`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       eventId: eventId,
+  //     }),
+  //   });
+  //   const participantRes = await participantAmt.json();
+  //   console.log(participantRes, "participantRes");
 
-    return participantRes.result;
-  };
+  //   return participantRes.result;
+  // };
 
   const handleJoinEvent = async (
     eventId: string,
@@ -127,18 +128,18 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
-        //Updated event participant
-        const updateRes = await fetch(`${api_origin}/record/eventUpdate`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            eventId: eventId,
-          }),
-        });
-        const updateResJson = await updateRes.json();
-        console.log(updateResJson, "Check event");
+        // //Updated event participant
+        // const updateRes = await fetch(`${api_origin}/record/eventUpdate`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     eventId: eventId,
+        //   }),
+        // });
+        // const updateResJson = await updateRes.json();
+        // console.log(updateResJson, "Check event");
 
         await handleGetAllEvents();
         setShowAlert("報名成功!");

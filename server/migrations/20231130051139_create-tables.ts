@@ -33,6 +33,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string("unit", 255).notNullable();
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
+      table.dateTime("date_update");
     });
   }
 
@@ -65,6 +66,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
       table.boolean("isDeleted").defaultTo(false);
+      table.dateTime("date_update");
     });
   }
 
@@ -77,6 +79,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string("project_id").references("projects.project_id");
       table.date("apply_date").notNullable();
       table.date("exchange_date");
+      //table.dateTime("date_update");
     });
   }
 
@@ -90,6 +93,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string("project_id").references("projects.project_id");
       table.date("date_add").notNullable();
       table.boolean("isDeleted").defaultTo(false);
+      table.dateTime("date_update");
     });
   }
 
