@@ -21,7 +21,7 @@ export const UserEvent = () => {
 
   const handleGetAllEvents = async () => {
     setShowAlert("loading");
-    const project = "心意習";
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/event`, {
       method: "POST",
       headers: {
@@ -32,9 +32,9 @@ export const UserEvent = () => {
       }),
     });
     const json = await res.json();
-    const filteredEvents = json.filter(
-      (event: any) => event.isDeleted === false
-    ).reverse();
+    const filteredEvents = json
+      .filter((event: any) => event.isDeleted === false)
+      .reverse();
     setEvents(filteredEvents);
     setShowAlert("");
   };
@@ -84,7 +84,7 @@ export const UserEvent = () => {
 
     if (result.full === false) {
       const userId = localStorage.getItem("ef2023_user_id");
-      const project = "心意習";
+      const project = "推普之友";
 
       const res = await fetch(`${api_origin}/record/event`, {
         method: "POST",
@@ -99,7 +99,7 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
-        handleGetAllEvents();
+        await handleGetAllEvents();
         setShowAlert("報名成功!");
       } else {
         setShowAlert("未能報名，請稍後再嘗試!");

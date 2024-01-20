@@ -28,7 +28,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   //Get all gifts
   const handleGetAllGifts = async () => {
     setShowAlert("loading");
-    const project = "心意習";
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/gift`, {
       method: "POST",
       headers: {

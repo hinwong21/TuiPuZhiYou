@@ -47,7 +47,7 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
     }
 
     if (parseFloat(point) && parseFloat(wasteWeight)) {
-      const project = "心意習";
+      const project = "推普之友";
       setShowAlert("loading");
       const res = await fetch(`${api_origin}/record/point`, {
         method: "POST",

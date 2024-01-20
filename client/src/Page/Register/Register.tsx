@@ -6,8 +6,8 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import {
-  sumyeeStreetOptions,
-  sumyeeNumberOptions,
+  tpzyStreetOptions,
+  tpzyNumberOptions,
   floorOptions,
 } from "../../service/projectOption";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
@@ -24,7 +24,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [street, setStreet] = useState<string>(sumyeeStreetOptions[0]);
+  const [street, setStreet] = useState<string>(tpzyStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -114,7 +114,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       return;
     }
 
-    const project = "心意習";
+    const project = "推普之友";
     setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
@@ -153,8 +153,8 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     <>
       <div className="registerContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">減廢之友-三無大廈</div>
-        <div className="projectSubHeader">廚餘回收先導計劃(上水)</div>
+        <div className="projectHeader">三無大廈環保回收你我出力</div>
+        <div className="projectSubHeader">(廚餘回收)</div>
 
         <h2>注册帳戶</h2>
         <Input
@@ -199,13 +199,13 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <Select
           title="街"
-          options={sumyeeStreetOptions}
+          options={tpzyStreetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
         <Select
           title="號"
-          options={sumyeeNumberOptions}
+          options={tpzyNumberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />

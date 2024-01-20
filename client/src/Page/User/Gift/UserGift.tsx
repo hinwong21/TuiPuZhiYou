@@ -45,7 +45,7 @@ export const UserGift = () => {
   //Get all gifts
   const handleGetAllGifts = async () => {
     setShowAlert("loading");
-    const project = "心意習";
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/gift`, {
       method: "POST",
       headers: {
@@ -97,7 +97,7 @@ export const UserGift = () => {
     setShowAlert("loading");
 
     const userId = localStorage.getItem("ef2023_user_id");
-    const project = "心意習";
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/record/gift`, {
       method: "POST",
       headers: {
@@ -113,7 +113,7 @@ export const UserGift = () => {
     const json = await res.json();
 
     if (json.success) {
-      handleGetAllGifts();
+      await handleGetAllGifts();
       const updatedTotalPoint = parseInt(json.result.point);
       setGetEXGiftID(json.result.exGiftID);
       setTotalPoint(updatedTotalPoint);

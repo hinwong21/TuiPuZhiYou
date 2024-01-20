@@ -7,8 +7,8 @@ import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
 import {
-  sumyeeStreetOptions,
-  sumyeeNumberOptions,
+  tpzyStreetOptions,
+  tpzyNumberOptions,
   floorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
@@ -20,7 +20,7 @@ export const SearchUser = () => {
     useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(false);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(true);
-  const [street, setStreet] = useState<string>(sumyeeStreetOptions[0]);
+  const [street, setStreet] = useState<string>(tpzyStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -75,7 +75,7 @@ export const SearchUser = () => {
 
   const handleSearchBtnClick = async () => {
     await setShowAlert("");
-    const project = "心意習";
+    const project = "推普之友";
     // use address search
     if (addressSearch) {
       if (
@@ -191,13 +191,13 @@ export const SearchUser = () => {
               </div>
               <Select
                 title="街"
-                options={sumyeeStreetOptions}
+                options={tpzyStreetOptions}
                 selectedOption={street}
                 onSelectOption={handleStreetChange}
               />
               <Select
                 title="號"
-                options={sumyeeNumberOptions}
+                options={tpzyNumberOptions}
                 selectedOption={number}
                 onSelectOption={handleNumberChange}
               />

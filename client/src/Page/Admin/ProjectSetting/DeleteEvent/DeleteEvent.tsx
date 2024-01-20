@@ -25,7 +25,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   //Get all events
   const handleGetAllEvents = async () => {
     setShowAlert("loading");
-    const project = "心意習"
+    const project = "推普之友";
     const res = await fetch(`${api_origin}/event`, {
       method: "POST",
       headers: {
