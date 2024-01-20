@@ -43,6 +43,7 @@ export const UserEvent = () => {
     eventId: string,
     userId: string | null
   ) => {
+    //Check user was already joined or not
     const res = await fetch(`${api_origin}/event/participant`, {
       method: "POST",
       headers: {
@@ -55,6 +56,23 @@ export const UserEvent = () => {
     });
     const json = await res.json();
     return json.result;
+  };
+
+  const handleCheckParticipant = async (eventId: string) => {
+    //Check the participant of event is full or not
+    const participantAmt = await fetch(`${api_origin}/checkParticipant`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        eventId: eventId,
+      }),
+    });
+    const participantRes = await participantAmt.json();
+    console.log(participantRes, "participantRes");
+
+    return participantRes.result;
   };
 
   const handleJoinEvent = async (
@@ -75,6 +93,16 @@ export const UserEvent = () => {
     }
 
     setShowAlert("loading");
+
+    //TODO 參加之前，check活動是否已經人數已滿
+    // const checkParticipant = await handleCheckParticipant(eventId);
+    // console.log(checkParticipant, "checkParticipantFront");
+
+    //if (checkParticipant) {
+    //setShowAlert("報名人數已滿!");
+    //return;
+    //}
+
     const result = await handleCheckEventFullOrNot(eventId, userId);
 
     if (result.joined === true) {
@@ -99,6 +127,19 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
+        //Updated event participant
+        const updateRes = await fetch(`${api_origin}/record/eventUpdate`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            eventId: eventId,
+          }),
+        });
+        const updateResJson = await updateRes.json();
+        console.log(updateResJson, "Check event");
+
         await handleGetAllEvents();
         setShowAlert("報名成功!");
       } else {
@@ -164,6 +205,9 @@ export const UserEvent = () => {
         />
       )}
       {showAlert === "未能報名，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "報名人數已滿!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

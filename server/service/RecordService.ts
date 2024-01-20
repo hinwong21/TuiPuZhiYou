@@ -1,3 +1,4 @@
+import { log } from "console";
 import { Knex } from "knex";
 
 export class RecordService {
@@ -52,7 +53,7 @@ export class RecordService {
           // date_add: this.knex.raw(`date_add`),
         });
 
-      return { updateGift };
+      return true;
     } catch (err) {
       throw new Error((err as Error).message);
     }
@@ -106,6 +107,22 @@ export class RecordService {
     });
     return true;
   };
+
+  // updateEvent = async (eventId: string) => {
+  //   try {
+  //     //Updated gift amount
+  //     const updateEvent = await this.knex("events")
+  //       .where("event_id", eventId)
+  //       .update({
+  //         participant: this.knex.raw(`participant - ${1}`),
+  //         // date_add: this.knex.raw(`date_add`),
+  //       });
+
+  //     return true;
+  //   } catch (err) {
+  //     throw new Error((err as Error).message);
+  //   }
+  // };
 
   // user
   getAllExchangeGiftRecord = async (userId: string) => {
@@ -281,6 +298,29 @@ export class RecordService {
         .where("gift_id", id);
 
       return records;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  checkParticipant = async (id: string) => {
+    try {
+      const joinedAmt = await this.knex("joinedEventRecords")
+        .select("participant")
+        .count("* as totalCount")
+        .groupBy("eventID");
+
+      console.log(joinedAmt, "joinedAmt");
+
+      const getParticipants = await this.knex("events")
+        .select("participant")
+        .first();
+
+      console.log(getParticipants, "getParticipants");
+
+      const isFull = getParticipants >= joinedAmt ? true : false;
+
+      return isFull;
     } catch (err) {
       throw new Error((err as Error).message);
     }

@@ -88,6 +88,17 @@ export class RecordController {
     }
   };
 
+  // updateEvent = async (req: express.Request, res: express.Response) => {
+  //   try {
+  //     const eventId = req.body.eventId;
+
+  //     const result = await this.recordService.updateEvent(eventId);
+  //     return res.json({ success: true });
+  //   } catch (err) {
+  //     errorHandler(err, req, res);
+  //   }
+  // };
+
   joinEventRecord = async (req: express.Request, res: express.Response) => {
     try {
       const today = new Date();
@@ -129,6 +140,18 @@ export class RecordController {
       const userId = req.body.userId;
       const result = await this.recordService.getAllJoinedEventRecords(userId);
       return res.json({ result: result });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  checkParticipant = async (req: express.Request, res: express.Response) => {
+    try {
+      const eventId = req.body.eventId;
+
+      const result = await this.recordService.checkParticipant(eventId);
+      console.log(result, "checkParticipant");
+      return res.json({ success: true, result });
     } catch (err) {
       errorHandler(err, req, res);
     }
