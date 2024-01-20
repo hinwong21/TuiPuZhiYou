@@ -326,17 +326,21 @@ export class RecordService {
       const joinedAmt = await this.knex("joinedEventRecords")
         .select("event_id")
         .count("* as totalJoinCount")
-        .groupBy("event_id");
-
-      console.log(joinedAmt, "joinedAmt");
+        .groupBy("event_id")
+        .where("event_id", id);
 
       const getParticipants = await this.knex("events")
         .select("participant")
         .first();
 
-      console.log(getParticipants, "getParticipants");
+      console.log(joinedAmt, "..joinedAmt");
+      console.log(getParticipants, "..getParticipants");
 
-      const isFull = getParticipants >= joinedAmt ? true : false;
+      const toStr = joinedAmt[0].totalJoinCount.toString();
+      console.log(toStr, "Str");
+
+      const resultInt = parseInt(toStr, 10);
+      const isFull = getParticipants >= resultInt ? true : false;
 
       return isFull;
     } catch (err) {

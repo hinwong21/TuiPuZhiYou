@@ -59,22 +59,25 @@ export const UserEvent = () => {
   };
 
   //TODO
-  // const handleCheckParticipant = async (eventId: string) => {
-  //   //Check the participant of event is full or not
-  //   const participantAmt = await fetch(`${api_origin}/record/checkParticipant`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       eventId: eventId,
-  //     }),
-  //   });
-  //   const participantRes = await participantAmt.json();
-  //   console.log(participantRes, "participantRes");
+  const handleCheckParticipant = async (eventId: string) => {
+    //Check the participant of event is full or not
+    const participantAmt = await fetch(
+      `${api_origin}/record/checkParticipant`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          eventId: eventId,
+        }),
+      }
+    );
+    const participantRes = await participantAmt.json();
+    console.log(participantRes, "participantRes");
 
-  //   return participantRes.result;
-  // };
+    return participantRes.result;
+  };
 
   const handleJoinEvent = async (
     eventId: string,
@@ -96,13 +99,16 @@ export const UserEvent = () => {
     setShowAlert("loading");
 
     //TODO 參加之前，check活動是否已經人數已滿
-    // const checkParticipant = await handleCheckParticipant(eventId);
-    // console.log(checkParticipant, "checkParticipantFront");
+    console.log(eventId, "GetID");
 
-    //if (checkParticipant) {
-    //setShowAlert("報名人數已滿!");
-    //return;
-    //}
+    const checkParticipant = await handleCheckParticipant(eventId);
+    console.log(checkParticipant, "checkParticipantFront");
+
+    if (checkParticipant) {
+      setShowAlert("報名人數已滿!");
+
+      return;
+    }
 
     const result = await handleCheckEventFullOrNot(eventId, userId);
 
