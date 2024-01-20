@@ -63,8 +63,8 @@ export const UserGift = () => {
         const giftAmountCount = gift.giftAmountCount
           ? parseInt(gift.giftAmountCount.count)
           : 0;
-        // const remainAmount = gift.amount - giftAmountCount;
-        const remainAmount = gift.amount;
+        const remainAmount = gift.amount - giftAmountCount;
+        //const remainAmount = gift.amount;
         //const remainAmount = giftAmountCount;
         return { ...gift, remainAmount };
       });
@@ -102,6 +102,7 @@ export const UserGift = () => {
     const project = "推普之友";
 
     //Check the gift amount
+    //1、Get the gift amount
     const giftAmt = await fetch(`${api_origin}/record/giftAmt`, {
       method: "POST",
       headers: {
@@ -115,8 +116,26 @@ export const UserGift = () => {
 
     console.log(giftAmtRst, "see");
 
-    if (giftAmtRst.success && giftAmtRst.result <= 0) {
+    //2: Get the exchange amount
+    const exchangeAmt = await fetch(`${api_origin}/record/exchangeAmt`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        giftId: giftId,
+      }),
+    });
+    const exchangeAmtRst = await exchangeAmt.json();
+
+    console.log(exchangeAmtRst, "exchangeAmtRst");
+
+    const resultInt = parseInt(exchangeAmtRst.result, 10);
+    console.log(resultInt, "resultInt");
+
+    if (resultInt >= giftAmtRst.result) {
       setShowAlert("禮物已換罄!");
+      handleGetAllGifts();
       return;
     }
 
@@ -135,24 +154,18 @@ export const UserGift = () => {
     const json = await res.json();
 
     if (json.success) {
-      // await handleGetAllGifts();
-      // const updatedTotalPoint = parseInt(json.result.point);
-      // setGetEXGiftID(json.result.exGiftID);
-      // setTotalPoint(updatedTotalPoint);
-      // setShowAlert("換領禮物成功!");
-
       //Updated Gift table
-      const updateRes = await fetch(`${api_origin}/record/giftUpdate`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          giftId: giftId,
-        }),
-      });
-      const updateResJson = await updateRes.json();
-      console.log(updateResJson, "Check");
+      // const updateRes = await fetch(`${api_origin}/record/giftUpdate`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     giftId: giftId,
+      //   }),
+      // });
+      // const updateResJson = await updateRes.json();
+      // console.log(updateResJson, "Check");
 
       await handleGetAllGifts();
       const updatedTotalPoint = parseInt(json.result.point);

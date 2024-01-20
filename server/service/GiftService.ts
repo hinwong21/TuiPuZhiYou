@@ -23,6 +23,7 @@ export class GiftService {
         amount: amount,
         project_id: projectId,
         date_add: dateAdd,
+        date_update: dateAdd,
       });
 
       return true;

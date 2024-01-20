@@ -1,5 +1,6 @@
 import { log } from "console";
 import { Knex } from "knex";
+import { unescapeLeadingUnderscores } from "typescript";
 
 export class RecordService {
   constructor(private knex: Knex) {}
@@ -43,22 +44,22 @@ export class RecordService {
     }
   };
 
-  updateGiftAmt = async (giftId: string) => {
-    try {
-      const updateTime = new Date();
-      //Updated gift amount
-      const updateGift = await this.knex("gifts")
-        .where("gift_id", giftId)
-        .update({
-          amount: this.knex.raw(`amount - ${1}`),
-          date_update: this.knex.raw(`updateTime`),
-        });
+  // updateGiftAmt = async (giftId: string) => {
+  //   try {
+  //     const updateTime = new Date();
+  //     //Updated gift amount
+  //     const updateGift = await this.knex("gifts")
+  //       .where("gift_id", giftId)
+  //       .update({
+  //         amount: this.knex.raw(`amount - ${1}`),
+  //         date_update: updateTime,
+  //       });
 
-      return true;
-    } catch (err) {
-      throw new Error((err as Error).message);
-    }
-  };
+  //     return true;
+  //   } catch (err) {
+  //     throw new Error((err as Error).message);
+  //   }
+  // };
 
   exchangeGiftRecord = async (
     id: string,
@@ -304,12 +305,28 @@ export class RecordService {
     }
   };
 
+  checkExchangeGiftAmt = async (id: string) => {
+    try {
+      const exchangeGiftAmt = await this.knex("exchangeGiftRecords")
+        .select("gift_id")
+        .count("* as totalExchangeCount")
+        .groupBy("gift_id")
+        .where("gift_id", id);
+
+      console.log(exchangeGiftAmt, "exchangeGiftAmt");
+
+      return exchangeGiftAmt;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
   checkParticipant = async (id: string) => {
     try {
       const joinedAmt = await this.knex("joinedEventRecords")
-        .select("participant")
-        .count("* as totalCount")
-        .groupBy("eventID");
+        .select("event_id")
+        .count("* as totalJoinCount")
+        .groupBy("event_id");
 
       console.log(joinedAmt, "joinedAmt");
 

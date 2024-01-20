@@ -61,7 +61,7 @@ export const UserEvent = () => {
   //TODO
   // const handleCheckParticipant = async (eventId: string) => {
   //   //Check the participant of event is full or not
-  //   const participantAmt = await fetch(`${api_origin}/checkParticipant`, {
+  //   const participantAmt = await fetch(`${api_origin}/record/checkParticipant`, {
   //     method: "POST",
   //     headers: {
   //       "Content-type": "application/json",
