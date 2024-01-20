@@ -134,8 +134,8 @@ export const UserGift = () => {
     console.log(resultInt, "resultInt");
 
     if (resultInt >= giftAmtRst.result) {
+      await handleGetAllGifts();
       setShowAlert("禮物已換罄!");
-      handleGetAllGifts();
       return;
     }
 
