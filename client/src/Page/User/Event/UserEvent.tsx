@@ -104,13 +104,19 @@ export const UserEvent = () => {
     const checkParticipant = await handleCheckParticipant(eventId);
     console.log(checkParticipant, "checkParticipantFront");
 
-    if (checkParticipant) {
-      setShowAlert("報名人數已滿!");
-
-      return;
-    }
+    // if (checkParticipant) {
+    //   setShowAlert("報名人數已滿!");
+    //   return;
+    // }
 
     const result = await handleCheckEventFullOrNot(eventId, userId);
+    console.log(result, "handleCheckEventFullOrNot");
+
+    if(result.full){
+      await handleGetAllEvents();
+      setShowAlert("報名人數已滿!");
+       return;
+    }
 
     if (result.joined === true) {
       setShowAlert("已報名活動!");
@@ -150,6 +156,7 @@ export const UserEvent = () => {
         await handleGetAllEvents();
         setShowAlert("報名成功!");
       } else {
+        await handleGetAllEvents();
         setShowAlert("未能報名，請稍後再嘗試!");
       }
     }
