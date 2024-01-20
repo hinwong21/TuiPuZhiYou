@@ -42,6 +42,22 @@ export class RecordService {
     }
   };
 
+  updateGiftAmt = async (giftId: string) => {
+    try {
+      //Updated gift amount
+      const updateGift = await this.knex("gifts")
+        .where("gift_id", giftId)
+        .update({
+          amount: this.knex.raw(`amount - ${1}`),
+          // date_add: this.knex.raw(`date_add`),
+        });
+
+      return { updateGift };
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
   exchangeGiftRecord = async (
     id: string,
     userId: string,
@@ -252,6 +268,18 @@ export class RecordService {
         .join("users", "exchangeGiftRecords.user_id", "=", "users.user_id")
         .join("gifts", "exchangeGiftRecords.gift_id", "=", "gifts.gift_id")
         .where("exchangeGiftRecords.exchangeGiftRecords_id", id);
+      return records;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  checkGiftAmt = async (id: string) => {
+    try {
+      const records = await this.knex("gifts")
+        .select("amount")
+        .where("gift_id", id);
+
       return records;
     } catch (err) {
       throw new Error((err as Error).message);

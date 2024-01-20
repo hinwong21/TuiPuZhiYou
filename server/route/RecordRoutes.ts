@@ -11,6 +11,8 @@ let recordController = new RecordController(recordService);
 recordRoutes.post("/point", recordController.addPointRecord);
 recordRoutes.post("/waste", recordController.getWasteRecord);
 recordRoutes.post("/gift", recordController.exchangeGiftRecord);
+recordRoutes.post("/giftAmt", recordController.checkGiftAmt);
+recordRoutes.post("/giftUpdate", recordController.updateGiftAmt);
 recordRoutes.post("/event", recordController.joinEventRecord);
 recordRoutes.post("/exchangeGift", recordController.getAllExchangeGiftRecord);
 recordRoutes.post("/joinedEvent", recordController.getAllJoinedEventRecords);

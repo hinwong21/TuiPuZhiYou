@@ -63,7 +63,9 @@ export const UserGift = () => {
         const giftAmountCount = gift.giftAmountCount
           ? parseInt(gift.giftAmountCount.count)
           : 0;
-        const remainAmount = gift.amount - giftAmountCount;
+        // const remainAmount = gift.amount - giftAmountCount;
+        const remainAmount = gift.amount;
+        //const remainAmount = giftAmountCount;
         return { ...gift, remainAmount };
       });
     setGifts(updatedGifts);
@@ -98,6 +100,26 @@ export const UserGift = () => {
 
     const userId = localStorage.getItem("ef2023_user_id");
     const project = "推普之友";
+
+    //Check the gift amount
+    const giftAmt = await fetch(`${api_origin}/record/giftAmt`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        giftId: giftId,
+      }),
+    });
+    const giftAmtRst = await giftAmt.json();
+
+    console.log(giftAmtRst, "see");
+
+    if (giftAmtRst.success && giftAmtRst.result <= 0) {
+      setShowAlert("禮物已換罄!");
+      return;
+    }
+
     const res = await fetch(`${api_origin}/record/gift`, {
       method: "POST",
       headers: {
@@ -113,6 +135,25 @@ export const UserGift = () => {
     const json = await res.json();
 
     if (json.success) {
+      // await handleGetAllGifts();
+      // const updatedTotalPoint = parseInt(json.result.point);
+      // setGetEXGiftID(json.result.exGiftID);
+      // setTotalPoint(updatedTotalPoint);
+      // setShowAlert("換領禮物成功!");
+
+      //Updated Gift table
+      const updateRes = await fetch(`${api_origin}/record/giftUpdate`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          giftId: giftId,
+        }),
+      });
+      const updateResJson = await updateRes.json();
+      console.log(updateResJson, "Check");
+
       await handleGetAllGifts();
       const updatedTotalPoint = parseInt(json.result.point);
       setGetEXGiftID(json.result.exGiftID);
@@ -187,6 +228,9 @@ export const UserGift = () => {
         />
       )}
       {showAlert === "未能換領禮物，請稍後再嘗試!" && (
+        <AlertConBox header={showAlert} btnName={"確認"} />
+      )}
+      {showAlert === "禮物已換罄!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
     </>

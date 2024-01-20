@@ -66,6 +66,28 @@ export class RecordController {
     }
   };
 
+  checkGiftAmt = async (req: express.Request, res: express.Response) => {
+    try {
+      const giftId = req.body.giftId;
+
+      const result = await this.recordService.checkGiftAmt(giftId);
+      return res.json({ success: true, result: result[0].amount });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
+  updateGiftAmt = async (req: express.Request, res: express.Response) => {
+    try {
+      const giftId = req.body.giftId;
+
+      const result = await this.recordService.updateGiftAmt(giftId);
+      return res.json({ success: true });
+    } catch (err) {
+      errorHandler(err, req, res);
+    }
+  };
+
   joinEventRecord = async (req: express.Request, res: express.Response) => {
     try {
       const today = new Date();
