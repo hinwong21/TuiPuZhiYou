@@ -325,32 +325,32 @@ export class RecordService {
     }
   };
 
-  checkParticipant = async (id: string) => {
-    try {
-      const joinedAmt = await this.knex("joinedEventRecords")
-        .select("event_id")
-        .count("* as totalJoinCount")
-        .groupBy("event_id")
-        .where("event_id", id);
+  // checkParticipant = async (id: string) => {
+  //   try {
+  //     const joinedAmt = await this.knex("joinedEventRecords")
+  //       .select("event_id")
+  //       .count("* as totalJoinCount")
+  //       .groupBy("event_id")
+  //       .where("event_id", id);
 
-      const getParticipants = await this.knex("events")
-        .select("participant")
-        .first();
+  //     const getParticipants = await this.knex("events")
+  //       .select("participant")
+  //       .first();
 
-      console.log(joinedAmt, "..joinedAmt");
-      console.log(getParticipants, "..getParticipants");
+  //     console.log(joinedAmt, "..joinedAmt");
+  //     console.log(getParticipants, "..getParticipants");
 
-      const toStr = joinedAmt[0].totalJoinCount.toString();
-      console.log(toStr, "Str");
+  //     const toStr = joinedAmt[0].totalJoinCount.toString();
+  //     console.log(toStr, "Str");
 
-      const resultInt = parseInt(toStr, 10);
-      const isFull = getParticipants >= resultInt ? true : false;
+  //     const resultInt = parseInt(toStr, 10);
+  //     const isFull = getParticipants >= resultInt ? true : false;
 
-      return isFull;
-    } catch (err) {
-      throw new Error((err as Error).message);
-    }
-  };
+  //     return isFull;
+  //   } catch (err) {
+  //     throw new Error((err as Error).message);
+  //   }
+  // };
 
   setGiftIsExchanged = async (id: string) => {
     const today = new Date();

@@ -58,26 +58,26 @@ export const UserEvent = () => {
     return json.result;
   };
 
-  //TODO
-  const handleCheckParticipant = async (eventId: string) => {
-    //Check the participant of event is full or not
-    const participantAmt = await fetch(
-      `${api_origin}/record/checkParticipant`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          eventId: eventId,
-        }),
-      }
-    );
-    const participantRes = await participantAmt.json();
-    console.log(participantRes, "participantRes");
+  // //TODO
+  // const handleCheckParticipant = async (eventId: string) => {
+  //   //Check the participant of event is full or not
+  //   const participantAmt = await fetch(
+  //     `${api_origin}/record/checkParticipant`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         eventId: eventId,
+  //       }),
+  //     }
+  //   );
+  //   const participantRes = await participantAmt.json();
+  //   console.log(participantRes, "participantRes");
 
-    return participantRes.result;
-  };
+  //   return participantRes.result;
+  // };
 
   const handleJoinEvent = async (
     eventId: string,
@@ -98,24 +98,13 @@ export const UserEvent = () => {
 
     setShowAlert("loading");
 
-    //TODO 參加之前，check活動是否已經人數已滿
-    console.log(eventId, "GetID");
-
-    const checkParticipant = await handleCheckParticipant(eventId);
-    console.log(checkParticipant, "checkParticipantFront");
-
-    // if (checkParticipant) {
-    //   setShowAlert("報名人數已滿!");
-    //   return;
-    // }
-
     const result = await handleCheckEventFullOrNot(eventId, userId);
     console.log(result, "handleCheckEventFullOrNot");
 
-    if(result.full){
+    if (result.full) {
       await handleGetAllEvents();
       setShowAlert("報名人數已滿!");
-       return;
+      return;
     }
 
     if (result.joined === true) {
@@ -140,19 +129,6 @@ export const UserEvent = () => {
       });
       const json = await res.json();
       if (json.success) {
-        // //Updated event participant
-        // const updateRes = await fetch(`${api_origin}/record/eventUpdate`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     eventId: eventId,
-        //   }),
-        // });
-        // const updateResJson = await updateRes.json();
-        // console.log(updateResJson, "Check event");
-
         await handleGetAllEvents();
         setShowAlert("報名成功!");
       } else {

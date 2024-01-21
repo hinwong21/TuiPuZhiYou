@@ -13,13 +13,14 @@ recordRoutes.post("/waste", recordController.getWasteRecord);
 recordRoutes.post("/gift", recordController.exchangeGiftRecord);
 recordRoutes.post("/giftAmt", recordController.checkGiftAmt);
 recordRoutes.post("/exchangeAmt", recordController.checkExchangeGiftAmt);
-//recordRoutes.post("/giftUpdate", recordController.updateGiftAmt);
 recordRoutes.post("/event", recordController.joinEventRecord);
-//recordRoutes.post("/eventUpdate", recordController.updateEvent);
-recordRoutes.post("/checkParticipant", recordController.checkParticipant);
 recordRoutes.post("/exchangeGift", recordController.getAllExchangeGiftRecord);
 recordRoutes.post("/joinedEvent", recordController.getAllJoinedEventRecords);
 recordRoutes.post("/user", recordController.getAllProjectUserDetail);
+//recordRoutes.post("/eventUpdate", recordController.updateEvent);
+// recordRoutes.post("/checkParticipant", recordController.checkParticipant);
+//recordRoutes.post("/giftUpdate", recordController.updateGiftAmt);
+
 recordRoutes.post(
   "/admin/gift",
   recordController.getAllProjectExchangeGiftDetails

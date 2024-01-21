@@ -163,17 +163,17 @@ export class RecordController {
     }
   };
 
-  checkParticipant = async (req: express.Request, res: express.Response) => {
-    try {
-      const eventId = req.body.eventId;
+  // checkParticipant = async (req: express.Request, res: express.Response) => {
+  //   try {
+  //     const eventId = req.body.eventId;
 
-      const result = await this.recordService.checkParticipant(eventId);
-      console.log(result, "checkParticipant");
-      return res.json({ success: true, result });
-    } catch (err) {
-      errorHandler(err, req, res);
-    }
-  };
+  //     const result = await this.recordService.checkParticipant(eventId);
+  //     console.log(result, "checkParticipant");
+  //     return res.json({ success: true, result });
+  //   } catch (err) {
+  //     errorHandler(err, req, res);
+  //   }
+  // };
 
   getAllProjectUserDetail = async (
     req: express.Request,
