@@ -121,7 +121,16 @@ export const AddPoint: React.FC<AddPointProps> = ({ userDetail, goBack }) => {
         <AlertConBox header={showAlert} btnName={"確認"} />
       )}
       {showAlert === "未能添加!(請檢查填寫資料)" && (
-        <AlertConBox header={showAlert} btnName={"確認"} />
+        <AlertConBox
+          header={
+            <div>
+              未能添加禮物!
+              <br />
+              (請檢查填寫資料)
+            </div>
+          }
+          btnName={"確認"}
+        />
       )}
       {showAlert === "添加成功!" && (
         <AlertConBox header={showAlert} btnName={"確認"} />
