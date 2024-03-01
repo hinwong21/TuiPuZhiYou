@@ -6,6 +6,7 @@ import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
 import { AlertLoadingBox } from "../../Component/AlertBox/AlertLoadingBox";
+import { ProjectTitle } from "../../Component/ProjectTitle";
 
 interface LoginProps {
   onStatusChange: (newStatus: string) => void;
@@ -38,7 +39,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
 
   const handleLoginBtnClick = async () => {
     setShowAlert("loading");
-    const projectId = "香港青年陽光力量";
+    const projectId = "新界北義工團";
 
     const res = await fetch(`${api_origin}/account/login`, {
       method: "POST",
@@ -125,8 +126,7 @@ export const Login: React.FC<LoginProps> = ({ onStatusChange, username }) => {
     <>
       <div className="loginContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈回收大行動</div>
-        <div className="projectSubHeader">(廚餘回收)</div>
+        <ProjectTitle />
 
         <h2>登入</h2>
         {/* Input fields for username and password */}

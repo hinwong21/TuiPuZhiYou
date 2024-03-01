@@ -42,7 +42,7 @@ export const UserGift = () => {
   };
 
   const handleGetAllGifts = async () => {
-    const project = "香港青年陽光力量";
+    const project = "新界北義工團";
     const res = await fetch(`${api_origin}/gift`, {
       method: "POST",
       headers: {
@@ -103,7 +103,7 @@ export const UserGift = () => {
     setShowAlert("loading");
 
     const userId = localStorage.getItem("ef2023_user_id");
-    const project = "香港青年陽光力量";
+    const project = "新界北義工團";
 
     //Check the gift amount
     //1、Get the gift amount

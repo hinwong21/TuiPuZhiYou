@@ -7,8 +7,8 @@ import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
 import {
-  hksunStreetOptions,
-  hksunNumberOptions,
+  ndvgStreetOptions,
+  ndvgNumberOptions,
   floorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
@@ -20,7 +20,7 @@ export const SearchUser = () => {
     useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(false);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(true);
-  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
+  const [street, setStreet] = useState<string>(ndvgStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -75,7 +75,7 @@ export const SearchUser = () => {
 
   const handleSearchBtnClick = async () => {
     await setShowAlert("");
-    const project = "香港青年陽光力量";
+    const project = "新界北義工團";
     // use address search
     if (addressSearch) {
       if (
@@ -191,13 +191,13 @@ export const SearchUser = () => {
               </div>
               <Select
                 title="街"
-                options={hksunStreetOptions}
+                options={ndvgStreetOptions}
                 selectedOption={street}
                 onSelectOption={handleStreetChange}
               />
               <Select
                 title="號"
-                options={hksunNumberOptions}
+                options={ndvgNumberOptions}
                 selectedOption={number}
                 onSelectOption={handleNumberChange}
               />

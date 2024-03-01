@@ -6,12 +6,13 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import {
-  hksunStreetOptions,
-  hksunNumberOptions,
+  ndvgStreetOptions,
+  ndvgNumberOptions,
   floorOptions,
 } from "../../service/projectOption";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
 import { InputTransUpper } from "../../Component/Input/InputTransform/InputTransUpper";
+import { ProjectTitle } from "../../Component/ProjectTitle";
 
 interface RegisterProps {
   onStatusChange: (newStatus: string) => void;
@@ -24,7 +25,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
+  const [street, setStreet] = useState<string>(ndvgStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -114,7 +115,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       return;
     }
 
-    const project = "香港青年陽光力量";
+    const project = "新界北義工團";
     setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
@@ -153,8 +154,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     <>
       <div className="registerContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈回收大行動</div>
-        <div className="projectSubHeader">(廚餘回收)</div>
+        <ProjectTitle />
 
         <h2>注册帳戶</h2>
         <Input
@@ -199,13 +199,13 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <Select
           title="街"
-          options={hksunStreetOptions}
+          options={ndvgStreetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
         <Select
           title="號"
-          options={hksunNumberOptions}
+          options={ndvgNumberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />

@@ -5,6 +5,7 @@ import { api_origin } from "../../../service/api";
 import { GiftDetail } from "./GiftDetail/GiftDetail";
 // import { EventDetail } from "./EventDetail/EventDetail";
 import { AlertLoadingBox } from "../../../Component/AlertBox/AlertLoadingBox";
+import { ProjectTitle } from "../../../Component/ProjectTitle";
 
 export const UserInfo = () => {
   const [totalPoint, setTotalPoint] = useState(0);
@@ -81,8 +82,7 @@ export const UserInfo = () => {
       {status === "" && (
         <div className="userInfoContainer">
           <div className="userInfoGap"></div>
-          <div className="projectHeader">三無大廈回收大行動</div>
-          <div className="projectSubHeader">(廚餘回收)</div>
+          <ProjectTitle />
           <div className="userInfoPoints">我的積分： {totalPoint} 分</div>
           <div className="userInfoWasteRecord">
             本月廚餘： {thisMonthWaste} 公斤
