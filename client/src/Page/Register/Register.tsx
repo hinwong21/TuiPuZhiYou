@@ -6,8 +6,8 @@ import { ConfirmButton } from "../../Component/ConfirmButton/ConfirmButton";
 import { api_origin } from "../../service/api";
 import { handleKeyPress } from "../../service/useKeyPress";
 import {
-  tpzyStreetOptions,
-  tpzyNumberOptions,
+  hksunStreetOptions,
+  hksunNumberOptions,
   floorOptions,
 } from "../../service/projectOption";
 import { AlertConBox } from "../../Component/AlertBox/AlertConBox";
@@ -24,7 +24,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [street, setStreet] = useState<string>(tpzyStreetOptions[0]);
+  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -114,7 +114,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
       return;
     }
 
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     setShowAlert("loading");
     const res = await fetch(`${api_origin}/account/register`, {
       method: "POST",
@@ -153,7 +153,7 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
     <>
       <div className="registerContainer">
         <div className="userInfoGap"></div>
-        <div className="projectHeader">三無大廈環保回收你我出力</div>
+        <div className="projectHeader">三無大廈回收大行動</div>
         <div className="projectSubHeader">(廚餘回收)</div>
 
         <h2>注册帳戶</h2>
@@ -199,13 +199,13 @@ export const Register: React.FC<RegisterProps> = ({ onStatusChange }) => {
 
         <Select
           title="街"
-          options={tpzyStreetOptions}
+          options={hksunStreetOptions}
           selectedOption={street}
           onSelectOption={handleStreetChange}
         />
         <Select
           title="號"
-          options={tpzyNumberOptions}
+          options={hksunNumberOptions}
           selectedOption={number}
           onSelectOption={handleNumberChange}
         />

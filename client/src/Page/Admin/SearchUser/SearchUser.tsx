@@ -7,8 +7,8 @@ import { handleKeyPress } from "../../../service/useKeyPress";
 import { AddPoint } from "./AddPoint";
 import { api_origin } from "../../../service/api";
 import {
-  tpzyStreetOptions,
-  tpzyNumberOptions,
+  hksunStreetOptions,
+  hksunNumberOptions,
   floorOptions,
 } from "../../../service/projectOption";
 import { AlertConBox } from "../../../Component/AlertBox/AlertConBox";
@@ -20,7 +20,7 @@ export const SearchUser = () => {
     useState("searchUser");
   const [addressSearch, setAddressSearch] = useState(false);
   const [emailOrPhoneNumSearch, setEmailOrPhoneNumSearch] = useState(true);
-  const [street, setStreet] = useState<string>(tpzyStreetOptions[0]);
+  const [street, setStreet] = useState<string>(hksunStreetOptions[0]);
   const [number, setNumber] = useState<string>("");
   const [floor, setFloor] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -75,7 +75,7 @@ export const SearchUser = () => {
 
   const handleSearchBtnClick = async () => {
     await setShowAlert("");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     // use address search
     if (addressSearch) {
       if (
@@ -191,13 +191,13 @@ export const SearchUser = () => {
               </div>
               <Select
                 title="街"
-                options={tpzyStreetOptions}
+                options={hksunStreetOptions}
                 selectedOption={street}
                 onSelectOption={handleStreetChange}
               />
               <Select
                 title="號"
-                options={tpzyNumberOptions}
+                options={hksunNumberOptions}
                 selectedOption={number}
                 onSelectOption={handleNumberChange}
               />

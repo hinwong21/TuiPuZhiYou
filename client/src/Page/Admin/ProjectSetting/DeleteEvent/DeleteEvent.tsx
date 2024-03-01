@@ -25,7 +25,7 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
   //Get all events
   const handleGetAllEvents = async () => {
     setShowAlert("loading");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     const res = await fetch(`${api_origin}/event`, {
       method: "POST",
       headers: {
@@ -36,9 +36,9 @@ export const DeleteEvent: React.FC<DeleteEventProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
-    const filteredEvents = json.filter(
-      (event: any) => event.isDeleted === false
-    ).reverse();
+    const filteredEvents = json
+      .filter((event: any) => event.isDeleted === false)
+      .reverse();
     setEvents(filteredEvents);
     setShowAlert("");
   };

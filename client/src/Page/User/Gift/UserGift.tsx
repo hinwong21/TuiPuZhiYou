@@ -23,7 +23,7 @@ export const UserGift = () => {
 
   const handleGetUserDetails = async () => {
     const userId = localStorage.getItem("ef2023_user_id");
-    setShowAlert("loading");
+
     const res = await fetch(`${api_origin}/account/`, {
       method: "POST",
       headers: {
@@ -34,7 +34,6 @@ export const UserGift = () => {
       }),
     });
     const json = await res.json();
-    setShowAlert("");
 
     if (json.result && json.result.length > 0) {
       const point = parseInt(json.result[0].total_point);
@@ -42,10 +41,8 @@ export const UserGift = () => {
     }
   };
 
-  //Get all gifts
   const handleGetAllGifts = async () => {
-    setShowAlert("loading");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     const res = await fetch(`${api_origin}/gift`, {
       method: "POST",
       headers: {
@@ -69,6 +66,13 @@ export const UserGift = () => {
         return { ...gift, remainAmount };
       });
     setGifts(updatedGifts);
+  };
+
+  //Get all gifts
+  const loadGiftPage = async () => {
+    setShowAlert("loading");
+    handleGetUserDetails();
+    await handleGetAllGifts();
     setShowAlert("");
   };
 
@@ -99,7 +103,7 @@ export const UserGift = () => {
     setShowAlert("loading");
 
     const userId = localStorage.getItem("ef2023_user_id");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
 
     //Check the gift amount
     //1、Get the gift amount
@@ -114,8 +118,6 @@ export const UserGift = () => {
     });
     const giftAmtRst = await giftAmt.json();
 
-    console.log(giftAmtRst, "see");
-
     //2: Get the exchange amount
     const exchangeAmt = await fetch(`${api_origin}/record/exchangeAmt`, {
       method: "POST",
@@ -128,10 +130,7 @@ export const UserGift = () => {
     });
     const exchangeAmtRst = await exchangeAmt.json();
 
-    console.log(exchangeAmtRst, "exchangeAmtRst");
-
     const resultInt = parseInt(exchangeAmtRst.result, 10);
-    console.log(resultInt, "resultInt");
 
     if (resultInt >= giftAmtRst.result) {
       await handleGetAllGifts();
@@ -178,8 +177,7 @@ export const UserGift = () => {
   };
 
   useEffect(() => {
-    handleGetUserDetails();
-    handleGetAllGifts();
+    loadGiftPage();
   }, []);
 
   return (

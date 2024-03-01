@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #FDECE4;
-  --secondary-color: #32A02B;
-  --tertiary-color: #56412C;
-  --confirmButton-color: #174b13;
+  --primary-color: #FFD49C;
+  --secondary-color: #F37705;
+  --tertiary-color: #000000;
+  --confirmButton-color: #9a4c03;
 }
 
 body {

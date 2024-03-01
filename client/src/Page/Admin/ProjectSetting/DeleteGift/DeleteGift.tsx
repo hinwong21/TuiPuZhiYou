@@ -28,7 +28,7 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
   //Get all gifts
   const handleGetAllGifts = async () => {
     setShowAlert("loading");
-    const project = "推普之友";
+    const project = "香港青年陽光力量";
     const res = await fetch(`${api_origin}/gift`, {
       method: "POST",
       headers: {
@@ -39,16 +39,16 @@ export const DeleteGift: React.FC<DeleteGiftProps> = ({ goBack }) => {
       }),
     });
     const json = await res.json();
-     const updatedGifts = json
-       .filter((gift: any) => !gift.isDeleted)
-       .reverse()
-       .map((gift: any) => {
-         const giftAmountCount = gift.giftAmountCount
-           ? parseInt(gift.giftAmountCount.count)
-           : 0;
-         const remainAmount = gift.amount - giftAmountCount;
-         return { ...gift, remainAmount };
-       });
+    const updatedGifts = json
+      .filter((gift: any) => !gift.isDeleted)
+      .reverse()
+      .map((gift: any) => {
+        const giftAmountCount = gift.giftAmountCount
+          ? parseInt(gift.giftAmountCount.count)
+          : 0;
+        const remainAmount = gift.amount - giftAmountCount;
+        return { ...gift, remainAmount };
+      });
     setGifts(updatedGifts);
     setShowAlert("");
   };

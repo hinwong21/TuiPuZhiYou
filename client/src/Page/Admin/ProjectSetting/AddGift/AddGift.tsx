@@ -78,7 +78,7 @@ export const AddGift: React.FC<AddGiftProps> = ({ goBack }) => {
     if (image) {
       setShowAlert("loading");
       const base64Image = await convertFileToBase64(image);
-      const project = "推普之友";
+      const project = "香港青年陽光力量";
 
       const res = await fetch(`${api_origin}/gift/add`, {
         method: "POST",
