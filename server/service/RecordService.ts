@@ -159,6 +159,8 @@ export class RecordService {
   };
 
   getAllProjectUserDetail = async (project: string, start: Date, end: Date) => {
+    console.log(project, 1);
+
     try {
       if (project === "全部") {
         const startDate = new Date(start);
@@ -451,11 +453,15 @@ export class RecordService {
         endDate.setDate(endDate.getDate() + 1);
         const endDayStr = endDate.toISOString();
         const records = await this.knex("earnPointRecords")
-          .select("*")
+          .select("users.*")
+          .select("earnPointRecords.*")
           .whereBetween("earnPointRecords.date_add", [startDayStr, endDayStr])
           .orderBy("earnPointRecords.date_add", "desc")
           .join("users", "earnPointRecords.user_id", "=", "users.user_id")
           .where("earnPointRecords.project_id", "=", project);
+
+        console.log(records, 9999);
+
         return records;
       }
     } catch (err) {

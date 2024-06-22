@@ -27,7 +27,15 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
         const workbook = XLSX.read(binaryString, { type: "binary" });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        const data: any = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const data: any = XLSX.utils
+          .sheet_to_json(sheet, { header: 1 })
+          .filter((row: any) => {
+            // Check if any of the values in the row are empty
+            return row.some(
+              (value: any) =>
+                value !== undefined && value !== null && value !== ""
+            );
+          });
         setTableName(sheetName);
         setHeaders(data[0]);
         setResults(data.slice(1));
@@ -38,6 +46,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
   };
 
   const handleUploadFileToDB = () => {
+    setShowAlert("loading");
     // count res json.success
     let uploadSuccess = 0;
 
@@ -45,9 +54,11 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
     let uploadCount = 0;
     if (tableName === "users") {
       results.forEach(async (item: any) => {
+        let applyDate = new Date(item[9]);
+        applyDate.setDate(applyDate.getDate() + 1);
+        applyDate.toISOString();
         if (item.length > 0) {
           uploadCount += 1;
-          setShowAlert("loading");
           const res = await fetch(`${api_origin}/account/upload`, {
             method: "POST",
             headers: {
@@ -63,7 +74,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
               floor: item[6],
               unit: item[7],
               project_id: item[8],
-              date_add: new Date(item[9]),
+              date_add: applyDate,
             }),
           });
           const json = await res.json();
@@ -79,9 +90,11 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       });
     } else if (tableName === "earnPointRecords") {
       results.forEach(async (item: any) => {
+        let applyDate = new Date(item[4]);
+        applyDate.setDate(applyDate.getDate() + 1);
+        applyDate.toISOString();
         if (item.length > 0) {
           uploadCount += 1;
-          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/point`, {
             method: "POST",
             headers: {
@@ -92,7 +105,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
               point: item[1],
               weight: item[2],
               project: item[3],
-              date_add: new Date(item[4]),
+              date_add: applyDate,
             }),
           });
           const json = await res.json();
@@ -108,9 +121,11 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       });
     } else if (tableName === "joinedEventRecords") {
       results.forEach(async (item: any) => {
+        let applyDate = new Date(item[2]);
+        applyDate.setDate(applyDate.getDate() + 1);
+        applyDate.toISOString();
         if (item.length > 0) {
           uploadCount += 1;
-          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/event/upload`, {
             method: "POST",
             headers: {
@@ -119,7 +134,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
             body: JSON.stringify({
               user_id: item[0],
               event_name: item[1],
-              apply_date: new Date(item[2]),
+              apply_date: applyDate,
               project: item[3],
             }),
           });
@@ -138,6 +153,9 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
       results.forEach(async (item: any) => {
         let isExchanged = false;
         let exchangedDate: any = new Date(item[5]);
+        let applyDate = new Date(item[4]);
+        applyDate.setDate(applyDate.getDate() + 1);
+        applyDate.toISOString();
 
         // set string to type boolean
         if (item[2] === "true") {
@@ -147,11 +165,13 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
         // if no date, set to undefined
         if (item[5] === "-") {
           exchangedDate = undefined;
+        } else {
+          exchangedDate.setDate(exchangedDate.getDate() + 1);
+          exchangedDate.toISOString();
         }
 
         if (item.length > 0) {
           uploadCount += 1;
-          setShowAlert("loading");
           const res = await fetch(`${api_origin}/record/gift/upload`, {
             method: "POST",
             headers: {
@@ -162,7 +182,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ goBack }) => {
               gift_name: item[1],
               isExchanged: isExchanged,
               project: item[3],
-              apply_date: new Date(item[4]),
+              apply_date: applyDate,
               exchanged_date: exchangedDate,
             }),
           });
